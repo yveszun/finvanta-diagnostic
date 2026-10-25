@@ -27,16 +27,18 @@
     "serviceDistinction": {
       "general": {
         "description": "General psychiatric consultation",
-        "eligibleFacilityTypes": ["Hospital", "Infirmary", "Rural Health Unit", "City Health Office"],
+        "eligibleFacilityTypes": ["Hospital", "Rural Health Unit", "City Health Office", "Infirmary"],
         "eligibleLevels": [1, 2, 3],
-        "requiresVerification": true
+        "requiresVerification": true,
+        "illustrativeAssumption": "All facility types and levels eligible for general consultations"
       },
       "specialty": {
         "description": "Specialty mental health services",
         "eligibleFacilityTypes": ["Hospital"],
         "eligibleLevels": [2, 3],
         "requiresVerification": true,
-        "note": "Specialty services typically require higher-level facilities - pending verification"
+        "illustrativeAssumption": "Only Level 2+ hospitals eligible for specialty services",
+        "note": "This is an illustrative assumption pending official PhilHealth policy verification"
       }
     }
   },
@@ -77,7 +79,20 @@
       "5_payment": "Payment disbursed to facility"
     },
     "requireBothApprovalAndPaymentDates": true,
-    "note": "Approval and payment are distinct stages - approved claims may have payment delays"
+    "paymentProcessing": {
+      "approvedButUnpaidRate": 0.15,
+      "illustrativeAssumption": "15% of approved claims have payment pending to demonstrate reimbursement bottlenecks",
+      "paymentDelayDays": {
+        "minimum": 5,
+        "maximum": 45,
+        "illustrativeNote": "Payment typically occurs 5-45 days after approval"
+      },
+      "partialPaymentRate": 0.05,
+      "illustrativePartialPaymentRatio": 0.70,
+      "disbursementAdjustmentRate": 0.98,
+      "disbursementNote": "2% processing adjustment is an illustrative synthetic assumption, not actual PhilHealth policy"
+    },
+    "note": "Approval and payment are distinct stages - approved claims may have payment delays, partial payments, or be pending disbursement"
   },
   
   "scenarios": {

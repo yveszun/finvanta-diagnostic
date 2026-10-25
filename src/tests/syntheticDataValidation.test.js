@@ -108,7 +108,7 @@ describe('Synthetic Data Validation', () => {
 
         it('all claims should have valid statuses', () => {
           const claims = dataByScenario[scenario].claims;
-          const validStatuses = ['submitted', 'accepted', 'adjudicated', 'approved', 'paid', 'denied'];
+          const validStatuses = ['submitted', 'accepted', 'adjudicated', 'approved', 'paid', 'denied', 'partial_payment'];
           
           claims.forEach(claim => {
             expect(

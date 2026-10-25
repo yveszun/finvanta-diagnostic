@@ -197,6 +197,27 @@ function generateAccreditations(facilities, scenarioConfig, regionalProfile, see
             const accreditationDate = new Date(2025, monthsAgo, day);
             const validUntil = new Date(2026, monthsAgo, day); // 1 year validity
             
+            // Determine which services this facility is accredited for
+            // Based on facility type and level
+            const servicesCovered = [];
+            
+            // General consultations: All facilities eligible (illustrative assumption)
+            if (config.eligibility.serviceDistinction.general.eligibleFacilityTypes.includes(facility.facility_type) &&
+                config.eligibility.serviceDistinction.general.eligibleLevels.includes(facility.facility_level)) {
+                servicesCovered.push("PSYCH_CONSULT_GEN");
+            }
+            
+            // Specialty services: Only Level 2+ hospitals (illustrative assumption)
+            if (facility.facility_type === "Hospital" &&
+                facility.facility_level >= 2 &&
+                config.eligibility.serviceDistinction.specialty.eligibleFacilityTypes.includes(facility.facility_type) &&
+                config.eligibility.serviceDistinction.specialty.eligibleLevels.includes(facility.facility_level)) {
+                servicesCovered.push("PSYCH_CONSULT_SPEC");
+            }
+            
+            // Only create accreditation if facility qualifies for at least one service
+            if (servicesCovered.length === 0) return;
+            
             accreditations.push({
                 accreditation_id: `ACC_${facility.facility_id}_${accreditationDate.toISOString().split('T')[0]}`,
                 facility_id: facility.facility_id,
@@ -204,7 +225,8 @@ function generateAccreditations(facilities, scenarioConfig, regionalProfile, see
                 valid_until: validUntil.toISOString().split('T')[0],
                 status: "approved",
                 accreditation_type: "Outpatient Mental Health Services",
-                services_covered: ["PSYCH_CONSULT_GEN", "PSYCH_CONSULT_SPEC"]
+                services_covered: servicesCovered,
+                illustrative_note: "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
             });
         });
     });
@@ -254,26 +276,55 @@ function generateClaims(accreditations, facilities, scenarioConfig, seed) {
     filingFacilities.forEach((facility, facilityIndex) => {
         const numClaims = claimsPerFacility + (facilityIndex < extraClaims ? 1 : 0);
         
+        // Get accreditation date for this facility
+        const facilityAccreditation = accreditations.find(a => a.facility_id === facility.facility_id);
+        const accreditationDate = facilityAccreditation ? new Date(facilityAccreditation.accreditation_date) : new Date(2025, 0, 1);
+        
         for (let i = 0; i < numClaims; i++) {
-            // Service date in H1 2025 (Jan-Jun)
-            const serviceMonth = rng.nextInt(0, 5);
-            const serviceDay = rng.nextInt(1, 28);
-            const serviceDate = new Date(2025, serviceMonth, serviceDay);
+            // Service date must be on or after accreditation date, within H1 2025 (Jan-Jun)
+            const h1EndDate = new Date(2025, 5, 30); // June 30, 2025
             
-            // Determine service type based on facility level
-            let serviceType;
-            if (facility.facility_level === 1) {
-                // Level 1: mostly general, rarely specialty
-                serviceType = rng.next() < 0.90 ? 'general' : 'specialty';
-            } else if (facility.facility_level === 2) {
-                // Level 2: mix based on scenario distribution
-                serviceType = rng.next() < serviceDistribution.general ? 'general' : 'specialty';
-            } else {
-                // Level 3: more specialty services
-                serviceType = rng.next() < 0.40 ? 'general' : 'specialty';
+            // Calculate days between accreditation and end of H1 2025
+            const daysAvailable = Math.floor((h1EndDate - accreditationDate) / (1000 * 60 * 60 * 24));
+            
+            if (daysAvailable <= 0) {
+                // Accreditation too late in period, skip this claim
+                continue;
             }
             
+            // Random day offset from accreditation date
+            const dayOffset = rng.nextInt(0, Math.min(daysAvailable, 180));
+            const serviceDate = new Date(accreditationDate);
+            serviceDate.setDate(serviceDate.getDate() + dayOffset);
+            
+            // Determine service type based on facility's accreditation
+            const facilityAccreditation = accreditations.find(a => a.facility_id === facility.facility_id);
+            const servicesCovered = facilityAccreditation ? facilityAccreditation.services_covered : [];
+            
+            let serviceType;
+            if (servicesCovered.includes("PSYCH_CONSULT_GEN") && servicesCovered.includes("PSYCH_CONSULT_SPEC")) {
+                // Facility accredited for both - choose based on distribution
+                if (facility.facility_level === 2) {
+                    serviceType = rng.next() < serviceDistribution.general ? 'general' : 'specialty';
+                } else {
+                    // Level 3: more specialty
+                    serviceType = rng.next() < 0.40 ? 'general' : 'specialty';
+                }
+            } else if (servicesCovered.includes("PSYCH_CONSULT_SPEC")) {
+                // Only specialty
+                serviceType = 'specialty';
+            } else {
+                // Only general (or no coverage - shouldn't happen)
+                serviceType = 'general';
+            }
+            
+            // Verify service is actually covered by accreditation
             const serviceConfig = config.services[serviceType];
+            if (!servicesCovered.includes(serviceConfig.code)) {
+                // Facility not accredited for this service, skip
+                continue;
+            }
+            
             const billedAmount = serviceConfig.packageCeiling;
             
             // Generate unique claim ID
@@ -300,6 +351,7 @@ function generateClaims(accreditations, facilities, scenarioConfig, seed) {
             let status, approvalDate, paymentDate, denialReason;
             let approvedAmount = null;
             let disbursedAmount = null;
+            let paymentStatus = null;
             
             if (isApproved) {
                 // Stage 4: Approval (same day as adjudication completes)
@@ -310,22 +362,58 @@ function generateClaims(accreditations, facilities, scenarioConfig, seed) {
                 const variation = 0.9 + (rng.next() * 0.2); // 90-110% of average
                 approvedAmount = Math.round(billedAmount * reimbursementRatio * variation);
                 
-                // Stage 5: Payment (5-20 days after approval)
-                const paymentDelay = rng.nextInt(5, 20);
-                const paymentDateObj = new Date(adjudicationDate);
-                paymentDateObj.setDate(paymentDateObj.getDate() + paymentDelay);
-                paymentDate = paymentDateObj.toISOString().split('T')[0];
+                // Determine payment status: paid, pending, or partial
+                const paymentRoll = rng.next();
+                const paymentProcessing = config.claimsProcessing.paymentProcessing;
                 
-                // Calculate disbursed amount (98% of approved per financial assumptions)
-                const disbursementRatio = config.financialAssumptions.approvedToDisbursedRatio;
-                disbursedAmount = Math.round(approvedAmount * disbursementRatio);
+                if (paymentRoll < paymentProcessing.approvedButUnpaidRate) {
+                    // Approved but payment pending (15%)
+                    status = "approved";
+                    paymentDate = null;
+                    disbursedAmount = null;
+                    paymentStatus = "pending";
+                    
+                } else if (paymentRoll < paymentProcessing.approvedButUnpaidRate + paymentProcessing.partialPaymentRate) {
+                    // Partial payment (5%)
+                    status = "partial_payment";
+                    
+                    const paymentDelay = rng.nextInt(
+                        paymentProcessing.paymentDelayDays.minimum,
+                        paymentProcessing.paymentDelayDays.maximum
+                    );
+                    const paymentDateObj = new Date(adjudicationDate);
+                    paymentDateObj.setDate(paymentDateObj.getDate() + paymentDelay);
+                    paymentDate = paymentDateObj.toISOString().split('T')[0];
+                    
+                    // Partial payment (70% of approved amount)
+                    disbursedAmount = Math.round(approvedAmount * paymentProcessing.illustrativePartialPaymentRatio);
+                    paymentStatus = "partial";
+                    
+                } else {
+                    // Full payment (80%)
+                    status = "paid";
+                    
+                    // Stage 5: Payment (5-45 days after approval)
+                    const paymentDelay = rng.nextInt(
+                        paymentProcessing.paymentDelayDays.minimum,
+                        paymentProcessing.paymentDelayDays.maximum
+                    );
+                    const paymentDateObj = new Date(adjudicationDate);
+                    paymentDateObj.setDate(paymentDateObj.getDate() + paymentDelay);
+                    paymentDate = paymentDateObj.toISOString().split('T')[0];
+                    
+                    // Calculate disbursed amount (98% of approved per financial assumptions)
+                    const disbursementRatio = paymentProcessing.disbursementAdjustmentRate;
+                    disbursedAmount = Math.round(approvedAmount * disbursementRatio);
+                    paymentStatus = "paid_full";
+                }
                 
-                status = "paid";
             } else {
                 // Claim denied at adjudication
                 status = "denied";
                 approvalDate = null;
                 paymentDate = null;
+                paymentStatus = "denied";
                 
                 // Denial reasons
                 const denialReasons = [
@@ -334,7 +422,8 @@ function generateClaims(accreditations, facilities, scenarioConfig, seed) {
                     "Patient eligibility could not be verified",
                     "Exceeded package ceiling",
                     "Duplicate claim",
-                    "Service date outside coverage period"
+                    "Service date outside coverage period",
+                    "Facility not accredited for this service type"
                 ];
                 denialReason = rng.choice(denialReasons);
             }
@@ -354,7 +443,9 @@ function generateClaims(accreditations, facilities, scenarioConfig, seed) {
                 approved_amount: approvedAmount,
                 payment_date: paymentDate,
                 disbursed_amount: disbursedAmount,
+                outstanding_balance: approvedAmount ? (disbursedAmount !== null ? approvedAmount - disbursedAmount : approvedAmount) : null,
                 status: status,
+                payment_status: paymentStatus,
                 denial_reason: denialReason
             });
             
@@ -364,21 +455,32 @@ function generateClaims(accreditations, facilities, scenarioConfig, seed) {
     
     // Calculate actual financials
     const totalBilled = claims.reduce((sum, c) => sum + c.billed_amount, 0);
-    const approvedClaims = claims.filter(c => c.status === 'paid');
+    const approvedClaims = claims.filter(c => c.approved_amount);
     const totalApproved = approvedClaims.reduce((sum, c) => sum + c.approved_amount, 0);
-    const totalDisbursed = approvedClaims.reduce((sum, c) => sum + c.disbursed_amount, 0);
+    const paidClaims = claims.filter(c => c.disbursed_amount);
+    const totalDisbursed = paidClaims.reduce((sum, c) => sum + c.disbursed_amount, 0);
+    const totalOutstanding = claims.reduce((sum, c) => sum + (c.outstanding_balance || 0), 0);
+    const pendingClaims = claims.filter(c => c.status === 'approved' && !c.payment_date);
+    const partialPaymentClaims = claims.filter(c => c.status === 'partial_payment');
     
     console.log(`✓ Generated ${claims.length} claims`);
     console.log(`  - From ${filingFacilities.length} facilities`);
-    console.log(`  - Approved: ${approvedClaims.length} (${(approvalRate * 100).toFixed(1)}%)`);
-    console.log(`  - Denied: ${claims.length - approvedClaims.length} (${((1 - approvalRate) * 100).toFixed(1)}%)`);
+    console.log(`  - Approved: ${approvedClaims.length} (${(approvedClaims.length / claims.length * 100).toFixed(1)}%)`);
+    console.log(`  - Paid (full): ${paidClaims.filter(c => c.payment_status === 'paid_full').length}`);
+    console.log(`  - Partial payment: ${partialPaymentClaims.length}`);
+    console.log(`  - Approved but unpaid: ${pendingClaims.length}`);
+    console.log(`  - Denied: ${claims.filter(c => c.status === 'denied').length} (${((claims.filter(c => c.status === 'denied').length / claims.length) * 100).toFixed(1)}%)`);
     console.log(`  - Total billed: ₱${totalBilled.toLocaleString()}`);
     console.log(`  - Total approved: ₱${totalApproved.toLocaleString()}`);
     console.log(`  - Total disbursed: ₱${totalDisbursed.toLocaleString()}`);
+    console.log(`  - Total outstanding: ₱${totalOutstanding.toLocaleString()}`);
     console.log(`  - Avg billed: ₱${Math.round(totalBilled / claims.length).toLocaleString()}`);
-    console.log(`  - Avg approved: ₱${Math.round(totalApproved / approvedClaims.length).toLocaleString()}`);
-    console.log(`  - Avg disbursed: ₱${Math.round(totalDisbursed / approvedClaims.length).toLocaleString()}`);
-    
+    if (approvedClaims.length > 0) {
+        console.log(`  - Avg approved: ₱${Math.round(totalApproved / approvedClaims.length).toLocaleString()}`);
+    }
+    if (paidClaims.length > 0) {
+        console.log(`  - Avg disbursed: ₱${Math.round(totalDisbursed / paidClaims.length).toLocaleString()}`);
+    }    
     return claims;
 }
 
