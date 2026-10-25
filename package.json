@@ -10,7 +10,12 @@
     "preview": "vite preview",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "test:coverage": "vitest --coverage"
+    "test:coverage": "vitest --coverage",
+    "generate:data": "node scripts/generateData.js",
+    "generate:low": "node scripts/generateData.js low neutral",
+    "generate:moderate": "node scripts/generateData.js moderate neutral",
+    "generate:high": "node scripts/generateData.js high neutral",
+    "generate:all": "npm run generate:low && npm run generate:moderate && npm run generate:high"
   },
   "dependencies": {
     "html2canvas": "^1.4.1",

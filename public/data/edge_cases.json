@@ -1,0 +1,129 @@
+{
+  "description": "Edge case scenarios for testing validation and error handling",
+  "cases": [
+    {
+      "name": "zero_eligible_facilities",
+      "facilities": [],
+      "accreditations": [],
+      "claims": [],
+      "expectedBehavior": "Should display N/A for all rates, show warning message"
+    },
+    {
+      "name": "no_accreditations",
+      "facilities": [
+        {
+          "facility_id": "FAC_TEST_0001",
+          "facility_name": "Test Hospital",
+          "facility_type": "Hospital",
+          "facility_level": 2,
+          "region": "National Capital Region",
+          "eligible": true
+        }
+      ],
+      "accreditations": [],
+      "claims": [],
+      "expectedBehavior": "Accreditation rate = 0%, filing rate = N/A"
+    },
+    {
+      "name": "no_claims_filed",
+      "facilities": [
+        {
+          "facility_id": "FAC_TEST_0001",
+          "facility_name": "Test Hospital",
+          "facility_type": "Hospital",
+          "facility_level": 2,
+          "region": "National Capital Region",
+          "eligible": true
+        }
+      ],
+      "accreditations": [
+        {
+          "accreditation_id": "ACC_TEST_001",
+          "facility_id": "FAC_TEST_0001",
+          "accreditation_date": "2025-01-15",
+          "status": "approved"
+        }
+      ],
+      "claims": [],
+      "expectedBehavior": "Filing rate = 0%, all claims metrics = 0"
+    },
+    {
+      "name": "all_claims_denied",
+      "facilities": [
+        {
+          "facility_id": "FAC_TEST_0001",
+          "facility_name": "Test Hospital",
+          "facility_type": "Hospital",
+          "facility_level": 2,
+          "region": "National Capital Region",
+          "eligible": true
+        }
+      ],
+      "accreditations": [
+        {
+          "accreditation_id": "ACC_TEST_001",
+          "facility_id": "FAC_TEST_0001",
+          "accreditation_date": "2025-01-15",
+          "status": "approved"
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "CLM_TEST_001",
+          "facility_id": "FAC_TEST_0001",
+          "service_date": "2025-02-01",
+          "billed_amount": 9000,
+          "submission_date": "2025-02-02",
+          "acceptance_date": "2025-02-03",
+          "adjudication_date": "2025-02-10",
+          "approval_date": null,
+          "approved_amount": null,
+          "payment_date": null,
+          "disbursed_amount": null,
+          "status": "denied",
+          "denial_reason": "Incomplete documentation"
+        }
+      ],
+      "expectedBehavior": "Approval rate = 0%, total disbursed = ₱0"
+    },
+    {
+      "name": "approved_payment_pending",
+      "facilities": [
+        {
+          "facility_id": "FAC_TEST_0001",
+          "facility_name": "Test Hospital",
+          "facility_type": "Hospital",
+          "facility_level": 2,
+          "region": "National Capital Region",
+          "eligible": true
+        }
+      ],
+      "accreditations": [
+        {
+          "accreditation_id": "ACC_TEST_001",
+          "facility_id": "FAC_TEST_0001",
+          "accreditation_date": "2025-01-15",
+          "status": "approved"
+        }
+      ],
+      "claims": [
+        {
+          "claim_id": "CLM_TEST_002",
+          "facility_id": "FAC_TEST_0001",
+          "service_date": "2025-02-01",
+          "billed_amount": 9000,
+          "submission_date": "2025-02-02",
+          "acceptance_date": "2025-02-03",
+          "adjudication_date": "2025-02-10",
+          "approval_date": "2025-02-10",
+          "approved_amount": 7650,
+          "payment_date": null,
+          "disbursed_amount": null,
+          "status": "approved",
+          "denial_reason": null
+        }
+      ],
+      "expectedBehavior": "Payment rate < 100%, shows processing delay"
+    }
+  ]
+}
