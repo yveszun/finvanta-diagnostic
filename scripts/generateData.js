@@ -390,7 +390,7 @@ function generateClaims(accreditations, facilities, scenarioConfig, seed) {
                     paymentStatus = "partial";
                     
                 } else {
-                    // Full payment (80%)
+                    // Full payment (80%) - 100% of approved amount
                     status = "paid";
                     
                     // Stage 5: Payment (5-45 days after approval)
@@ -402,9 +402,8 @@ function generateClaims(accreditations, facilities, scenarioConfig, seed) {
                     paymentDateObj.setDate(paymentDateObj.getDate() + paymentDelay);
                     paymentDate = paymentDateObj.toISOString().split('T')[0];
                     
-                    // Calculate disbursed amount (98% of approved per financial assumptions)
-                    const disbursementRatio = paymentProcessing.disbursementAdjustmentRate;
-                    disbursedAmount = Math.round(approvedAmount * disbursementRatio);
+                    // Fully paid claims receive 100% of approved amount
+                    disbursedAmount = approvedAmount;
                     paymentStatus = "paid_full";
                 }
                 

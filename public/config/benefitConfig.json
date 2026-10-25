@@ -89,8 +89,7 @@
       },
       "partialPaymentRate": 0.05,
       "illustrativePartialPaymentRatio": 0.70,
-      "disbursementAdjustmentRate": 0.98,
-      "disbursementNote": "2% processing adjustment is an illustrative synthetic assumption, not actual PhilHealth policy"
+      "disbursementNote": "Fully paid claims receive 100% of approved amount. Partial payments receive 70% (illustrative). No unsupported deduction assumptions."
     },
     "note": "Approval and payment are distinct stages - approved claims may have payment delays, partial payments, or be pending disbursement"
   },

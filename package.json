@@ -15,7 +15,8 @@
     "generate:low": "node scripts/generateData.js low neutral",
     "generate:moderate": "node scripts/generateData.js moderate neutral",
     "generate:high": "node scripts/generateData.js high neutral",
-    "generate:all": "npm run generate:low && npm run generate:moderate && npm run generate:high"
+    "generate:all": "npm run generate:low && npm run generate:moderate && npm run generate:high",
+    "validate": "node scripts/validateAll.js"
   },
   "dependencies": {
     "html2canvas": "^1.4.1",

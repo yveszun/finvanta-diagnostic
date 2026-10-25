@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "generatedDate": "2026-10-25T15:52:15.492Z",
+  "generatedDate": "2026-10-25T16:02:37.464Z",
   "generatedBy": "Finvanta Data Generator V2",
   "scenario": "low",
   "regionalProfile": "neutral",
@@ -19,7 +19,7 @@
   "financials": {
     "totalBilled": 1504000,
     "totalApproved": 1163785,
-    "totalDisbursed": 934690,
+    "totalDisbursed": 953463,
     "currency": "PHP",
     "note": "Billed = package ceiling; Approved = adjudicated amount; Disbursed = actual payment"
   },
