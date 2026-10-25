@@ -13,7 +13,17 @@
 
 export class DataValidator {
   constructor(config = {}) {
-    this.config = config;
+    this.config = config || {};
+    
+    // Define valid claim statuses
+    this.validClaimStatuses = ['submitted', 'accepted', 'adjudicated', 'approved', 'paid', 'denied', 'partial_payment'];
+    this.validPaymentStatuses = ['pending', 'paid_full', 'partial', 'denied', null];
+    
+    // Define required fields
+    this.requiredFacilityFields = ['facility_id', 'facility_name', 'facility_type', 'region'];
+    this.requiredAccreditationFields = ['accreditation_id', 'facility_id', 'accreditation_date', 'status', 'services_covered'];
+    this.requiredClaimFields = ['claim_id', 'facility_id', 'service_date', 'service_code', 'billed_amount', 'submission_date', 'status'];
+    
     this.results = {
       valid: true,
       errors: [],
@@ -35,6 +45,15 @@ export class DataValidator {
       summary: {}
     };
 
+    // Check for empty datasets (CRITICAL if intended for analysis)
+    this.validateDatasetCompleteness(facilities, accreditations, claims);
+
+    // Validate required fields
+    this.validateRequiredFields(facilities, accreditations, claims);
+
+    // Validate claim and payment statuses
+    this.validateStatuses(claims);
+
     // Run all validation checks
     this.validateUniqueness(facilities, accreditations, claims);
     this.validateReferences(facilities, accreditations, claims);
@@ -54,31 +73,195 @@ export class DataValidator {
   }
 
   /**
+   * Validate dataset completeness (distinguish empty test fixtures from analysis-ready data)
+   */
+  validateDatasetCompleteness(facilities, accreditations, claims) {
+    // Completely empty dataset
+    if (!facilities || facilities.length === 0) {
+      if (!accreditations || accreditations.length === 0) {
+        if (!claims || claims.length === 0) {
+          this.addError('CRITICAL', 'EMPTY_DATASET',
+            'Dataset is completely empty. Not suitable for analysis.');
+          return;
+        }
+      }
+    }
+
+    // Empty facilities
+    if (!facilities || facilities.length === 0) {
+      this.addError('CRITICAL', 'EMPTY_FACILITIES',
+        'No facilities in dataset. Cannot validate accreditations or claims.');
+    }
+
+    // No accreditations (warning - could be valid for "no implementation" scenario)
+    if (!accreditations || accreditations.length === 0) {
+      this.addError('WARNING', 'NO_ACCREDITATIONS',
+        'No accreditations in dataset. May be valid for zero-implementation scenario.');
+    }
+
+    // No claims (warning - could be valid for pre-launch scenario)
+    if (!claims || claims.length === 0) {
+      this.addError('WARNING', 'NO_CLAIMS',
+        'No claims in dataset. May be valid for pre-utilization scenario.');
+    }
+  }
+
+  /**
+   * Validate required fields are present and non-empty
+   */
+  validateRequiredFields(facilities, accreditations, claims) {
+    // Validate facilities
+    if (facilities && facilities.length > 0) {
+      const facilitiesWithMissingFields = [];
+      facilities.forEach((facility, idx) => {
+        const missing = this.requiredFacilityFields.filter(field => 
+          facility[field] === null || 
+          facility[field] === undefined || 
+          facility[field] === ''
+        );
+        if (missing.length > 0) {
+          facilitiesWithMissingFields.push({
+            index: idx,
+            facility_id: facility.facility_id || `[index ${idx}]`,
+            missing_fields: missing
+          });
+        }
+      });
+
+      if (facilitiesWithMissingFields.length > 0) {
+        this.addError('CRITICAL', 'FACILITIES_MISSING_REQUIRED_FIELDS',
+          `${facilitiesWithMissingFields.length} facilities have missing required fields`,
+          facilitiesWithMissingFields.slice(0, 5));
+      }
+    }
+
+    // Validate accreditations
+    if (accreditations && accreditations.length > 0) {
+      const accreditationsWithMissingFields = [];
+      accreditations.forEach((accred, idx) => {
+        const missing = this.requiredAccreditationFields.filter(field => {
+          if (field === 'services_covered') {
+            return !Array.isArray(accred[field]) || accred[field].length === 0;
+          }
+          return accred[field] === null || 
+                 accred[field] === undefined || 
+                 accred[field] === '';
+        });
+        if (missing.length > 0) {
+          accreditationsWithMissingFields.push({
+            index: idx,
+            accreditation_id: accred.accreditation_id || `[index ${idx}]`,
+            missing_fields: missing
+          });
+        }
+      });
+
+      if (accreditationsWithMissingFields.length > 0) {
+        this.addError('CRITICAL', 'ACCREDITATIONS_MISSING_REQUIRED_FIELDS',
+          `${accreditationsWithMissingFields.length} accreditations have missing required fields`,
+          accreditationsWithMissingFields.slice(0, 5));
+      }
+    }
+
+    // Validate claims
+    if (claims && claims.length > 0) {
+      const claimsWithMissingFields = [];
+      claims.forEach((claim, idx) => {
+        const missing = this.requiredClaimFields.filter(field =>
+          claim[field] === null || 
+          claim[field] === undefined || 
+          claim[field] === ''
+        );
+        if (missing.length > 0) {
+          claimsWithMissingFields.push({
+            index: idx,
+            claim_id: claim.claim_id || `[index ${idx}]`,
+            missing_fields: missing
+          });
+        }
+      });
+
+      if (claimsWithMissingFields.length > 0) {
+        this.addError('CRITICAL', 'CLAIMS_MISSING_REQUIRED_FIELDS',
+          `${claimsWithMissingFields.length} claims have missing required fields`,
+          claimsWithMissingFields.slice(0, 5));
+      }
+    }
+  }
+
+  /**
+   * Validate claim statuses and payment statuses against permitted values
+   */
+  validateStatuses(claims) {
+    if (!claims || claims.length === 0) return;
+
+    // Validate claim statuses
+    const invalidClaimStatuses = [];
+    claims.forEach(claim => {
+      if (!this.validClaimStatuses.includes(claim.status)) {
+        invalidClaimStatuses.push({
+          claim_id: claim.claim_id,
+          invalid_status: claim.status
+        });
+      }
+    });
+
+    if (invalidClaimStatuses.length > 0) {
+      this.addError('CRITICAL', 'INVALID_CLAIM_STATUS',
+        `${invalidClaimStatuses.length} claims have invalid status values. Permitted: ${this.validClaimStatuses.join(', ')}`,
+        invalidClaimStatuses.slice(0, 5));
+    }
+
+    // Validate payment statuses
+    const invalidPaymentStatuses = [];
+    claims.forEach(claim => {
+      if (claim.payment_status !== undefined && !this.validPaymentStatuses.includes(claim.payment_status)) {
+        invalidPaymentStatuses.push({
+          claim_id: claim.claim_id,
+          invalid_payment_status: claim.payment_status
+        });
+      }
+    });
+
+    if (invalidPaymentStatuses.length > 0) {
+      this.addError('ERROR', 'INVALID_PAYMENT_STATUS',
+        `${invalidPaymentStatuses.length} claims have invalid payment_status values. Permitted: ${this.validPaymentStatuses.filter(s => s !== null).join(', ')}, null`,
+        invalidPaymentStatuses.slice(0, 5));
+    }
+  }
+
+  /**
    * 1. Validate uniqueness of IDs
    */
   validateUniqueness(facilities, accreditations, claims) {
     // Facility IDs
-    const facilityIds = facilities.map(f => f.facility_id);
-    const uniqueFacilityIds = new Set(facilityIds);
-    if (facilityIds.length !== uniqueFacilityIds.size) {
-      this.addError('CRITICAL', 'DUPLICATE_FACILITY_IDS', 
-        `Found ${facilityIds.length - uniqueFacilityIds.size} duplicate facility IDs`);
+    if (facilities && facilities.length > 0) {
+      const facilityIds = facilities.map(f => f.facility_id).filter(id => id); // Filter out null/undefined
+      const uniqueFacilityIds = new Set(facilityIds);
+      if (facilityIds.length !== uniqueFacilityIds.size) {
+        this.addError('CRITICAL', 'DUPLICATE_FACILITY_IDS', 
+          `Found ${facilityIds.length - uniqueFacilityIds.size} duplicate facility IDs`);
+      }
     }
 
     // Accreditation IDs
-    const accredIds = accreditations.map(a => a.accreditation_id);
-    const uniqueAccredIds = new Set(accredIds);
-    if (accredIds.length !== uniqueAccredIds.size) {
-      this.addError('CRITICAL', 'DUPLICATE_ACCREDITATION_IDS',
-        `Found ${accredIds.length - uniqueAccredIds.size} duplicate accreditation IDs`);
+    if (accreditations && accreditations.length > 0) {
+      const accredIds = accreditations.map(a => a.accreditation_id).filter(id => id);
+      const uniqueAccredIds = new Set(accredIds);
+      if (accredIds.length !== uniqueAccredIds.size) {
+        this.addError('CRITICAL', 'DUPLICATE_ACCREDITATION_IDS',
+          `Found ${accredIds.length - uniqueAccredIds.size} duplicate accreditation IDs`);
+      }
     }
 
     // Claim IDs
-    const claimIds = claims.map(c => c.claim_id);
-    const uniqueClaimIds = new Set(claimIds);
-    if (claimIds.length !== uniqueClaimIds.size) {
-      this.addError('CRITICAL', 'DUPLICATE_CLAIM_IDS',
-        `Found ${claimIds.length - uniqueClaimIds.size} duplicate claim IDs`);
+    if (claims && claims.length > 0) {
+      const claimIds = claims.map(c => c.claim_id).filter(id => id);
+      const uniqueClaimIds = new Set(claimIds);
+      if (claimIds.length !== uniqueClaimIds.size) {
+        this.addError('CRITICAL', 'DUPLICATE_CLAIM_IDS',
+          `Found ${claimIds.length - uniqueClaimIds.size} duplicate claim IDs`);
+      }
     }
   }
 
@@ -86,22 +269,28 @@ export class DataValidator {
    * 2. Validate referential integrity
    */
   validateReferences(facilities, accreditations, claims) {
-    const validFacilityIds = new Set(facilities.map(f => f.facility_id));
+    if (!facilities || facilities.length === 0) return;
+
+    const validFacilityIds = new Set(facilities.map(f => f.facility_id).filter(id => id));
 
     // Accreditations must reference valid facilities
-    const invalidAccredRefs = accreditations.filter(a => !validFacilityIds.has(a.facility_id));
-    if (invalidAccredRefs.length > 0) {
-      this.addError('CRITICAL', 'INVALID_ACCREDITATION_FACILITY_REFS',
-        `${invalidAccredRefs.length} accreditations reference non-existent facilities`,
-        invalidAccredRefs.slice(0, 5).map(a => a.accreditation_id));
+    if (accreditations && accreditations.length > 0) {
+      const invalidAccredRefs = accreditations.filter(a => a.facility_id && !validFacilityIds.has(a.facility_id));
+      if (invalidAccredRefs.length > 0) {
+        this.addError('CRITICAL', 'INVALID_ACCREDITATION_FACILITY_REFS',
+          `${invalidAccredRefs.length} accreditations reference non-existent facilities`,
+          invalidAccredRefs.slice(0, 5).map(a => a.accreditation_id));
+      }
     }
 
     // Claims must reference valid facilities
-    const invalidClaimRefs = claims.filter(c => !validFacilityIds.has(c.facility_id));
-    if (invalidClaimRefs.length > 0) {
-      this.addError('CRITICAL', 'INVALID_CLAIM_FACILITY_REFS',
-        `${invalidClaimRefs.length} claims reference non-existent facilities`,
-        invalidClaimRefs.slice(0, 5).map(c => c.claim_id));
+    if (claims && claims.length > 0) {
+      const invalidClaimRefs = claims.filter(c => c.facility_id && !validFacilityIds.has(c.facility_id));
+      if (invalidClaimRefs.length > 0) {
+        this.addError('CRITICAL', 'INVALID_CLAIM_FACILITY_REFS',
+          `${invalidClaimRefs.length} claims reference non-existent facilities`,
+          invalidClaimRefs.slice(0, 5).map(c => c.claim_id));
+      }
     }
   }
 
@@ -109,21 +298,28 @@ export class DataValidator {
    * 3. Validate chronology: service dates must be on or after accreditation
    */
   validateChronology(accreditations, claims) {
+    if (!accreditations || accreditations.length === 0) return;
+    if (!claims || claims.length === 0) return;
+
     // Build accreditation date map
     const accredDateMap = {};
     accreditations.forEach(a => {
-      accredDateMap[a.facility_id] = a.accreditation_date;
+      if (a.facility_id && a.accreditation_date) {
+        accredDateMap[a.facility_id] = a.accreditation_date;
+      }
     });
 
     const violations = [];
     claims.forEach(claim => {
-      const accredDate = accredDateMap[claim.facility_id];
-      if (accredDate && claim.service_date < accredDate) {
-        violations.push({
-          claim_id: claim.claim_id,
-          service_date: claim.service_date,
-          accreditation_date: accredDate
-        });
+      if (claim.service_date && claim.facility_id) {
+        const accredDate = accredDateMap[claim.facility_id];
+        if (accredDate && claim.service_date < accredDate) {
+          violations.push({
+            claim_id: claim.claim_id,
+            service_date: claim.service_date,
+            accreditation_date: accredDate
+          });
+        }
       }
     });
 
@@ -138,6 +334,10 @@ export class DataValidator {
    * 4. Validate service-specific compliance
    */
   validateServiceCompliance(facilities, accreditations, claims) {
+    if (!claims || claims.length === 0) return;
+    if (!accreditations || accreditations.length === 0) return;
+    if (!facilities || facilities.length === 0) return;
+
     // Build services covered map
     const servicesCoveredMap = {};
     accreditations.forEach(a => {
@@ -171,19 +371,60 @@ export class DataValidator {
         violations.slice(0, 5));
     }
 
-    // Check Level 1 facilities don't have specialty services
-    const level1SpecialtyViolations = [];
-    claims.forEach(claim => {
-      const facility = facilityLevelMap[claim.facility_id];
-      if (facility && facility.level === 1 && claim.service_code === 'PSYCH_CONSULT_SPEC') {
-        level1SpecialtyViolations.push(claim.claim_id);
-      }
-    });
+    // Check specialty eligibility based on configuration (if available)
+    if (this.config && this.config.eligibility && this.config.eligibility.serviceDistinction) {
+      const specialtyConfig = this.config.eligibility.serviceDistinction.specialty;
+      
+      if (specialtyConfig) {
+        const specialtyViolations = [];
+        claims.forEach(claim => {
+          if (claim.service_code === 'PSYCH_CONSULT_SPEC') {
+            const facility = facilityLevelMap[claim.facility_id];
+            if (facility) {
+              // Check if facility type is eligible
+              if (!specialtyConfig.eligibleFacilityTypes.includes(facility.type)) {
+                specialtyViolations.push({
+                  claim_id: claim.claim_id,
+                  facility_type: facility.type,
+                  note: specialtyConfig.illustrativeAssumption || 'Eligibility restriction'
+                });
+              }
+              // Check if facility level is eligible
+              else if (!specialtyConfig.eligibleLevels.includes(facility.level)) {
+                specialtyViolations.push({
+                  claim_id: claim.claim_id,
+                  facility_level: facility.level,
+                  note: specialtyConfig.illustrativeAssumption || 'Eligibility restriction'
+                });
+              }
+            }
+          }
+        });
 
-    if (level1SpecialtyViolations.length > 0) {
-      this.addError('ERROR', 'LEVEL1_SPECIALTY_VIOLATION',
-        `${level1SpecialtyViolations.length} Level 1 facilities have specialty claims`,
-        level1SpecialtyViolations.slice(0, 5));
+        if (specialtyViolations.length > 0) {
+          this.addError('ERROR', 'SPECIALTY_ELIGIBILITY_VIOLATION',
+            `${specialtyViolations.length} specialty claims at facilities not meeting illustrative eligibility criteria (pending PhilHealth verification)`,
+            specialtyViolations.slice(0, 5));
+        }
+      }
+    } else {
+      // Fallback: hardcoded Level 1 check with clear labeling
+      const level1SpecialtyViolations = [];
+      claims.forEach(claim => {
+        const facility = facilityLevelMap[claim.facility_id];
+        if (facility && facility.level === 1 && claim.service_code === 'PSYCH_CONSULT_SPEC') {
+          level1SpecialtyViolations.push({
+            claim_id: claim.claim_id,
+            note: 'Illustrative assumption: Level 1 facilities not eligible for specialty services (pending official PhilHealth verification)'
+          });
+        }
+      });
+
+      if (level1SpecialtyViolations.length > 0) {
+        this.addError('ERROR', 'LEVEL1_SPECIALTY_VIOLATION',
+          `${level1SpecialtyViolations.length} Level 1 facilities have specialty claims (illustrative assumption - pending verification)`,
+          level1SpecialtyViolations.slice(0, 5));
+      }
     }
   }
 
@@ -191,6 +432,8 @@ export class DataValidator {
    * 5. Validate payment logic and status consistency
    */
   validatePaymentLogic(claims) {
+    if (!claims || claims.length === 0) return;
+
     // Paid claims must have payment date and disbursed amount
     const paidWithoutDate = claims.filter(c => 
       c.status === 'paid' && !c.payment_date
@@ -276,6 +519,8 @@ export class DataValidator {
    * 6. Validate financial consistency
    */
   validateFinancialConsistency(claims) {
+    if (!claims || claims.length === 0) return;
+
     // Disbursed <= Approved
     const disbursedExceedsApproved = claims.filter(c =>
       c.disbursed_amount !== null && 
@@ -332,6 +577,8 @@ export class DataValidator {
    * 7. Validate date progression
    */
   validateDateProgression(claims) {
+    if (!claims || claims.length === 0) return;
+
     const violations = [];
     
     claims.forEach(claim => {
@@ -407,29 +654,64 @@ export class DataValidator {
    * Generate validation summary
    */
   generateSummary(facilities, accreditations, claims) {
-    const approvedClaims = claims.filter(c => 
+    // Handle empty or null datasets
+    const facilitiesArray = facilities || [];
+    const accreditationsArray = accreditations || [];
+    const claimsArray = claims || [];
+
+    // Count distinct accredited facilities (not just accreditation records)
+    const distinctAccreditedFacilities = new Set(
+      accreditationsArray.map(a => a.facility_id)
+    ).size;
+
+    // Count facilities with general vs specialty accreditation (distinct facilities)
+    const facilitiesWithGeneral = new Set();
+    const facilitiesWithSpecialty = new Set();
+    
+    accreditationsArray.forEach(accred => {
+      if (accred.services_covered) {
+        if (accred.services_covered.includes('PSYCH_CONSULT_GEN')) {
+          facilitiesWithGeneral.add(accred.facility_id);
+        }
+        if (accred.services_covered.includes('PSYCH_CONSULT_SPEC')) {
+          facilitiesWithSpecialty.add(accred.facility_id);
+        }
+      }
+    });
+
+    const approvedClaims = claimsArray.filter(c => 
       c.approved_amount !== null && c.approved_amount > 0
     );
-    const paidClaims = claims.filter(c => c.status === 'paid');
-    const approvedUnpaid = claims.filter(c => 
+    const paidClaims = claimsArray.filter(c => c.status === 'paid');
+    const approvedUnpaid = claimsArray.filter(c => 
       c.status === 'approved' && c.payment_date === null
     );
-    const partialPayment = claims.filter(c => c.status === 'partial_payment');
-    const deniedClaims = claims.filter(c => c.status === 'denied');
+    const partialPayment = claimsArray.filter(c => c.status === 'partial_payment');
+    const deniedClaims = claimsArray.filter(c => c.status === 'denied');
 
-    const totalBilled = claims.reduce((sum, c) => sum + c.billed_amount, 0);
+    const totalBilled = claimsArray.reduce((sum, c) => sum + (c.billed_amount || 0), 0);
     const totalApproved = approvedClaims.reduce((sum, c) => sum + c.approved_amount, 0);
-    const totalDisbursed = claims.reduce((sum, c) => sum + (c.disbursed_amount || 0), 0);
-    const totalOutstanding = claims.reduce((sum, c) => sum + (c.outstanding_balance || 0), 0);
+    const totalDisbursed = claimsArray.reduce((sum, c) => sum + (c.disbursed_amount || 0), 0);
+    const totalOutstanding = claimsArray.reduce((sum, c) => sum + (c.outstanding_balance || 0), 0);
+
+    // Calculate rates with proper handling of zero denominators
+    const accreditationRate = facilitiesArray.length > 0 
+      ? ((distinctAccreditedFacilities / facilitiesArray.length) * 100).toFixed(1) + '%'
+      : 'N/A';
+
+    const approvalRate = totalBilled > 0 ? totalApproved / totalBilled : null;
+    const disbursementRate = totalApproved > 0 ? totalDisbursed / totalApproved : null;
 
     this.results.summary = {
       facilities: {
-        total: facilities.length,
-        accredited: accreditations.length,
-        accreditationRate: (accreditations.length / facilities.length * 100).toFixed(1) + '%'
+        total: facilitiesArray.length,
+        accredited: distinctAccreditedFacilities,
+        accreditationRate: accreditationRate,
+        withGeneralAccreditation: facilitiesWithGeneral.size,
+        withSpecialtyAccreditation: facilitiesWithSpecialty.size
       },
       claims: {
-        total: claims.length,
+        total: claimsArray.length,
         approved: approvedClaims.length,
         fullyPaid: paidClaims.length,
         approvedUnpaid: approvedUnpaid.length,
@@ -441,8 +723,8 @@ export class DataValidator {
         totalApproved: totalApproved,
         totalDisbursed: totalDisbursed,
         totalOutstanding: totalOutstanding,
-        approvalRate: totalApproved / totalBilled,
-        disbursementRate: totalDisbursed / totalApproved
+        approvalRate: approvalRate,
+        disbursementRate: disbursementRate
       }
     };
   }
@@ -508,6 +790,12 @@ export class DataValidator {
       lines.push('SUMMARY:');
       lines.push('--------');
       lines.push(`Facilities: ${results.summary.facilities.total} (${results.summary.facilities.accredited} accredited, ${results.summary.facilities.accreditationRate})`);
+      if (results.summary.facilities.withGeneralAccreditation !== undefined) {
+        lines.push(`  - With general accreditation: ${results.summary.facilities.withGeneralAccreditation}`);
+      }
+      if (results.summary.facilities.withSpecialtyAccreditation !== undefined) {
+        lines.push(`  - With specialty accreditation: ${results.summary.facilities.withSpecialtyAccreditation}`);
+      }
       lines.push(`Claims: ${results.summary.claims.total} total`);
       lines.push(`  - Fully Paid: ${results.summary.claims.fullyPaid}`);
       lines.push(`  - Partial Payment: ${results.summary.claims.partialPayment}`);

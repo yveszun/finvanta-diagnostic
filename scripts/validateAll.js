@@ -13,6 +13,10 @@ const projectRoot = path.resolve(__dirname, '..');
 
 const scenarios = ['low_neutral', 'moderate_neutral', 'high_neutral'];
 
+// Load benefit config for eligibility validation
+const configPath = path.join(projectRoot, 'public/config/benefitConfig.json');
+const benefitConfig = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+
 console.log('═══════════════════════════════════════════════════════════');
 console.log('FINVANTA HEALTH - DATA VALIDATION');
 console.log('═══════════════════════════════════════════════════════════');
@@ -29,8 +33,8 @@ scenarios.forEach(scenario => {
   const accreditations = JSON.parse(fs.readFileSync(path.join(dataDir, 'accreditations.json'), 'utf-8'));
   const claims = JSON.parse(fs.readFileSync(path.join(dataDir, 'claims.json'), 'utf-8'));
   
-  // Validate
-  const validator = new DataValidator();
+  // Validate with eligibility config
+  const validator = new DataValidator({ eligibility: benefitConfig.eligibility });
   const results = validator.validate(facilities, accreditations, claims);
   
   // Generate and display report

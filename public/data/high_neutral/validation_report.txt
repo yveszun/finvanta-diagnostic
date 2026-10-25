@@ -9,6 +9,8 @@ Warnings: 0
 SUMMARY:
 --------
 Facilities: 1500 (528 accredited, 35.2%)
+  - With general accreditation: 528
+  - With specialty accreditation: 256
 Claims: 2000 total
   - Fully Paid: 1551
   - Partial Payment: 81
