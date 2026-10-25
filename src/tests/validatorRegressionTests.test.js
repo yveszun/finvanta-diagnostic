@@ -406,7 +406,7 @@ describe('Validator Regression Tests - Independent Review Findings', () => {
       }
     });
 
-    it('should fall back to hardcoded check with label when config not provided', () => {
+    it('should return warning when config not provided (Phase 3 update)', () => {
       const validator = new DataValidator(); // No config
       
       const level1Facility = sampleFacilities.find(f => f.facility_level === 1);
@@ -424,18 +424,20 @@ describe('Validator Regression Tests - Independent Review Findings', () => {
         [testClaim]
       );
       
-      // Should still detect violation with fallback check
+      // Phase 3: Should return WARNING instead of applying hardcoded rules
+      expect(results.warnings.some(w => 
+        w.code === 'MISSING_ELIGIBILITY_CONFIG'
+      )).toBe(true);
+      
+      // Should NOT validate eligibility without config
       expect(results.errors.some(e => 
         e.code === 'LEVEL1_SPECIALTY_VIOLATION' || 
         e.code === 'SPECIALTY_ELIGIBILITY_VIOLATION'
-      )).toBe(true);
+      )).toBe(false);
       
-      // Should include illustrative label
-      const error = results.errors.find(e => 
-        e.code === 'LEVEL1_SPECIALTY_VIOLATION' || 
-        e.code === 'SPECIALTY_ELIGIBILITY_VIOLATION'
-      );
-      expect(error.message.toLowerCase()).toContain('illustrative');
+      // Warning should explain that eligibility validation was skipped
+      const warning = results.warnings.find(w => w.code === 'MISSING_ELIGIBILITY_CONFIG');
+      expect(warning.message.toLowerCase()).toContain('eligibility');
     });
   });
 

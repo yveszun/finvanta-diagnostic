@@ -408,22 +408,12 @@ export class DataValidator {
         }
       }
     } else {
-      // Fallback: hardcoded Level 1 check with clear labeling
-      const level1SpecialtyViolations = [];
-      claims.forEach(claim => {
-        const facility = facilityLevelMap[claim.facility_id];
-        if (facility && facility.level === 1 && claim.service_code === 'PSYCH_CONSULT_SPEC') {
-          level1SpecialtyViolations.push({
-            claim_id: claim.claim_id,
-            note: 'Illustrative assumption: Level 1 facilities not eligible for specialty services (pending official PhilHealth verification)'
-          });
-        }
-      });
-
-      if (level1SpecialtyViolations.length > 0) {
-        this.addError('ERROR', 'LEVEL1_SPECIALTY_VIOLATION',
-          `${level1SpecialtyViolations.length} Level 1 facilities have specialty claims (illustrative assumption - pending verification)`,
-          level1SpecialtyViolations.slice(0, 5));
+      // No config provided - return warning instead of applying hardcoded rules
+      const specialtyClaims = claims.filter(c => c.service_code === 'PSYCH_CONSULT_SPEC');
+      if (specialtyClaims.length > 0) {
+        this.addError('WARNING', 'MISSING_ELIGIBILITY_CONFIG',
+          `Cannot validate specialty service eligibility: configuration not provided. ${specialtyClaims.length} specialty claims present.`,
+          { note: 'Provide eligibility configuration to enable service-specific validation' });
       }
     }
   }
