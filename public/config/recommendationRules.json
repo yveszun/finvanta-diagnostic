@@ -1,0 +1,227 @@
+{
+  "version": "2.0",
+  "lastUpdated": "2026-10-25",
+  "disclaimer": "ALL THRESHOLDS ARE ILLUSTRATIVE FOR DEMONSTRATION PURPOSES ONLY. These are not established PhilHealth benchmarks and should not be treated as policy targets without official verification.",
+  
+  "thresholdWarning": "⚠️ ILLUSTRATIVE THRESHOLDS — Not verified PhilHealth policy targets",
+  
+  "rules": [
+    {
+      "id": "LOW_ACCREDITATION_CRITICAL",
+      "condition": "accreditationRate < 10",
+      "severity": "critical",
+      "category": "Accreditation",
+      
+      "observedFinding": "Accreditation rate is {{accreditationRate}}%",
+      "supportingIndicator": "{{accredited}} of {{eligible}} facilities accredited for this benefit",
+      
+      "potentialExplanation": "This MAY indicate: (1) Complex accreditation requirements, (2) Limited facility awareness of benefit, (3) Insufficient implementation support resources, (4) Documentation or capacity barriers, (5) Eligibility criteria unclear or restrictive",
+      
+      "evidenceLimitations": "We do not know: Which facilities attempted accreditation, Reasons for non-participation, Whether facilities are aware of the benefit, Capacity constraints at facility level, Actual eligibility if official criteria differ",
+      
+      "suggestedInvestigation": "Survey sample of non-accredited facilities; Review accreditation application data for rejection reasons; Interview regional coordinators on outreach effectiveness; Verify official eligibility criteria; Assess technical assistance availability",
+      
+      "possibleInstitutionalDecisions": "Consider: (1) Review and simplify accreditation requirements if appropriate, (2) Launch targeted facility engagement campaign, (3) Provide technical assistance for applications, (4) Clarify eligibility criteria officially, (5) Assess whether benefit design aligns with facility capacity",
+      
+      "priority": "HIGH",
+      "threshold": {
+        "value": 10,
+        "unit": "percent",
+        "label": "ILLUSTRATIVE ONLY",
+        "source": "Demonstration purposes - not a verified PhilHealth benchmark",
+        "note": "This threshold is not based on official policy documentation"
+      }
+    },
+    
+    {
+      "id": "MODERATE_ACCREDITATION",
+      "condition": "accreditationRate >= 10 AND accreditationRate < 25",
+      "severity": "medium",
+      "category": "Accreditation",
+      
+      "observedFinding": "Accreditation rate is {{accreditationRate}}%",
+      "supportingIndicator": "{{accredited}} of {{eligible}} facilities accredited",
+      
+      "potentialExplanation": "This MAY indicate moderate early-stage uptake with room for acceleration",
+      
+      "evidenceLimitations": "Trend data not available; Barriers to higher uptake not identified; Actual eligibility criteria pending verification",
+      
+      "suggestedInvestigation": "Track monthly accreditation trends; Identify facilities in application process; Compare performance across regions; Document success factors from accredited facilities",
+      
+      "possibleInstitutionalDecisions": "Consider: (1) Targeted outreach to remaining eligible facilities, (2) Share success stories and best practices, (3) Monitor trend trajectory over next 3 months",
+      
+      "priority": "MEDIUM",
+      "threshold": {
+        "value": 25,
+        "unit": "percent",
+        "label": "ILLUSTRATIVE ONLY",
+        "source": "Demonstration purposes only",
+        "note": "Not an established PhilHealth benchmark"
+      }
+    },
+    
+    {
+      "id": "LOW_CLAIMS_FILING",
+      "condition": "accreditationRate >= 15 AND claimsFilingRate < 40",
+      "severity": "critical",
+      "category": "Service Activation",
+      
+      "observedFinding": "Only {{filingRate}}% of accredited facilities are filing claims",
+      "supportingIndicator": "{{filing}} of {{accredited}} accredited facilities have submitted claims",
+      
+      "potentialExplanation": "This MAY indicate: (1) Services not activated post-accreditation, (2) Provider awareness gaps about claims process, (3) Lower patient demand than anticipated, (4) Claims submission barriers, (5) Administrative capacity constraints",
+      
+      "evidenceLimitations": "We do not know: Which accredited facilities have activated services, Provider training completion status, Patient demand levels, Specific claims process barriers, Whether low filing reflects low service delivery or only low administrative reporting",
+      
+      "suggestedInvestigation": "Verify service activation status at accredited facilities; Survey providers on benefit awareness and claims process challenges; Review claims rejection patterns; Assess patient referral and awareness; Distinguish service delivery from claims filing",
+      
+      "possibleInstitutionalDecisions": "Consider: (1) Post-accreditation provider training program, (2) Simplified claims submission process, (3) Patient and provider awareness campaigns, (4) Monitor service activation timelines, (5) Assess whether benefit design meets patient needs",
+      
+      "priority": "HIGH",
+      "threshold": {
+        "value": 40,
+        "unit": "percent",
+        "label": "ILLUSTRATIVE ONLY",
+        "source": "Demonstration purposes only",
+        "note": "Not verified against PhilHealth policy targets"
+      }
+    },
+    
+    {
+      "id": "LOW_CLAIMS_APPROVAL_RATE",
+      "condition": "claimsApprovalRate < 80",
+      "severity": "critical",
+      "category": "Claims Adjudication",
+      
+      "observedFinding": "Claims approval rate is {{approvalRate}}%",
+      "supportingIndicator": "{{approved}} of {{adjudicated}} adjudicated claims approved",
+      
+      "potentialExplanation": "This MAY indicate: (1) Documentation quality issues, (2) Eligibility verification challenges, (3) Service coding errors, (4) Claims process complexity, (5) Unclear benefit rules",
+      
+      "evidenceLimitations": "We do not know: Top denial reasons by category, Whether denials are systematic or facility-specific, Whether denied claims are corrected and resubmitted, Training gaps at facility level",
+      
+      "suggestedInvestigation": "Analyze denial reasons by frequency; Identify facilities with high denial rates; Review documentation requirements for clarity; Assess provider training adequacy; Distinguish technical denials from policy-based denials",
+      
+      "possibleInstitutionalDecisions": "Consider: (1) Targeted training on common denial reasons, (2) Simplify documentation requirements if appropriate, (3) Improve claims submission guidance, (4) Allow claim corrections and resubmissions, (5) Review whether benefit rules are clearly communicated",
+      
+      "priority": "HIGH",
+      "threshold": {
+        "value": 80,
+        "unit": "percent",
+        "label": "ILLUSTRATIVE ONLY",
+        "source": "Demonstration purposes only",
+        "note": "Not an established PhilHealth benchmark"
+      }
+    },
+    
+    {
+      "id": "PAYMENT_DELAY",
+      "condition": "averageDaysToPayment > 60",
+      "severity": "medium",
+      "category": "Payment Processing",
+      
+      "observedFinding": "Average time from service to payment is {{avgDays}} days",
+      "supportingIndicator": "Based on {{paidClaims}} paid claims",
+      
+      "potentialExplanation": "This MAY indicate: (1) Processing capacity constraints, (2) Documentation review backlogs, (3) Payment system delays, (4) Multiple approval layers",
+      
+      "evidenceLimitations": "We do not know: Breakdown of delays by processing stage (acceptance, adjudication, approval, disbursement), Whether delays are systemic or case-specific, Impact on provider cash flow and participation",
+      
+      "suggestedInvestigation": "Map processing timeline by stage; Identify bottleneck stages; Assess processing capacity; Interview facilities on impact of payment delays; Distinguish approval delays from disbursement delays",
+      
+      "possibleInstitutionalDecisions": "Consider: (1) Increase adjudication capacity, (2) Streamline approval workflow, (3) Expedite disbursement processing, (4) Communicate expected timelines to providers clearly",
+      
+      "priority": "MEDIUM",
+      "threshold": {
+        "value": 60,
+        "unit": "days",
+        "label": "ILLUSTRATIVE ONLY",
+        "source": "Demonstration purposes only",
+        "note": "Not a verified PhilHealth service standard"
+      }
+    },
+    
+    {
+      "id": "REGIONAL_DISPARITY",
+      "condition": "regionalVariance > 20",
+      "severity": "medium",
+      "category": "Geographic Equity",
+      
+      "observedFinding": "Large variation in implementation rates across regions",
+      "supportingIndicator": "Best performing: {{bestRegion}} ({{maxRate}}%); Lowest: {{worstRegion}} ({{minRate}}%)",
+      
+      "potentialExplanation": "This MAY indicate: (1) Variable regional coordination effectiveness, (2) Urban-rural infrastructure gaps, (3) Differential resource availability, (4) Best practices not shared across regions, (5) Regional eligibility patterns if actual criteria differ",
+      
+      "evidenceLimitations": "We do not know: Regional context differences (facility mix, population mental health needs), Coordinator capacity and resources by region, Whether low rates reflect eligibility or implementation barriers, Actual geographic distribution if using illustrative eligibility",
+      
+      "suggestedInvestigation": "Interview high-performing regional coordinators to document success factors; Assess infrastructure and resource differences; Review regional facility eligibility patterns; Verify whether variation reflects implementation or structural factors; Check if official eligibility criteria affect regional patterns differently",
+      
+      "possibleInstitutionalDecisions": "Consider: (1) Share best practices via regional coordinator network, (2) Provide additional support to lower-performing regions, (3) Adjust resource allocation based on need and context, (4) Verify official eligibility criteria to understand true eligible facility distribution",
+      
+      "priority": "MEDIUM",
+      "threshold": {
+        "value": 20,
+        "unit": "percentage points",
+        "label": "ILLUSTRATIVE ONLY",
+        "source": "Demonstration purposes only",
+        "note": "Not an established equity threshold"
+      },
+      "additionalNote": "Regional patterns in this demonstration are simulated and do not represent actual geographic findings"
+    },
+    
+    {
+      "id": "STRONG_PERFORMANCE",
+      "condition": "accreditationRate > 30 AND claimsFilingRate > 60 AND claimsApprovalRate > 90",
+      "severity": "success",
+      "category": "Monitoring",
+      
+      "observedFinding": "Implementation shows strong uptake across stages",
+      "supportingIndicator": "Accreditation: {{accreditationRate}}%; Filing: {{filingRate}}%; Approval: {{approvalRate}}%",
+      
+      "potentialExplanation": "This MAY indicate effective implementation strategy and strong facility engagement",
+      
+      "evidenceLimitations": "Quality of services not assessed; Patient outcomes not measured; Service delivery volumes vs administrative activity not distinguished",
+      
+      "suggestedInvestigation": "Continue monthly monitoring of trends; Document success factors for potential replication; Begin outcome evaluation (patient access, quality, satisfaction); Assess actual service delivery beyond administrative metrics",
+      
+      "possibleInstitutionalDecisions": "Consider: (1) Maintain current implementation approach, (2) Document and share success factors, (3) Shift focus to quality and outcome measurement, (4) Plan outcome evaluation study",
+      
+      "priority": "LOW",
+      "threshold": {
+        "values": [30, 60, 90],
+        "units": ["percent", "percent", "percent"],
+        "label": "ILLUSTRATIVE ONLY",
+        "source": "Demonstration purposes only",
+        "note": "These thresholds are not official PhilHealth performance targets"
+      }
+    }
+  ],
+  
+  "displayGuidelines": {
+    "alwaysShowThresholdLabel": true,
+    "prominentDisclaimerOnEveryPage": true,
+    "distinguishFindingsFromHypotheses": true,
+    "useLanguage": {
+      "findings": "The data shows..., Observed..., Measured...",
+      "hypotheses": "This MAY indicate..., Potential explanation..., Possible factors..."
+    },
+    "prominentLimitationsDisplay": true,
+    "actionableInvestigationSteps": true,
+    "neverPresentAsEstablishedBenchmarks": true
+  },
+  
+  "analyticalNotes": [
+    "All thresholds are illustrative and not based on verified PhilHealth policy documentation",
+    "Recommendations distinguish observed administrative activity from actual service delivery",
+    "Evidence limitations are explicitly stated for each finding",
+    "Hypotheses are clearly labeled as potential explanations requiring investigation",
+    "Institutional decisions are presented as options for consideration, not prescriptive mandates"
+  ],
+  
+  "metadata": {
+    "configVersion": "2.0-conditional-approval",
+    "notForProduction": true,
+    "notForPolicyDecisions": true,
+    "purpose": "Demonstration of analytical framework only"
+  }
+}

@@ -1,0 +1,173 @@
+{
+  "version": "2.0",
+  "lastUpdated": "2026-10-25",
+  "benefit": {
+    "name": "Outpatient Mental Health Benefit Package",
+    "code": "MENTAL_HEALTH_OPD",
+    "effectiveDate": "2025-01-01",
+    "description": "Covers outpatient mental health consultations and services",
+    "disclaimer": "This is a demonstration system using synthetic data only"
+  },
+  
+  "eligibility": {
+    "mode": "configurable",
+    "requiresOfficialVerification": true,
+    "verificationStatus": "PENDING",
+    "verificationNote": "Eligibility criteria not yet verified with PhilHealth. Current configuration is illustrative only.",
+    "officialSource": "Awaiting PhilHealth Circular",
+    
+    "currentConfiguration": {
+      "facilityTypes": ["Hospital", "Infirmary", "Rural Health Unit", "City Health Office"],
+      "includeLevelOne": true,
+      "includeLevelTwo": true,
+      "includeLevelThree": true,
+      "note": "No facility level restrictions applied pending official verification"
+    },
+    
+    "serviceDistinction": {
+      "general": {
+        "description": "General psychiatric consultation",
+        "eligibleFacilityTypes": ["Hospital", "Infirmary", "Rural Health Unit", "City Health Office"],
+        "eligibleLevels": [1, 2, 3],
+        "requiresVerification": true
+      },
+      "specialty": {
+        "description": "Specialty mental health services",
+        "eligibleFacilityTypes": ["Hospital"],
+        "eligibleLevels": [2, 3],
+        "requiresVerification": true,
+        "note": "Specialty services typically require higher-level facilities - pending verification"
+      }
+    }
+  },
+  
+  "services": {
+    "general": {
+      "code": "PSYCH_CONSULT_GEN",
+      "name": "General Psychiatric Consultation",
+      "amount": 9000,
+      "currency": "PHP",
+      "description": "Basic mental health consultation and assessment"
+    },
+    "specialty": {
+      "code": "PSYCH_CONSULT_SPEC",
+      "name": "Specialty Mental Health Service",
+      "amount": 16000,
+      "currency": "PHP",
+      "description": "Specialized mental health intervention or treatment"
+    }
+  },
+  
+  "claimsProcessing": {
+    "stages": {
+      "1_submission": "Claim submitted by facility",
+      "2_acceptance": "Claim accepted for processing (initial validation passed)",
+      "3_adjudication": "Claim reviewed and adjudicated",
+      "4_approval": "Claim approved for payment",
+      "5_payment": "Payment disbursed to facility"
+    },
+    "requireBothApprovalAndPaymentDates": true,
+    "note": "Approval and payment are distinct stages - approved claims may have payment delays"
+  },
+  
+  "scenarios": {
+    "description": "Three demonstration scenarios with different implementation levels",
+    "disclaimer": "All scenarios use synthetic data. Numbers do not represent actual PhilHealth performance.",
+    
+    "low": {
+      "name": "Low Implementation & Utilization",
+      "facilitiesTotal": 1500,
+      "accreditationRate": 0.05,
+      "claimsFilingRate": 0.20,
+      "approvalRate": 0.88,
+      "estimatedTotalClaims": 150,
+      "estimatedTotalValue": 300000,
+      "description": "Simulates early implementation phase with limited facility engagement"
+    },
+    
+    "moderate": {
+      "name": "Moderate Implementation & Utilization",
+      "facilitiesTotal": 1500,
+      "accreditationRate": 0.15,
+      "claimsFilingRate": 0.40,
+      "approvalRate": 0.92,
+      "estimatedTotalClaims": 600,
+      "estimatedTotalValue": 900000,
+      "description": "Simulates mid-stage implementation with growing participation"
+    },
+    
+    "high": {
+      "name": "High Implementation & Utilization",
+      "facilitiesTotal": 1500,
+      "accreditationRate": 0.35,
+      "claimsFilingRate": 0.70,
+      "approvalRate": 0.95,
+      "estimatedTotalClaims": 2000,
+      "estimatedTotalValue": 2500000,
+      "description": "Simulates mature implementation with strong facility engagement"
+    },
+    
+    "defaultScenario": "moderate"
+  },
+  
+  "regionalDistribution": {
+    "mode": "configurable",
+    "disclaimer": "Regional distributions are simulated and do not represent actual geographic patterns",
+    
+    "profiles": {
+      "neutral": {
+        "name": "Neutral Distribution",
+        "description": "Equal implementation rates across all regions",
+        "variationCoefficient": 0.0
+      },
+      
+      "differentiated": {
+        "name": "Differentiated Distribution",
+        "description": "Simulated urban-rural variation (NCR higher, rural regions lower)",
+        "variationCoefficient": 0.5,
+        "urbanMultiplier": 2.5,
+        "ruralMultiplier": 0.4,
+        "note": "Simulated pattern only - not based on actual regional data"
+      }
+    },
+    
+    "defaultProfile": "neutral"
+  },
+  
+  "analyticalSafeguards": {
+    "handleZeroDenominators": true,
+    "displayNAForUndefined": true,
+    "distinguishActivityFromDelivery": true,
+    "notes": [
+      "All rates display 'N/A' when denominator is zero",
+      "Administrative activity (accreditation, filing) is distinct from service delivery",
+      "Facility counts never mixed with claim counts in rate calculations"
+    ]
+  },
+  
+  "validationRequirements": {
+    "uniqueIds": true,
+    "validReferences": true,
+    "dateConsistency": true,
+    "statusConsistency": true,
+    "approvalPaymentSeparation": true,
+    "requiredFields": ["facility_id", "claim_id", "service_date", "claim_amount", "status"]
+  },
+  
+  "displayLabels": {
+    "syntheticDataBanner": "⚠️ SYNTHETIC DATA — For Demonstration Only — Not Actual PhilHealth Performance",
+    "eligibilityWarning": "ILLUSTRATIVE — Eligibility criteria pending official verification",
+    "rateDisclaimer": "All rates are illustrative pending verification of official requirements",
+    "regionalDisclaimer": "Regional patterns are simulated and do not represent actual geographic findings",
+    "thresholdDisclaimer": "All recommendation thresholds are illustrative, not established PhilHealth benchmarks"
+  },
+  
+  "metadata": {
+    "dataType": "SYNTHETIC",
+    "purpose": "Demonstration and development only",
+    "notForProduction": true,
+    "notForPolicyDecisions": true,
+    "generatedBy": "Finvanta Data Generator V2",
+    "configVersion": "2.0-conditional-approval"
+  }
+}
