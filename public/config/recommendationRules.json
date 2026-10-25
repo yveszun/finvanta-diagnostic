@@ -11,9 +11,10 @@
       "condition": "accreditationRate < 10",
       "severity": "critical",
       "category": "Accreditation",
+      "metricsRequired": ["stage1_eligibleFacilities", "stage2_accreditedFacilities", "accreditationRate"],
       
       "observedFinding": "Accreditation rate is {{accreditationRate}}%",
-      "supportingIndicator": "{{accredited}} of {{eligible}} facilities accredited for this benefit",
+      "supportingIndicator": "{{stage2_accreditedFacilities}} of {{stage1_eligibleFacilities}} facilities accredited for this benefit",
       
       "potentialExplanation": "This MAY indicate: (1) Complex accreditation requirements, (2) Limited facility awareness of benefit, (3) Insufficient implementation support resources, (4) Documentation or capacity barriers, (5) Eligibility criteria unclear or restrictive",
       
@@ -38,9 +39,10 @@
       "condition": "accreditationRate >= 10 AND accreditationRate < 25",
       "severity": "medium",
       "category": "Accreditation",
+      "metricsRequired": ["stage1_eligibleFacilities", "stage2_accreditedFacilities", "accreditationRate"],
       
       "observedFinding": "Accreditation rate is {{accreditationRate}}%",
-      "supportingIndicator": "{{accredited}} of {{eligible}} facilities accredited",
+      "supportingIndicator": "{{stage2_accreditedFacilities}} of {{stage1_eligibleFacilities}} facilities accredited",
       
       "potentialExplanation": "This MAY indicate moderate early-stage uptake with room for acceleration",
       
@@ -62,12 +64,13 @@
     
     {
       "id": "LOW_CLAIMS_FILING",
-      "condition": "accreditationRate >= 15 AND claimsFilingRate < 40",
+      "condition": "accreditationRate >= 15 AND filingRate < 40",
       "severity": "critical",
       "category": "Service Activation",
+      "metricsRequired": ["stage2_accreditedFacilities", "stage3_filingFacilities", "filingRate"],
       
       "observedFinding": "Only {{filingRate}}% of accredited facilities are filing claims",
-      "supportingIndicator": "{{filing}} of {{accredited}} accredited facilities have submitted claims",
+      "supportingIndicator": "{{stage3_filingFacilities}} of {{stage2_accreditedFacilities}} accredited facilities have submitted claims",
       
       "potentialExplanation": "This MAY indicate: (1) Services not activated post-accreditation, (2) Provider awareness gaps about claims process, (3) Lower patient demand than anticipated, (4) Claims submission barriers, (5) Administrative capacity constraints",
       
@@ -89,12 +92,13 @@
     
     {
       "id": "LOW_CLAIMS_APPROVAL_RATE",
-      "condition": "claimsApprovalRate < 80",
+      "condition": "approvalRate < 80",
       "severity": "critical",
       "category": "Claims Adjudication",
+      "metricsRequired": ["stage3_adjudicatedClaims", "stage4_approvedClaims", "approvalRate"],
       
       "observedFinding": "Claims approval rate is {{approvalRate}}%",
-      "supportingIndicator": "{{approved}} of {{adjudicated}} adjudicated claims approved",
+      "supportingIndicator": "{{stage4_approvedClaims}} of {{stage3_adjudicatedClaims}} adjudicated claims approved",
       
       "potentialExplanation": "This MAY indicate: (1) Documentation quality issues, (2) Eligibility verification challenges, (3) Service coding errors, (4) Claims process complexity, (5) Unclear benefit rules",
       
@@ -119,9 +123,10 @@
       "condition": "averageDaysToPayment > 60",
       "severity": "medium",
       "category": "Payment Processing",
+      "metricsRequired": ["averageDaysToPayment", "stage5_paidClaims"],
       
-      "observedFinding": "Average time from service to payment is {{avgDays}} days",
-      "supportingIndicator": "Based on {{paidClaims}} paid claims",
+      "observedFinding": "Average time from service to payment is {{averageDaysToPayment}} days",
+      "supportingIndicator": "Based on {{stage5_paidClaims}} paid claims",
       
       "potentialExplanation": "This MAY indicate: (1) Processing capacity constraints, (2) Documentation review backlogs, (3) Payment system delays, (4) Multiple approval layers",
       
@@ -146,6 +151,7 @@
       "condition": "regionalVariance > 20",
       "severity": "medium",
       "category": "Geographic Equity",
+      "metricsRequired": ["regionalVariance", "regionalAccreditationRate"],
       
       "observedFinding": "Large variation in implementation rates across regions",
       "supportingIndicator": "Best performing: {{bestRegion}} ({{maxRate}}%); Lowest: {{worstRegion}} ({{minRate}}%)",
@@ -171,16 +177,17 @@
     
     {
       "id": "STRONG_PERFORMANCE",
-      "condition": "accreditationRate > 30 AND claimsFilingRate > 60 AND claimsApprovalRate > 90",
+      "condition": "accreditationRate > 30 AND filingRate > 60 AND approvalRate > 90",
       "severity": "success",
       "category": "Monitoring",
+      "metricsRequired": ["accreditationRate", "filingRate", "approvalRate"],
       
       "observedFinding": "Implementation shows strong uptake across stages",
       "supportingIndicator": "Accreditation: {{accreditationRate}}%; Filing: {{filingRate}}%; Approval: {{approvalRate}}%",
       
       "potentialExplanation": "This MAY indicate effective implementation strategy and strong facility engagement",
       
-      "evidenceLimitations": "Quality of services not assessed; Patient outcomes not measured; Service delivery volumes vs administrative activity not distinguished",
+      "evidenceLimitations": "We do not know: Quality of services, Patient outcomes, Whether service delivery volumes match administrative reporting, Impact on patient access and satisfaction",
       
       "suggestedInvestigation": "Continue monthly monitoring of trends; Document success factors for potential replication; Begin outcome evaluation (patient access, quality, satisfaction); Assess actual service delivery beyond administrative metrics",
       

@@ -45,17 +45,27 @@
     "general": {
       "code": "PSYCH_CONSULT_GEN",
       "name": "General Psychiatric Consultation",
-      "amount": 9000,
+      "packageCeiling": 9000,
       "currency": "PHP",
-      "description": "Basic mental health consultation and assessment"
+      "description": "Basic mental health consultation and assessment",
+      "note": "Package ceiling - actual reimbursement may be lower based on adjudication"
     },
     "specialty": {
       "code": "PSYCH_CONSULT_SPEC",
       "name": "Specialty Mental Health Service",
-      "amount": 16000,
+      "packageCeiling": 16000,
       "currency": "PHP",
-      "description": "Specialized mental health intervention or treatment"
+      "description": "Specialized mental health intervention or treatment",
+      "note": "Package ceiling - actual reimbursement may be lower based on adjudication"
     }
+  },
+  
+  "financialAssumptions": {
+    "disclaimer": "Financial estimates are synthetic and illustrative only",
+    "billedToApprovedRatio": 0.92,
+    "approvedToDisbursedRatio": 0.98,
+    "averageReimbursementToPackageRatio": 0.85,
+    "note": "Billed amount = package ceiling; Approved amount accounts for denials; Disbursed amount accounts for payment processing adjustments; Average reimbursement reflects typical adjudication outcomes"
   },
   
   "claimsProcessing": {
@@ -80,8 +90,20 @@
       "accreditationRate": 0.05,
       "claimsFilingRate": 0.20,
       "approvalRate": 0.88,
-      "estimatedTotalClaims": 150,
-      "estimatedTotalValue": 300000,
+      "targetClaimsCount": 150,
+      "serviceTypeDistribution": {
+        "general": 0.65,
+        "specialty": 0.35
+      },
+      "financials": {
+        "totalBilled": 1717500,
+        "totalApproved": 1284690,
+        "totalDisbursed": 1258996,
+        "averageBilledPerClaim": 11450,
+        "averageApprovedPerClaim": 8565,
+        "averageDisbursedPerClaim": 8393,
+        "calculation": "150 claims × (65% × ₱9,000 + 35% × ₱16,000) = ₱1,717,500 billed; × 88% approval × 85% avg reimbursement = ₱1,284,690 approved; × 98% disbursement = ₱1,258,996 disbursed"
+      },
       "description": "Simulates early implementation phase with limited facility engagement"
     },
     
@@ -91,8 +113,20 @@
       "accreditationRate": 0.15,
       "claimsFilingRate": 0.40,
       "approvalRate": 0.92,
-      "estimatedTotalClaims": 600,
-      "estimatedTotalValue": 900000,
+      "targetClaimsCount": 600,
+      "serviceTypeDistribution": {
+        "general": 0.60,
+        "specialty": 0.40
+      },
+      "financials": {
+        "totalBilled": 7080000,
+        "totalApproved": 5536560,
+        "totalDisbursed": 5425829,
+        "averageBilledPerClaim": 11800,
+        "averageApprovedPerClaim": 9228,
+        "averageDisbursedPerClaim": 9043,
+        "calculation": "600 claims × (60% × ₱9,000 + 40% × ₱16,000) = ₱7,080,000 billed; × 92% approval × 85% avg reimbursement = ₱5,536,560 approved; × 98% disbursement = ₱5,425,829 disbursed"
+      },
       "description": "Simulates mid-stage implementation with growing participation"
     },
     
@@ -102,8 +136,20 @@
       "accreditationRate": 0.35,
       "claimsFilingRate": 0.70,
       "approvalRate": 0.95,
-      "estimatedTotalClaims": 2000,
-      "estimatedTotalValue": 2500000,
+      "targetClaimsCount": 2000,
+      "serviceTypeDistribution": {
+        "general": 0.55,
+        "specialty": 0.45
+      },
+      "financials": {
+        "totalBilled": 24300000,
+        "totalApproved": 19622250,
+        "totalDisbursed": 19229805,
+        "averageBilledPerClaim": 12150,
+        "averageApprovedPerClaim": 9811,
+        "averageDisbursedPerClaim": 9615,
+        "calculation": "2000 claims × (55% × ₱9,000 + 45% × ₱16,000) = ₱24,300,000 billed; × 95% approval × 85% avg reimbursement = ₱19,622,250 approved; × 98% disbursement = ₱19,229,805 disbursed"
+      },
       "description": "Simulates mature implementation with strong facility engagement"
     },
     
