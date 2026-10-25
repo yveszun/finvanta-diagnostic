@@ -1,41 +1,44 @@
 import { formatNumber, formatCurrency } from '../utils/formatters';
 
 export default function ExecutiveOverview({ data, scenario }) {
-  const { summary, metadata } = data;
+  // Extract from Phase 3 analytics structure
+  const cascade = data?.analytics?.facilityParticipationCascade;
+  const claimsCascade = data?.analytics?.claimsProcessingCascade;
+  const financial = data?.analytics?.financialCalculations;
 
   const indicators = [
     {
       label: 'Facilities Accredited',
-      value: summary.accredited_facilities,
-      total: summary.total_facilities,
+      value: cascade?.stage2_accredited?.count || 0,
+      total: cascade?.stage1_eligible?.count || 0,
       description: 'Facilities approved to provide mental health services'
     },
     {
       label: 'Facilities Filing Claims',
-      value: summary.facilities_filing_claims,
-      total: summary.accredited_facilities,
+      value: cascade?.stage3_claiming?.count || 0,
+      total: cascade?.stage2_accredited?.count || 0,
       description: 'Accredited facilities that have submitted at least one claim'
     },
     {
       label: 'Facilities Receiving Payment',
-      value: summary.facilities_receiving_payment,
-      total: summary.facilities_filing_claims,
+      value: cascade?.stage4_receiving_payment?.count || 0,
+      total: cascade?.stage3_claiming?.count || 0,
       description: 'Filing facilities that have received at least one payment'
     },
     {
       label: 'Total Claims Submitted',
-      value: summary.total_claims,
+      value: claimsCascade?.stage1_submitted?.count || 0,
       description: 'All claims submitted during reporting period'
     },
     {
       label: 'Claims Approved but Unpaid',
-      value: summary.approved_but_unpaid,
-      total: summary.total_claims,
+      value: claimsCascade?.breakdown?.approvedUnpaid?.count || 0,
+      total: claimsCascade?.stage1_submitted?.count || 0,
       description: 'Claims approved for reimbursement but payment not yet disbursed'
     },
     {
       label: 'Total Amount Disbursed',
-      value: formatCurrency(summary.total_disbursed),
+      value: financial?.totalDisbursed?.formatted || '₱0',
       description: 'Total reimbursements paid to facilities'
     }
   ];
@@ -59,8 +62,10 @@ export default function ExecutiveOverview({ data, scenario }) {
                   {indicator.label}
                 </dt>
                 <dd className="text-2xl font-bold text-gray-900">
-                  {typeof indicator.value === 'number' ? formatNumber(indicator.value) : indicator.value}
-                  {indicator.total && (
+                  {typeof indicator.value === 'string' 
+                    ? indicator.value 
+                    : formatNumber(indicator.value)}
+                  {indicator.total && typeof indicator.value === 'number' && indicator.total > 0 && (
                     <span className="text-sm font-normal text-gray-500 ml-2">
                       / {formatNumber(indicator.total)}
                       <span className="ml-1">

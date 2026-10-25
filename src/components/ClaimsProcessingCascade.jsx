@@ -1,81 +1,81 @@
 import { formatNumber, safePercent } from '../utils/formatters';
 
 export default function ClaimsProcessingCascade({ data }) {
-  const { claims_cascade } = data;
+  const claimsCascade = data?.analytics?.claimsProcessingCascade;
 
   const stages = [
     {
       label: 'Submitted',
-      count: claims_cascade.submitted,
+      count: claimsCascade?.stage1_submitted?.count || 0,
       description: 'All claims submitted by facilities',
       denominator: null,
       color: 'bg-blue-50 border-blue-200'
     },
     {
       label: 'Pending Acceptance',
-      count: claims_cascade.pending_acceptance,
+      count: claimsCascade?.stage1a_pending_acceptance?.count || 0,
       description: 'Awaiting initial review and acceptance',
-      denominator: claims_cascade.submitted,
+      denominator: claimsCascade?.stage1_submitted?.count || 0,
       denominatorLabel: 'submitted claims',
       isPending: true,
       color: 'bg-yellow-50 border-yellow-200'
     },
     {
       label: 'Accepted',
-      count: claims_cascade.accepted,
+      count: claimsCascade?.stage2_accepted?.count || 0,
       description: 'Passed initial review, proceeding to adjudication',
-      denominator: claims_cascade.submitted,
+      denominator: claimsCascade?.stage1_submitted?.count || 0,
       denominatorLabel: 'submitted claims',
       color: 'bg-green-50 border-green-200'
     },
     {
       label: 'Pending Adjudication',
-      count: claims_cascade.pending_adjudication,
+      count: claimsCascade?.stage2a_pending_adjudication?.count || 0,
       description: 'Accepted but awaiting adjudication decision',
-      denominator: claims_cascade.accepted,
+      denominator: claimsCascade?.stage2_accepted?.count || 0,
       denominatorLabel: 'accepted claims',
       isPending: true,
       color: 'bg-yellow-50 border-yellow-200'
     },
     {
       label: 'Adjudicated',
-      count: claims_cascade.adjudicated,
+      count: claimsCascade?.stage3_adjudicated?.count || 0,
       description: 'Reviewed and decision made',
-      denominator: claims_cascade.accepted,
+      denominator: claimsCascade?.stage2_accepted?.count || 0,
       denominatorLabel: 'accepted claims',
       color: 'bg-green-50 border-green-200'
     },
     {
       label: 'Approved',
-      count: claims_cascade.approved,
+      count: claimsCascade?.stage4_approved?.count || 0,
       description: 'Approved for reimbursement (includes paid and unpaid)',
-      denominator: claims_cascade.adjudicated,
+      denominator: claimsCascade?.stage3_adjudicated?.count || 0,
       denominatorLabel: 'adjudicated claims',
       color: 'bg-green-50 border-green-200'
     },
     {
       label: 'Approved but Unpaid',
-      count: claims_cascade.approved_but_unpaid,
+      count: claimsCascade?.breakdown?.approvedUnpaid?.count || 0,
       description: 'Approved but payment not yet disbursed',
-      denominator: claims_cascade.approved,
+      denominator: claimsCascade?.stage4_approved?.count || 0,
       denominatorLabel: 'approved claims',
       isSubcategory: true,
       color: 'bg-orange-50 border-orange-200'
     },
     {
       label: 'Paid',
-      count: claims_cascade.paid,
+      count: claimsCascade?.stage5_paid?.count || 0,
       description: 'Payment disbursed (full or partial)',
-      denominator: claims_cascade.approved,
+      denominator: claimsCascade?.stage4_approved?.count || 0,
       denominatorLabel: 'approved claims',
       isSubcategory: true,
       color: 'bg-emerald-50 border-emerald-200'
     },
     {
       label: 'Denied',
-      count: claims_cascade.denied,
+      count: claimsCascade?.breakdown?.denied?.count || 0,
       description: 'Not approved for reimbursement',
-      denominator: claims_cascade.adjudicated,
+      denominator: claimsCascade?.stage3_adjudicated?.count || 0,
       denominatorLabel: 'adjudicated claims',
       color: 'bg-red-50 border-red-200'
     }

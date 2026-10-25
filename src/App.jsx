@@ -16,28 +16,54 @@ function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    loadScenarioData(scenario);
+    // Create AbortController for this request
+    const abortController = new AbortController();
+    
+    loadScenarioData(scenario, abortController.signal);
+    
+    // Cleanup function to abort on unmount or scenario change
+    return () => {
+      abortController.abort();
+    };
   }, [scenario]);
 
-  const loadScenarioData = async (selectedScenario) => {
+  const loadScenarioData = async (selectedScenario, signal) => {
     setLoading(true);
     setError(null);
     
     try {
       // Load analytics data for the selected scenario
-      const response = await fetch(`/outputs/phase3_analytics/${selectedScenario}_bottleneck_mix_analytics.json`);
+      const response = await fetch(
+        `/outputs/phase3_analytics/${selectedScenario}_bottleneck_mix_analytics.json`,
+        { signal }
+      );
       
       if (!response.ok) {
         throw new Error(`Failed to load analytics data: ${response.statusText}`);
       }
       
       const data = await response.json();
-      setAnalyticsData(data);
+      
+      // Validate analytics data structure before setting state
+      if (!data.analytics || !data.analytics.facilityParticipationCascade) {
+        throw new Error('Invalid analytics data structure');
+      }
+      
+      // Only update state if the request wasn't aborted
+      if (!signal.aborted) {
+        setAnalyticsData(data);
+      }
     } catch (err) {
-      console.error('Error loading scenario data:', err);
-      setError(err.message);
+      // Don't set error if request was aborted (normal scenario change)
+      if (err.name !== 'AbortError' && !signal.aborted) {
+        console.error('Error loading scenario data:', err);
+        setError(err.message);
+      }
     } finally {
-      setLoading(false);
+      // Only update loading state if not aborted
+      if (!signal.aborted) {
+        setLoading(false);
+      }
     }
   };
 

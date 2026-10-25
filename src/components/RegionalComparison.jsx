@@ -2,25 +2,40 @@ import { useState, useMemo } from 'react';
 import { formatNumber, safePercent } from '../utils/formatters';
 
 export default function RegionalComparison({ data }) {
-  const { regionalComparisons } = data.analytics;
   const [sortField, setSortField] = useState('accreditationRate');
   const [sortDirection, setSortDirection] = useState('desc');
   const [selectedRegion, setSelectedRegion] = useState(null);
 
-  if (!regionalComparisons || !regionalComparisons.byRegion) {
-    return (
-      <div className="mb-8 bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-2">Regional Comparison</h2>
-        <p className="text-gray-600">Regional data not available</p>
-      </div>
-    );
-  }
-
+  // Always call hooks before any conditional returns
+  const { regionalComparisons } = data?.analytics || {};
+  
   const regionData = useMemo(() => {
-    const regions = Object.entries(regionalComparisons.byRegion).map(([name, metrics]) => ({
-      name,
-      ...metrics
-    }));
+    if (!regionalComparisons || !regionalComparisons.byRegion) {
+      return [];
+    }
+
+    const regions = Object.entries(regionalComparisons.byRegion).map(([name, metrics]) => {
+      // Phase 3 data provides: facilities, accredited, accreditationRate, claims, financial
+      // Calculate rates from actual counts
+      const accreditationRate = metrics.accreditationRate 
+        ? parseFloat(metrics.accreditationRate) 
+        : 0;
+      
+      // Note: Phase 3 data doesn't provide filing/payment facility counts by region
+      // Only facility counts, accredited counts, and claim counts
+      return {
+        name,
+        facilities: metrics.facilities || 0,
+        accredited: metrics.accredited || 0,
+        accreditationRate,
+        claims: metrics.claims || 0,
+        // These won't be available in Phase 3 regional data
+        filing: null,
+        receivingPayment: null,
+        filingRate: null,
+        paymentRate: null
+      };
+    });
 
     // Sort regions
     const sorted = [...regions].sort((a, b) => {
@@ -39,7 +54,17 @@ export default function RegionalComparison({ data }) {
     });
 
     return sorted;
-  }, [regionalComparisons.byRegion, sortField, sortDirection]);
+  }, [regionalComparisons, sortField, sortDirection]);
+
+  // Conditional return AFTER all hooks
+  if (!regionalComparisons || !regionalComparisons.byRegion) {
+    return (
+      <div className="mb-8 bg-white rounded-lg shadow p-6">
+        <h2 className="text-xl font-semibold text-gray-900 mb-2">Regional Comparison</h2>
+        <p className="text-gray-600">Regional data not available</p>
+      </div>
+    );
+  }
 
   const handleSort = (field) => {
     if (sortField === field) {
@@ -99,19 +124,13 @@ export default function RegionalComparison({ data }) {
                     <div>
                       <dt className="text-xs text-gray-600">Accredited</dt>
                       <dd className="text-lg font-semibold text-gray-900">
-                        {formatNumber(selectedRegion.accredited)} ({safePercent(selectedRegion.accredited, selectedRegion.facilities)})
+                        {formatNumber(selectedRegion.accredited)} ({selectedRegion.accreditationRate.toFixed(1)}%)
                       </dd>
                     </div>
                     <div>
-                      <dt className="text-xs text-gray-600">Filing Claims</dt>
+                      <dt className="text-xs text-gray-600">Claims Submitted</dt>
                       <dd className="text-lg font-semibold text-gray-900">
-                        {formatNumber(selectedRegion.filing)} ({safePercent(selectedRegion.filing, selectedRegion.accredited)})
-                      </dd>
-                    </div>
-                    <div>
-                      <dt className="text-xs text-gray-600">Receiving Payment</dt>
-                      <dd className="text-lg font-semibold text-gray-900">
-                        {formatNumber(selectedRegion.receivingPayment)} ({safePercent(selectedRegion.receivingPayment, selectedRegion.filing)})
+                        {formatNumber(selectedRegion.claims)}
                       </dd>
                     </div>
                   </div>
@@ -119,6 +138,7 @@ export default function RegionalComparison({ data }) {
                 <button
                   onClick={() => setSelectedRegion(null)}
                   className="text-gray-400 hover:text-gray-600"
+                  aria-label="Close regional details"
                 >
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -136,6 +156,9 @@ export default function RegionalComparison({ data }) {
                   <th 
                     className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
                     onClick={() => handleSort('name')}
+                    role="columnheader"
+                    tabIndex={0}
+                    onKeyPress={(e) => e.key === 'Enter' && handleSort('name')}
                   >
                     <div className="flex items-center space-x-1">
                       <span>Region</span>
@@ -145,6 +168,9 @@ export default function RegionalComparison({ data }) {
                   <th 
                     className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
                     onClick={() => handleSort('facilities')}
+                    role="columnheader"
+                    tabIndex={0}
+                    onKeyPress={(e) => e.key === 'Enter' && handleSort('facilities')}
                   >
                     <div className="flex items-center justify-end space-x-1">
                       <span>Facilities</span>
@@ -154,6 +180,9 @@ export default function RegionalComparison({ data }) {
                   <th 
                     className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
                     onClick={() => handleSort('accreditationRate')}
+                    role="columnheader"
+                    tabIndex={0}
+                    onKeyPress={(e) => e.key === 'Enter' && handleSort('accreditationRate')}
                   >
                     <div className="flex items-center justify-end space-x-1">
                       <span>Accred. Rate</span>
@@ -162,25 +191,10 @@ export default function RegionalComparison({ data }) {
                   </th>
                   <th 
                     className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
-                    onClick={() => handleSort('filingRate')}
-                  >
-                    <div className="flex items-center justify-end space-x-1">
-                      <span>Filing Rate</span>
-                      <SortIcon field="filingRate" />
-                    </div>
-                  </th>
-                  <th 
-                    className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
-                    onClick={() => handleSort('paymentRate')}
-                  >
-                    <div className="flex items-center justify-end space-x-1">
-                      <span>Payment Rate</span>
-                      <SortIcon field="paymentRate" />
-                    </div>
-                  </th>
-                  <th 
-                    className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
                     onClick={() => handleSort('claims')}
+                    role="columnheader"
+                    tabIndex={0}
+                    onKeyPress={(e) => e.key === 'Enter' && handleSort('claims')}
                   >
                     <div className="flex items-center justify-end space-x-1">
                       <span>Claims</span>
@@ -194,9 +208,10 @@ export default function RegionalComparison({ data }) {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {regionData.map((region) => {
-                  // Highlight simulated bottleneck regions
-                  const isBottleneck = region.accreditationRate < 10 || region.filingRate < 30;
-                  const isHighPerformer = region.accreditationRate > 20 && region.filingRate > 45;
+                  // Highlight simulated bottleneck regions based on accreditation rate
+                  // ILLUSTRATIVE THRESHOLDS - not validated benchmarks
+                  const isBottleneck = region.accreditationRate < 10;
+                  const isHighPerformer = region.accreditationRate > 30;
                   
                   return (
                     <tr 
@@ -220,13 +235,7 @@ export default function RegionalComparison({ data }) {
                         {formatNumber(region.facilities)}
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900 text-right font-medium">
-                        {safePercent(region.accredited, region.facilities)}
-                      </td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900 text-right font-medium">
-                        {safePercent(region.filing, region.accredited)}
-                      </td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900 text-right font-medium">
-                        {safePercent(region.receivingPayment, region.filing)}
+                        {region.accreditationRate.toFixed(1)}%
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900 text-right">
                         {formatNumber(region.claims)}
@@ -235,6 +244,7 @@ export default function RegionalComparison({ data }) {
                         <button
                           onClick={() => setSelectedRegion(region)}
                           className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                          aria-label={`View details for ${region.name}`}
                         >
                           View
                         </button>
@@ -247,12 +257,15 @@ export default function RegionalComparison({ data }) {
           </div>
 
           <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-            <h4 className="text-sm font-semibold text-gray-900 mb-2">Rate Definitions</h4>
+            <h4 className="text-sm font-semibold text-gray-900 mb-2">Metric Definitions</h4>
             <ul className="text-sm text-gray-600 space-y-1">
+              <li>• <strong>Facilities:</strong> Total facilities in illustrative eligible population for this region</li>
               <li>• <strong>Accreditation Rate:</strong> Accredited facilities / Total facilities in region</li>
-              <li>• <strong>Filing Rate:</strong> Filing facilities / Accredited facilities in region</li>
-              <li>• <strong>Payment Rate:</strong> Facilities receiving payment / Filing facilities in region</li>
+              <li>• <strong>Claims:</strong> Total claims submitted from facilities in this region</li>
             </ul>
+            <p className="mt-2 text-xs text-yellow-800">
+              <strong>Note:</strong> Accreditation rate thresholds (Low &lt;10%, High &gt;30%) are ILLUSTRATIVE only and have NOT been validated against actual PhilHealth benchmarks.
+            </p>
           </div>
 
           {regionalComparisons.limitations && (

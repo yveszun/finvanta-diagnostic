@@ -1,35 +1,39 @@
 import { formatNumber, safePercent } from '../utils/formatters';
 
 export default function FacilityCascade({ data }) {
-  const { summary } = data;
+  const cascade = data?.analytics?.facilityParticipationCascade;
 
   const stages = [
     {
-      label: 'Eligible Facilities',
-      count: summary.total_facilities,
-      description: 'All facilities in the network',
-      denominator: null
+      label: 'Facilities in Synthetic Dataset',
+      count: cascade?.stage1_eligible?.count || 0,
+      description: 'Facilities in illustrative eligible population — Eligibility criteria not independently verified',
+      denominator: null,
+      note: cascade?.stage1_eligible?.note || 'Pending official PhilHealth eligibility verification'
     },
     {
       label: 'Accredited Facilities',
-      count: summary.accredited_facilities,
-      description: 'Facilities approved to provide mental health services',
-      denominator: summary.total_facilities,
-      denominatorLabel: 'eligible facilities'
+      count: cascade?.stage2_accredited?.count || 0,
+      description: cascade?.stage2_accredited?.label || 'Facilities approved to provide mental health services',
+      denominator: cascade?.stage1_eligible?.count || 0,
+      denominatorLabel: 'eligible facilities',
+      note: cascade?.stage2_accredited?.note
     },
     {
       label: 'Facilities Filing Claims',
-      count: summary.facilities_filing_claims,
-      description: 'Accredited facilities that submitted at least one claim',
-      denominator: summary.accredited_facilities,
-      denominatorLabel: 'accredited facilities'
+      count: cascade?.stage3_claiming?.count || 0,
+      description: cascade?.stage3_claiming?.label || 'Accredited facilities that submitted at least one claim',
+      denominator: cascade?.stage2_accredited?.count || 0,
+      denominatorLabel: 'accredited facilities',
+      note: cascade?.stage3_claiming?.note
     },
     {
       label: 'Facilities Receiving Payment',
-      count: summary.facilities_receiving_payment,
-      description: 'Filing facilities that received at least one payment',
-      denominator: summary.facilities_filing_claims,
-      denominatorLabel: 'filing facilities'
+      count: cascade?.stage4_receiving_payment?.count || 0,
+      description: cascade?.stage4_receiving_payment?.label || 'Filing facilities that received at least one payment',
+      denominator: cascade?.stage3_claiming?.count || 0,
+      denominatorLabel: 'filing facilities',
+      note: cascade?.stage4_receiving_payment?.note
     }
   ];
 
