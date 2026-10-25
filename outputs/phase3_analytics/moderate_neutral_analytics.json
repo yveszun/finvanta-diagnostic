@@ -1,6 +1,6 @@
 {
   "scenario": "Moderate Activity",
-  "timestamp": "2026-10-25T16:29:09.531Z",
+  "timestamp": "2026-10-25T16:46:14.524Z",
   "validationResults": {
     "valid": true,
     "errorCount": 0,
@@ -56,6 +56,15 @@
         "label": "Submitted claims",
         "note": "All claims with claim IDs"
       },
+      "stage1a_pending_acceptance": {
+        "count": 0,
+        "numerator": 0,
+        "denominator": 600,
+        "rate": "0.0%",
+        "avgDaysPending": "N/A",
+        "label": "Pending acceptance (administrative review)",
+        "note": "V3: Claims awaiting acceptance"
+      },
       "stage2_accepted": {
         "count": 600,
         "numerator": 600,
@@ -63,6 +72,15 @@
         "rate": "100.0%",
         "label": "Accepted for processing",
         "note": "Claims with acceptance_date"
+      },
+      "stage2a_pending_adjudication": {
+        "count": 0,
+        "numerator": 0,
+        "denominator": 600,
+        "rate": "0.0%",
+        "avgDaysPending": "N/A",
+        "label": "Pending adjudication (awaiting review)",
+        "note": "V3: Claims awaiting adjudication"
       },
       "stage3_adjudicated": {
         "count": 600,
@@ -102,12 +120,18 @@
         "approvedUnpaid": {
           "count": 92,
           "percentage": "15.3%",
-          "label": "Approved but payment pending"
+          "label": "Approved but payment pending",
+          "avgDaysSinceApproval": "N/A"
         },
         "denied": {
           "count": 43,
           "percentage": "7.2%",
           "label": "Denied"
+        },
+        "pendingEarlierStages": {
+          "count": 0,
+          "percentage": "0.0%",
+          "label": "Pending at earlier stages (acceptance/adjudication)"
         }
       },
       "summary": {
@@ -115,7 +139,8 @@
         "distinctClaims": 600,
         "reachedPayment": 465,
         "awaitingPayment": 92,
-        "denied": 43
+        "denied": 43,
+        "pendingProcessing": 0
       }
     },
     "financialCalculations": {
@@ -394,7 +419,7 @@
       ]
     },
     "metadata": {
-      "timestamp": "2026-10-25T16:29:09.531Z",
+      "timestamp": "2026-10-25T16:46:14.524Z",
       "disclaimer": "All data is synthetic for diagnostic purposes. Does not represent actual PhilHealth performance.",
       "validation": {
         "hasErrors": false,

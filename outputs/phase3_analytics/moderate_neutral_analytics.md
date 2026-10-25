@@ -1,6 +1,6 @@
 # Phase 3 Analytics Report: Moderate Activity
 
-**Generated:** 2026-10-25T16:29:09.531Z
+**Generated:** 2026-10-25T16:46:14.524Z
 
 ---
 
@@ -125,7 +125,7 @@ This cascade shows claim counts (not facility counts) at each stage:
 
 ## Metadata
 
-- **Analysis Timestamp:** 2026-10-25T16:29:09.531Z
+- **Analysis Timestamp:** 2026-10-25T16:46:14.524Z
 - **Validation Errors:** 0
 - **Validation Warnings:** 1
 

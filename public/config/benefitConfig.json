@@ -74,11 +74,18 @@
     "stages": {
       "1_submission": "Claim submitted by facility",
       "2_acceptance": "Claim accepted for processing (initial validation passed)",
+      "2a_pending_acceptance": "Claim pending acceptance (administrative review)",
       "3_adjudication": "Claim reviewed and adjudicated",
+      "3a_pending_adjudication": "Claim pending adjudication (awaiting review)",
       "4_approval": "Claim approved for payment",
       "5_payment": "Payment disbursed to facility"
     },
     "requireBothApprovalAndPaymentDates": true,
+    "pendingRates": {
+      "pendingAcceptanceRate": 0.05,
+      "pendingAdjudicationRate": 0.08,
+      "note": "Configurable rates for claims stuck at earlier stages (V3)"
+    },
     "paymentProcessing": {
       "approvedButUnpaidRate": 0.15,
       "illustrativeAssumption": "15% of approved claims have payment pending to demonstrate reimbursement bottlenecks",
@@ -89,9 +96,13 @@
       },
       "partialPaymentRate": 0.05,
       "illustrativePartialPaymentRatio": 0.70,
-      "disbursementNote": "Fully paid claims receive 100% of approved amount. Partial payments receive 70% (illustrative). No unsupported deduction assumptions."
+      "disbursementNote": "Fully paid claims receive 100% of approved amount. Partial payments receive 70% (illustrative). No unsupported deduction assumptions.",
+      "facilitiesWithoutPayment": {
+        "rate": 0.10,
+        "note": "V3: 10% of claiming facilities have no claims reaching payment stage"
+      }
     },
-    "note": "Approval and payment are distinct stages - approved claims may have payment delays, partial payments, or be pending disbursement"
+    "note": "Approval and payment are distinct stages - approved claims may have payment delays, partial payments, or be pending disbursement. V3 adds pending acceptance/adjudication stages."
   },
   
   "scenarios": {
@@ -188,6 +199,46 @@
         "urbanMultiplier": 2.5,
         "ruralMultiplier": 0.4,
         "note": "Simulated pattern only - not based on actual regional data"
+      },
+      
+      "bottleneck_mix": {
+        "name": "Mixed Bottleneck Patterns (V3)",
+        "description": "Simulated regional variations showing different implementation bottlenecks",
+        "disclaimer": "SYNTHETIC PATTERNS - Not actual PhilHealth regional performance",
+        "patterns": {
+          "accreditation_bottleneck": {
+            "regions": ["Region IX (Zamboanga Peninsula)", "Region XII (SOCCSKSARGEN)"],
+            "accreditationMultiplier": 0.4,
+            "claimsMultiplier": 1.0,
+            "description": "Low accreditation rates limit facility participation"
+          },
+          "claims_filing_bottleneck": {
+            "regions": ["Region VI (Western Visayas)", "Region II (Cagayan Valley)"],
+            "accreditationMultiplier": 1.0,
+            "claimsMultiplier": 0.5,
+            "description": "Good accreditation but low claims filing"
+          },
+          "processing_delay": {
+            "regions": ["Region V (Bicol Region)", "Region X (Northern Mindanao)"],
+            "pendingAcceptanceMultiplier": 2.0,
+            "pendingAdjudicationMultiplier": 2.5,
+            "description": "Higher rates of claims stuck in processing"
+          },
+          "reimbursement_bottleneck": {
+            "regions": ["Region IV-B (MIMAROPA)", "Region VIII (Eastern Visayas)"],
+            "approvedButUnpaidMultiplier": 2.0,
+            "partialPaymentMultiplier": 1.5,
+            "description": "More approved claims awaiting payment"
+          },
+          "high_performance": {
+            "regions": ["National Capital Region", "Region VII (Central Visayas)"],
+            "accreditationMultiplier": 1.4,
+            "claimsMultiplier": 1.3,
+            "approvedButUnpaidMultiplier": 0.6,
+            "description": "Better performance across all stages"
+          }
+        },
+        "note": "V3: Differentiated bottlenecks to illustrate various implementation challenges. All patterns are synthetic."
       }
     },
     
@@ -227,7 +278,14 @@
     "purpose": "Demonstration and development only",
     "notForProduction": true,
     "notForPolicyDecisions": true,
-    "generatedBy": "Finvanta Data Generator V2",
-    "configVersion": "2.0-conditional-approval"
+    "generatedBy": "Finvanta Data Generator V3",
+    "configVersion": "3.0-post-review-refinements",
+    "v3Changes": [
+      "Added pending acceptance and adjudication stages",
+      "Facilities with claims but no payments (not 100% payment receipt)",
+      "Regional bottleneck variations (bottleneck_mix profile)",
+      "Improved payment timing indicators",
+      "Explicit analysis cutoff date for time-since-approval calculations"
+    ]
   }
 }

@@ -164,6 +164,7 @@ export class AnalyticsEngine {
    * 2. Claims Processing Cascade
    * 
    * Tracks claims through processing milestones.
+   * V3: Adds pending acceptance and adjudication stages.
    * Uses distinct claim IDs where applicable.
    */
   calculateClaimsProcessingCascade(claims) {
@@ -172,9 +173,11 @@ export class AnalyticsEngine {
       claims.filter(c => c.claim_id).map(c => c.claim_id)
     );
 
-    // Cumulative processing stages based on status field
+    // V3: Cumulative processing stages including pending states
     const submitted = claims.filter(c => c.claim_id).length; // All claims with IDs
+    const pendingAcceptance = claims.filter(c => c.status === 'pending_acceptance').length;
     const accepted = claims.filter(c => c.acceptance_date).length;
+    const pendingAdjudication = claims.filter(c => c.status === 'pending_adjudication').length;
     const adjudicated = claims.filter(c => c.adjudication_date).length;
     const approved = claims.filter(c => 
       c.status === 'approved' || c.status === 'paid' || c.status === 'partial_payment'
@@ -195,12 +198,32 @@ export class AnalyticsEngine {
     const approvalRate = adjudicated > 0 ? (approved / adjudicated) * 100 : null;
     const paymentRate = approved > 0 ? (paid / approved) * 100 : null;
 
+    // V3: Average days pending for claims stuck in pending states
+    const avgDaysPendingAcceptance = pendingAcceptance > 0
+      ? claims.filter(c => c.status === 'pending_acceptance' && c.days_pending)
+          .reduce((sum, c) => sum + c.days_pending, 0) / pendingAcceptance
+      : null;
+      
+    const avgDaysPendingAdjudication = pendingAdjudication > 0
+      ? claims.filter(c => c.status === 'pending_adjudication' && c.days_pending)
+          .reduce((sum, c) => sum + c.days_pending, 0) / pendingAdjudication
+      : null;
+
     return {
       stage1_submitted: {
         count: submitted,
         distinctClaims: distinctClaims.size,
         label: 'Submitted claims',
         note: 'All claims with claim IDs'
+      },
+      stage1a_pending_acceptance: {
+        count: pendingAcceptance,
+        numerator: pendingAcceptance,
+        denominator: submitted,
+        rate: submitted > 0 ? ((pendingAcceptance / submitted) * 100).toFixed(1) + '%' : 'N/A',
+        avgDaysPending: avgDaysPendingAcceptance ? avgDaysPendingAcceptance.toFixed(1) + ' days' : 'N/A',
+        label: 'Pending acceptance (administrative review)',
+        note: 'V3: Claims awaiting acceptance'
       },
       stage2_accepted: {
         count: accepted,
@@ -209,6 +232,15 @@ export class AnalyticsEngine {
         rate: acceptanceRate !== null ? acceptanceRate.toFixed(1) + '%' : 'N/A',
         label: 'Accepted for processing',
         note: 'Claims with acceptance_date'
+      },
+      stage2a_pending_adjudication: {
+        count: pendingAdjudication,
+        numerator: pendingAdjudication,
+        denominator: accepted,
+        rate: accepted > 0 ? ((pendingAdjudication / accepted) * 100).toFixed(1) + '%' : 'N/A',
+        avgDaysPending: avgDaysPendingAdjudication ? avgDaysPendingAdjudication.toFixed(1) + ' days' : 'N/A',
+        label: 'Pending adjudication (awaiting review)',
+        note: 'V3: Claims awaiting adjudication'
       },
       stage3_adjudicated: {
         count: adjudicated,
@@ -248,12 +280,18 @@ export class AnalyticsEngine {
         approvedUnpaid: {
           count: approvedUnpaid,
           percentage: submitted > 0 ? ((approvedUnpaid / submitted) * 100).toFixed(1) + '%' : 'N/A',
-          label: 'Approved but payment pending'
+          label: 'Approved but payment pending',
+          avgDaysSinceApproval: this._calculateAvgDaysSinceApproval(claims.filter(c => c.status === 'approved' && !c.payment_date))
         },
         denied: {
           count: denied,
           percentage: submitted > 0 ? ((denied / submitted) * 100).toFixed(1) + '%' : 'N/A',
           label: 'Denied'
+        },
+        pendingEarlierStages: {
+          count: pendingAcceptance + pendingAdjudication,
+          percentage: submitted > 0 ? (((pendingAcceptance + pendingAdjudication) / submitted) * 100).toFixed(1) + '%' : 'N/A',
+          label: 'Pending at earlier stages (acceptance/adjudication)'
         }
       },
       summary: {
@@ -261,9 +299,24 @@ export class AnalyticsEngine {
         distinctClaims: distinctClaims.size,
         reachedPayment: paid,
         awaitingPayment: approvedUnpaid,
-        denied: denied
+        denied: denied,
+        pendingProcessing: pendingAcceptance + pendingAdjudication
       }
     };
+  }
+
+  /**
+   * V3: Helper to calculate average days since approval for approved-but-unpaid claims
+   */
+  _calculateAvgDaysSinceApproval(approvedUnpaidClaims) {
+    const daysArray = approvedUnpaidClaims
+      .filter(c => c.days_since_approval !== null && c.days_since_approval !== undefined)
+      .map(c => c.days_since_approval);
+    
+    if (daysArray.length === 0) return 'N/A';
+    
+    const avg = daysArray.reduce((sum, d) => sum + d, 0) / daysArray.length;
+    return `${avg.toFixed(1)} days (as of ${approvedUnpaidClaims[0]?.analysis_cutoff_date || 'analysis cutoff'})`;
   }
 
   /**

@@ -26,11 +26,11 @@ import { AnalyticsEngine } from '../src/analytics/analyticsEngine.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Scenarios to process
+// Scenarios to process - V3: Using bottleneck_mix profiles
 const scenarios = [
-  { name: 'Low Activity', directory: 'low_neutral' },
-  { name: 'Moderate Activity', directory: 'moderate_neutral' },
-  { name: 'High Activity', directory: 'high_neutral' }
+  { name: 'Low Activity', directory: 'low_bottleneck_mix' },
+  { name: 'Moderate Activity', directory: 'moderate_bottleneck_mix' },
+  { name: 'High Activity', directory: 'high_bottleneck_mix' }
 ];
 
 // Output directory
@@ -130,13 +130,25 @@ function generateReport(scenarioName, analytics, validationResults) {
   const claims = analytics.claimsProcessingCascade;
   lines.push('This cascade shows claim counts (not facility counts) at each stage:');
   lines.push('');
+  lines.push('**V3: Now includes pending acceptance and adjudication stages**');
+  lines.push('');
   lines.push('| Stage | Count | Rate |');
   lines.push('|-------|-------|------|');
   lines.push(`| Submitted | ${formatNumber(claims.stage1_submitted.count)} | - |`);
+  lines.push(`| **Pending Acceptance** | ${formatNumber(claims.stage1a_pending_acceptance.count)} | ${claims.stage1a_pending_acceptance.rate} |`);
   lines.push(`| Accepted | ${formatNumber(claims.stage2_accepted.count)} | ${claims.stage2_accepted.rate} |`);
+  lines.push(`| **Pending Adjudication** | ${formatNumber(claims.stage2a_pending_adjudication.count)} | ${claims.stage2a_pending_adjudication.rate} |`);
   lines.push(`| Adjudicated | ${formatNumber(claims.stage3_adjudicated.count)} | ${claims.stage3_adjudicated.rate} |`);
   lines.push(`| Approved | ${formatNumber(claims.stage4_approved.count)} | ${claims.stage4_approved.rate} |`);
   lines.push(`| Paid | ${formatNumber(claims.stage5_paid.count)} | ${claims.stage5_paid.rate} |`);
+  lines.push('');
+  
+  lines.push('### Administrative Bottlenecks');
+  lines.push('');
+  lines.push('| Bottleneck Stage | Count | Avg Days Pending |');
+  lines.push('|------------------|-------|------------------|');
+  lines.push(`| Pending Acceptance | ${formatNumber(claims.stage1a_pending_acceptance.count)} | ${claims.stage1a_pending_acceptance.avgDaysPending} |`);
+  lines.push(`| Pending Adjudication | ${formatNumber(claims.stage2a_pending_adjudication.count)} | ${claims.stage2a_pending_adjudication.avgDaysPending} |`);
   lines.push('');
   
   lines.push('### Payment Breakdown');
@@ -146,9 +158,13 @@ function generateReport(scenarioName, analytics, validationResults) {
   lines.push(`| Fully Paid | ${formatNumber(claims.breakdown.fullyPaid.count)} | ${claims.breakdown.fullyPaid.percentage} |`);
   lines.push(`| Partially Paid | ${formatNumber(claims.breakdown.partiallyPaid.count)} | ${claims.breakdown.partiallyPaid.percentage} |`);
   lines.push(`| Approved but Unpaid | ${formatNumber(claims.breakdown.approvedUnpaid.count)} | ${claims.breakdown.approvedUnpaid.percentage} |`);
+  if (claims.breakdown.approvedUnpaid.avgDaysSinceApproval) {
+    lines.push(`| → Avg time awaiting payment | ${claims.breakdown.approvedUnpaid.avgDaysSinceApproval} | - |`);
+  }
   lines.push(`| Denied | ${formatNumber(claims.breakdown.denied.count)} | ${claims.breakdown.denied.percentage} |`);
+  lines.push(`| Pending Earlier Stages | ${formatNumber(claims.breakdown.pendingEarlierStages.count)} | ${claims.breakdown.pendingEarlierStages.percentage} |`);
   lines.push('');
-  lines.push('**Note:** Approval ≠ Payment. Claims may be approved but remain unpaid.');
+  lines.push('**Note:** Approval ≠ Payment. Claims may be approved but remain unpaid. V3 tracks time since approval for unpaid claims.');
   lines.push('');
   
   // Financial Metrics

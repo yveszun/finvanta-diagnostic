@@ -1,5 +1,5 @@
 /**
- * Finvanta Synthetic Data Generator V2
+ * Finvanta Synthetic Data Generator V3
  * 
  * Generates three scenarios: low, moderate, high implementation
  * Ensures financial consistency, unique IDs, valid relationships
@@ -7,8 +7,15 @@
  * Reproducible with fixed seeds
  * Configurable regional distributions
  * 
+ * V3 Refinements (Independent Review):
+ * - Facilities with claims but no payments (not 100% payment receipt)
+ * - Pending acceptance and adjudication stages
+ * - Differentiated regional profiles (bottleneck variations)
+ * - Clear payment timing indicators
+ * - Transparent eligibility warnings
+ * 
  * Usage: node scripts/generateData.js [scenario] [regionalProfile]
- * Example: node scripts/generateData.js moderate neutral
+ * Example: node scripts/generateData.js moderate bottleneck_mix
  */
 
 import fs from 'fs';
@@ -247,13 +254,21 @@ function generateAccreditations(facilities, scenarioConfig, regionalProfile, see
 
 /**
  * Generate claims with separate approval and payment stages
+ * V3: Added pending stages, facilities without payment, regional bottlenecks
  */
-function generateClaims(accreditations, facilities, scenarioConfig, seed) {
+function generateClaims(accreditations, facilities, scenarioConfig, regionalProfile, seed) {
     const rng = new SeededRandom(seed + 2000);
     const claims = [];
     const filingRate = scenarioConfig.claimsFilingRate;
     const approvalRate = scenarioConfig.approvalRate;
     const targetClaimsCount = scenarioConfig.targetClaimsCount;
+    
+    // V3: Load regional bottleneck configuration
+    const regionalConfig = config.regionalDistribution.profiles[regionalProfile] || config.regionalDistribution.profiles.neutral;
+    const bottleneckPatterns = regionalConfig.patterns || {};
+    
+    // V3: Load pending stage rates
+    const pendingRates = config.claimsProcessing.pendingRates;
     
     console.log(`\nGenerating claims (target: ${targetClaimsCount} claims)...`);
     
@@ -266,6 +281,15 @@ function generateClaims(accreditations, facilities, scenarioConfig, seed) {
     console.log(`  - Accredited facilities: ${accreditedFacilities.length}`);
     console.log(`  - Filing facilities: ${filingFacilities.length} (${(filingRate * 100).toFixed(1)}%)`);
     
+    // V3: Select facilities that will receive NO payments (10% of filing facilities)
+    const facilityPaymentRate = config.claimsProcessing.paymentProcessing.facilitiesWithoutPayment.rate;
+    const numFacilitiesWithoutPayment = Math.round(filingFacilities.length * facilityPaymentRate);
+    const facilitiesWithoutPayment = new Set(
+        rng.shuffle([...filingFacilities]).slice(0, numFacilitiesWithoutPayment).map(f => f.facility_id)
+    );
+    
+    console.log(`  - Facilities with claims but no payments: ${facilitiesWithoutPayment.size} (${(facilityPaymentRate * 100).toFixed(1)}%)`);
+    
     // Distribute claims across filing facilities
     const claimsPerFacility = Math.floor(targetClaimsCount / filingFacilities.length);
     const extraClaims = targetClaimsCount % filingFacilities.length;
@@ -273,12 +297,33 @@ function generateClaims(accreditations, facilities, scenarioConfig, seed) {
     let claimCounter = 1;
     const serviceDistribution = scenarioConfig.serviceTypeDistribution;
     
+    // V3: Analysis cutoff date for time-since-approval calculations
+    const analysisCutoffDate = new Date(2025, 6, 15); // July 15, 2025
+    
     filingFacilities.forEach((facility, facilityIndex) => {
         const numClaims = claimsPerFacility + (facilityIndex < extraClaims ? 1 : 0);
+        
+        // V3: Get regional bottleneck multipliers for this facility's region
+        let regionalPendingAcceptanceMult = 1.0;
+        let regionalPendingAdjudicationMult = 1.0;
+        let regionalApprovedUnpaidMult = 1.0;
+        
+        if (bottleneckPatterns) {
+            Object.values(bottleneckPatterns).forEach(pattern => {
+                if (pattern.regions && pattern.regions.includes(facility.region)) {
+                    regionalPendingAcceptanceMult = pattern.pendingAcceptanceMultiplier || 1.0;
+                    regionalPendingAdjudicationMult = pattern.pendingAdjudicationMultiplier || 1.0;
+                    regionalApprovedUnpaidMult = pattern.approvedButUnpaidMultiplier || 1.0;
+                }
+            });
+        }
         
         // Get accreditation date for this facility
         const facilityAccreditation = accreditations.find(a => a.facility_id === facility.facility_id);
         const accreditationDate = facilityAccreditation ? new Date(facilityAccreditation.accreditation_date) : new Date(2025, 0, 1);
+        
+        // V3: Check if this facility will have ALL claims not reach payment
+        const facilityNoPayments = facilitiesWithoutPayment.has(facility.facility_id);
         
         for (let i = 0; i < numClaims; i++) {
             // Service date must be on or after accreditation date, within H1 2025 (Jan-Jun)
@@ -298,7 +343,6 @@ function generateClaims(accreditations, facilities, scenarioConfig, seed) {
             serviceDate.setDate(serviceDate.getDate() + dayOffset);
             
             // Determine service type based on facility's accreditation
-            const facilityAccreditation = accreditations.find(a => a.facility_id === facility.facility_id);
             const servicesCovered = facilityAccreditation ? facilityAccreditation.services_covered : [];
             
             let serviceType;
@@ -337,9 +381,71 @@ function generateClaims(accreditations, facilities, scenarioConfig, seed) {
             const submissionDate = new Date(serviceDate);
             submissionDate.setDate(submissionDate.getDate() + rng.nextInt(1, 5));
             
+            // V3: Determine if claim is pending at acceptance stage
+            const basePendingAcceptanceRate = pendingRates.pendingAcceptanceRate * regionalPendingAcceptanceMult;
+            const isPendingAcceptance = rng.next() < basePendingAcceptanceRate;
+            
+            if (isPendingAcceptance) {
+                // Claim stuck at pending acceptance
+                claims.push({
+                    claim_id: claimId,
+                    facility_id: facility.facility_id,
+                    patient_id: patientId,
+                    service_date: serviceDate.toISOString().split('T')[0],
+                    service_type: serviceType,
+                    service_code: serviceConfig.code,
+                    billed_amount: billedAmount,
+                    submission_date: submissionDate.toISOString().split('T')[0],
+                    acceptance_date: null,  // Not yet accepted
+                    adjudication_date: null,
+                    approval_date: null,
+                    approved_amount: null,
+                    payment_date: null,
+                    disbursed_amount: null,
+                    outstanding_balance: null,
+                    status: "pending_acceptance",
+                    payment_status: "not_applicable",
+                    denial_reason: null,
+                    days_pending: Math.floor((analysisCutoffDate - submissionDate) / (1000 * 60 * 60 * 24))
+                });
+                claimCounter++;
+                continue;
+            }
+            
             // Stage 2: Acceptance (1-3 days after submission)
             const acceptanceDate = new Date(submissionDate);
             acceptanceDate.setDate(acceptanceDate.getDate() + rng.nextInt(1, 3));
+            
+            // V3: Determine if claim is pending at adjudication stage
+            const basePendingAdjudicationRate = pendingRates.pendingAdjudicationRate * regionalPendingAdjudicationMult;
+            const isPendingAdjudication = rng.next() < basePendingAdjudicationRate;
+            
+            if (isPendingAdjudication) {
+                // Claim stuck at pending adjudication
+                claims.push({
+                    claim_id: claimId,
+                    facility_id: facility.facility_id,
+                    patient_id: patientId,
+                    service_date: serviceDate.toISOString().split('T')[0],
+                    service_type: serviceType,
+                    service_code: serviceConfig.code,
+                    billed_amount: billedAmount,
+                    submission_date: submissionDate.toISOString().split('T')[0],
+                    acceptance_date: acceptanceDate.toISOString().split('T')[0],
+                    adjudication_date: null,  // Not yet adjudicated
+                    approval_date: null,
+                    approved_amount: null,
+                    payment_date: null,
+                    disbursed_amount: null,
+                    outstanding_balance: null,
+                    status: "pending_adjudication",
+                    payment_status: "not_applicable",
+                    denial_reason: null,
+                    days_pending: Math.floor((analysisCutoffDate - acceptanceDate) / (1000 * 60 * 60 * 24))
+                });
+                claimCounter++;
+                continue;
+            }
             
             // Stage 3: Adjudication (3-10 days after acceptance)
             const adjudicationDate = new Date(acceptanceDate);
@@ -352,6 +458,7 @@ function generateClaims(accreditations, facilities, scenarioConfig, seed) {
             let approvedAmount = null;
             let disbursedAmount = null;
             let paymentStatus = null;
+            let daysSinceApproval = null;
             
             if (isApproved) {
                 // Stage 4: Approval (same day as adjudication completes)
@@ -362,49 +469,70 @@ function generateClaims(accreditations, facilities, scenarioConfig, seed) {
                 const variation = 0.9 + (rng.next() * 0.2); // 90-110% of average
                 approvedAmount = Math.round(billedAmount * reimbursementRatio * variation);
                 
-                // Determine payment status: paid, pending, or partial
-                const paymentRoll = rng.next();
-                const paymentProcessing = config.claimsProcessing.paymentProcessing;
+                // V3: Calculate days since approval (for approved-but-unpaid reporting)
+                daysSinceApproval = Math.floor((analysisCutoffDate - adjudicationDate) / (1000 * 60 * 60 * 24));
                 
-                if (paymentRoll < paymentProcessing.approvedButUnpaidRate) {
-                    // Approved but payment pending (15%)
+                // V3: Force no payment if facility is in no-payment group
+                if (facilityNoPayments) {
+                    // All claims from this facility remain approved but unpaid
                     status = "approved";
                     paymentDate = null;
                     disbursedAmount = null;
                     paymentStatus = "pending";
                     
-                } else if (paymentRoll < paymentProcessing.approvedButUnpaidRate + paymentProcessing.partialPaymentRate) {
-                    // Partial payment (5%)
-                    status = "partial_payment";
-                    
-                    const paymentDelay = rng.nextInt(
-                        paymentProcessing.paymentDelayDays.minimum,
-                        paymentProcessing.paymentDelayDays.maximum
-                    );
-                    const paymentDateObj = new Date(adjudicationDate);
-                    paymentDateObj.setDate(paymentDateObj.getDate() + paymentDelay);
-                    paymentDate = paymentDateObj.toISOString().split('T')[0];
-                    
-                    // Partial payment (70% of approved amount)
-                    disbursedAmount = Math.round(approvedAmount * paymentProcessing.illustrativePartialPaymentRatio);
-                    paymentStatus = "partial";
-                    
                 } else {
-                    // Full payment (80%) - 100% of approved amount
-                    status = "paid";
+                    // Determine payment status: paid, pending, or partial
+                    const paymentRoll = rng.next();
+                    const paymentProcessing = config.claimsProcessing.paymentProcessing;
                     
-                    // Stage 5: Payment (5-45 days after approval)
-                    const paymentDelay = rng.nextInt(
-                        paymentProcessing.paymentDelayDays.minimum,
-                        paymentProcessing.paymentDelayDays.maximum
+                    // V3: Apply regional multiplier to approved-but-unpaid rate
+                    const adjustedApprovedButUnpaidRate = Math.min(
+                        paymentProcessing.approvedButUnpaidRate * regionalApprovedUnpaidMult,
+                        0.40  // Cap at 40%
                     );
-                    const paymentDateObj = new Date(adjudicationDate);
-                    paymentDateObj.setDate(paymentDateObj.getDate() + paymentDelay);
-                    paymentDate = paymentDateObj.toISOString().split('T')[0];
                     
-                    // Fully paid claims receive 100% of approved amount
-                    disbursedAmount = approvedAmount;
-                    paymentStatus = "paid_full";
+                    if (paymentRoll < adjustedApprovedButUnpaidRate) {
+                        // Approved but payment pending
+                        status = "approved";
+                        paymentDate = null;
+                        disbursedAmount = null;
+                        paymentStatus = "pending";
+                        
+                    } else if (paymentRoll < adjustedApprovedButUnpaidRate + paymentProcessing.partialPaymentRate) {
+                        // Partial payment
+                        status = "partial_payment";
+                        
+                        const paymentDelay = rng.nextInt(
+                            paymentProcessing.paymentDelayDays.minimum,
+                            paymentProcessing.paymentDelayDays.maximum
+                        );
+                        const paymentDateObj = new Date(adjudicationDate);
+                        paymentDateObj.setDate(paymentDateObj.getDate() + paymentDelay);
+                        paymentDate = paymentDateObj.toISOString().split('T')[0];
+                        
+                        // Partial payment (70% of approved amount)
+                        disbursedAmount = Math.round(approvedAmount * paymentProcessing.illustrativePartialPaymentRatio);
+                        paymentStatus = "partial";
+                        daysSinceApproval = null;  // Has payment, so not "awaiting" payment
+                        
+                    } else {
+                        // Full payment - 100% of approved amount
+                        status = "paid";
+                        
+                        // Stage 5: Payment (5-45 days after approval)
+                        const paymentDelay = rng.nextInt(
+                            paymentProcessing.paymentDelayDays.minimum,
+                            paymentProcessing.paymentDelayDays.maximum
+                        );
+                        const paymentDateObj = new Date(adjudicationDate);
+                        paymentDateObj.setDate(paymentDateObj.getDate() + paymentDelay);
+                        paymentDate = paymentDateObj.toISOString().split('T')[0];
+                        
+                        // Fully paid claims receive 100% of approved amount
+                        disbursedAmount = approvedAmount;
+                        paymentStatus = "paid_full";
+                        daysSinceApproval = null;  // Has payment, so not "awaiting" payment
+                    }
                 }
                 
             } else {
@@ -413,6 +541,7 @@ function generateClaims(accreditations, facilities, scenarioConfig, seed) {
                 approvalDate = null;
                 paymentDate = null;
                 paymentStatus = "denied";
+                daysSinceApproval = null;
                 
                 // Denial reasons
                 const denialReasons = [
@@ -445,41 +574,56 @@ function generateClaims(accreditations, facilities, scenarioConfig, seed) {
                 outstanding_balance: approvedAmount ? (disbursedAmount !== null ? approvedAmount - disbursedAmount : approvedAmount) : null,
                 status: status,
                 payment_status: paymentStatus,
-                denial_reason: denialReason
+                denial_reason: denialReason,
+                days_since_approval: daysSinceApproval,  // V3: For approved-but-unpaid reporting
+                analysis_cutoff_date: analysisCutoffDate.toISOString().split('T')[0]  // V3: Reference date
             });
             
             claimCounter++;
         }
     });
     
-    // Calculate actual financials
-    const totalBilled = claims.reduce((sum, c) => sum + c.billed_amount, 0);
-    const approvedClaims = claims.filter(c => c.approved_amount);
-    const totalApproved = approvedClaims.reduce((sum, c) => sum + c.approved_amount, 0);
-    const paidClaims = claims.filter(c => c.disbursed_amount);
-    const totalDisbursed = paidClaims.reduce((sum, c) => sum + c.disbursed_amount, 0);
-    const totalOutstanding = claims.reduce((sum, c) => sum + (c.outstanding_balance || 0), 0);
-    const pendingClaims = claims.filter(c => c.status === 'approved' && !c.payment_date);
-    const partialPaymentClaims = claims.filter(c => c.status === 'partial_payment');
+    // Summary statistics
+    const summary = {
+        totalClaims: claims.length,
+        submitted: claims.length,
+        pendingAcceptance: claims.filter(c => c.status === 'pending_acceptance').length,
+        accepted: claims.filter(c => c.acceptance_date !== null).length,
+        pendingAdjudication: claims.filter(c => c.status === 'pending_adjudication').length,
+        adjudicated: claims.filter(c => c.adjudication_date !== null).length,
+        approved: claims.filter(c => c.status === 'paid' || c.status === 'partial_payment' || c.status === 'approved').length,
+        paid: claims.filter(c => c.status === 'paid' || c.status === 'partial_payment').length,
+        fullyPaid: claims.filter(c => c.status === 'paid').length,
+        partiallyPaid: claims.filter(c => c.status === 'partial_payment').length,
+        approvedButUnpaid: claims.filter(c => c.status === 'approved').length,
+        denied: claims.filter(c => c.status === 'denied').length,
+        totalBilled: claims.reduce((sum, c) => sum + c.billed_amount, 0),
+        totalApproved: claims.filter(c => c.approved_amount).reduce((sum, c) => sum + c.approved_amount, 0),
+        totalDisbursed: claims.filter(c => c.disbursed_amount).reduce((sum, c) => sum + c.disbursed_amount, 0),
+        totalOutstanding: claims.filter(c => c.outstanding_balance).reduce((sum, c) => sum + c.outstanding_balance, 0)
+    };
     
-    console.log(`✓ Generated ${claims.length} claims`);
+    // V3: Facilities receiving payment count
+    const facilitiesWithPayment = new Set(claims.filter(c => c.payment_date !== null).map(c => c.facility_id));
+    
+    console.log(`✓ Generated ${summary.totalClaims} claims`);
     console.log(`  - From ${filingFacilities.length} facilities`);
-    console.log(`  - Approved: ${approvedClaims.length} (${(approvedClaims.length / claims.length * 100).toFixed(1)}%)`);
-    console.log(`  - Paid (full): ${paidClaims.filter(c => c.payment_status === 'paid_full').length}`);
-    console.log(`  - Partial payment: ${partialPaymentClaims.length}`);
-    console.log(`  - Approved but unpaid: ${pendingClaims.length}`);
-    console.log(`  - Denied: ${claims.filter(c => c.status === 'denied').length} (${((claims.filter(c => c.status === 'denied').length / claims.length) * 100).toFixed(1)}%)`);
-    console.log(`  - Total billed: ₱${totalBilled.toLocaleString()}`);
-    console.log(`  - Total approved: ₱${totalApproved.toLocaleString()}`);
-    console.log(`  - Total disbursed: ₱${totalDisbursed.toLocaleString()}`);
-    console.log(`  - Total outstanding: ₱${totalOutstanding.toLocaleString()}`);
-    console.log(`  - Avg billed: ₱${Math.round(totalBilled / claims.length).toLocaleString()}`);
-    if (approvedClaims.length > 0) {
-        console.log(`  - Avg approved: ₱${Math.round(totalApproved / approvedClaims.length).toLocaleString()}`);
-    }
-    if (paidClaims.length > 0) {
-        console.log(`  - Avg disbursed: ₱${Math.round(totalDisbursed / paidClaims.length).toLocaleString()}`);
-    }    
+    console.log(`  - Pending acceptance: ${summary.pendingAcceptance} (${((summary.pendingAcceptance/summary.totalClaims)*100).toFixed(1)}%)`);
+    console.log(`  - Pending adjudication: ${summary.pendingAdjudication} (${((summary.pendingAdjudication/summary.totalClaims)*100).toFixed(1)}%)`);
+    console.log(`  - Approved: ${summary.approved} (${((summary.approved/summary.totalClaims)*100).toFixed(1)}%)`);
+    console.log(`  - Paid (full): ${summary.fullyPaid}`);
+    console.log(`  - Partial payment: ${summary.partiallyPaid}`);
+    console.log(`  - Approved but unpaid: ${summary.approvedButUnpaid}`);
+    console.log(`  - Denied: ${summary.denied} (${((summary.denied/summary.totalClaims)*100).toFixed(1)}%)`);
+    console.log(`  - Facilities receiving payment: ${facilitiesWithPayment.size} of ${filingFacilities.length} (${((facilitiesWithPayment.size/filingFacilities.length)*100).toFixed(1)}%)`);
+    console.log(`  - Total billed: ₱${summary.totalBilled.toLocaleString()}`);
+    console.log(`  - Total approved: ₱${summary.totalApproved.toLocaleString()}`);
+    console.log(`  - Total disbursed: ₱${summary.totalDisbursed.toLocaleString()}`);
+    console.log(`  - Total outstanding: ₱${summary.totalOutstanding.toLocaleString()}`);
+    console.log(`  - Avg billed: ₱${Math.round(summary.totalBilled / summary.totalClaims).toLocaleString()}`);
+    console.log(`  - Avg approved: ₱${Math.round(summary.totalApproved / (summary.approved || 1)).toLocaleString()}`);
+    console.log(`  - Avg disbursed: ₱${Math.round(summary.totalDisbursed / (summary.paid || 1)).toLocaleString()}`);
+    
     return claims;
 }
 
@@ -675,7 +819,7 @@ function generateScenario(scenarioName, regionalProfile = 'neutral') {
     // Generate data
     const facilities = generateFacilities(scenarioConfig, regionalProfile, seed);
     const accreditations = generateAccreditations(facilities, scenarioConfig, regionalProfile, seed);
-    const claims = generateClaims(accreditations, facilities, scenarioConfig, seed);
+    const claims = generateClaims(accreditations, facilities, scenarioConfig, regionalProfile, seed);
     const metadata = generateMetadata(scenarioName, regionalProfile, facilities, accreditations, claims);
     
     // Output directory

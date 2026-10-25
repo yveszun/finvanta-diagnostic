@@ -15,9 +15,9 @@ export class DataValidator {
   constructor(config = {}) {
     this.config = config || {};
     
-    // Define valid claim statuses
-    this.validClaimStatuses = ['submitted', 'accepted', 'adjudicated', 'approved', 'paid', 'denied', 'partial_payment'];
-    this.validPaymentStatuses = ['pending', 'paid_full', 'partial', 'denied', null];
+    // Define valid claim statuses (V3: Added pending stages)
+    this.validClaimStatuses = ['submitted', 'accepted', 'adjudicated', 'approved', 'paid', 'denied', 'partial_payment', 'pending_acceptance', 'pending_adjudication'];
+    this.validPaymentStatuses = ['pending', 'paid_full', 'partial', 'denied', 'not_applicable', null];
     
     // Define required fields
     this.requiredFacilityFields = ['facility_id', 'facility_name', 'facility_type', 'region'];
