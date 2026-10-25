@@ -42,7 +42,7 @@ const claims = [
     payment_status: 'paid_full',
     denial_reason: null,
     days_since_approval: null,
-    analysis_cutoff_date: '2025-07-15T00:00:00.000Z'
+    analysis_cutoff_date: '2025-07-15T23:59:59.000Z'
   },
   {
     claim_id: 'CLM002',
@@ -65,7 +65,7 @@ const claims = [
     denial_reason: null,
     days_pending: 30,
     days_since_approval: null,
-    analysis_cutoff_date: '2025-07-15T00:00:00.000Z'
+    analysis_cutoff_date: '2025-07-15T23:59:59.000Z'
   }
 ];
 

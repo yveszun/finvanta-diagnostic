@@ -1,6 +1,6 @@
 # Phase 3 Analytics Report: Low Activity
 
-**Generated:** 2026-10-25T17:09:11.815Z
+**Generated:** 2026-10-25T17:17:32.621Z
 
 ---
 
@@ -54,7 +54,7 @@ This cascade shows claim counts (not facility counts) at each stage:
 | Fully Paid | 42 | 28.0% |
 | Partially Paid | 4 | 2.7% |
 | Approved but Unpaid | 62 | 41.3% |
-| → Avg time awaiting payment | 22.5 days (as of 2025-07-15T00:00:00.000Z) | - |
+| → Avg time awaiting payment | 22.5 days (as of 2025-07-15T23:59:59.000Z) | - |
 | Denied | 16 | 10.7% |
 | Pending Earlier Stages | 26 | 17.3% |
 
@@ -138,7 +138,7 @@ This cascade shows claim counts (not facility counts) at each stage:
 
 ## Metadata
 
-- **Analysis Timestamp:** 2026-10-25T17:09:11.814Z
+- **Analysis Timestamp:** 2026-10-25T17:17:32.621Z
 - **Validation Errors:** 0
 - **Validation Warnings:** 1
 

@@ -29,6 +29,11 @@ const __dirname = path.dirname(__filename);
 const configPath = path.resolve(__dirname, '../public/config/benefitConfig.json');
 const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
 
+// V3.2: Load centralized cutoff configuration
+const cutoffConfigPath = path.resolve(__dirname, '../public/config/cutoffConfig.json');
+const cutoffConfig = JSON.parse(fs.readFileSync(cutoffConfigPath, 'utf-8'));
+const ANALYSIS_CUTOFF_DATE = new Date(cutoffConfig.analysisCutoffDate);
+
 // Philippine regions
 const REGIONS = [
     "National Capital Region",
@@ -384,7 +389,8 @@ function generateClaims(accreditations, facilities, scenarioConfig, regionalProf
     
     // V3: Analysis cutoff date for time-since-approval calculations
     // V3.1: Use this as genuine snapshot boundary
-    const analysisCutoffDate = new Date(2025, 6, 15); // July 15, 2025
+    // V3.2: Use centralized cutoff configuration (end of reporting day)
+    const analysisCutoffDate = ANALYSIS_CUTOFF_DATE;
     
     filingFacilities.forEach((facility, facilityIndex) => {
         const numClaims = claimsPerFacility + (facilityIndex < extraClaims ? 1 : 0);

@@ -64,7 +64,7 @@ describe('Cutoff Enforcement Validation Tests', () => {
           facility_id: 'FAC001',
           status: 'paid',
           submission_date: '2025-06-01',
-          analysis_cutoff_date: '2025-07-15T00:00:00.000Z'
+          analysis_cutoff_date: '2025-07-15T23:59:59.000Z'
         },
         {
           claim_id: 'CLM002',
@@ -101,7 +101,7 @@ describe('Cutoff Enforcement Validation Tests', () => {
           facility_id: 'FAC001',
           status: 'paid',
           submission_date: '2025-07-20', // After cutoff
-          analysis_cutoff_date: '2025-07-15T00:00:00.000Z'
+          analysis_cutoff_date: '2025-07-15T23:59:59.000Z'
         }
       ];
 
@@ -130,7 +130,7 @@ describe('Cutoff Enforcement Validation Tests', () => {
           status: 'paid',
           submission_date: '2025-06-01',
           acceptance_date: '2025-07-20', // After cutoff
-          analysis_cutoff_date: '2025-07-15T00:00:00.000Z'
+          analysis_cutoff_date: '2025-07-15T23:59:59.000Z'
         }
       ];
 
@@ -161,7 +161,7 @@ describe('Cutoff Enforcement Validation Tests', () => {
           acceptance_date: '2025-06-02',
           adjudication_date: '2025-07-20', // After cutoff
           approval_date: '2025-07-20',
-          analysis_cutoff_date: '2025-07-15T00:00:00.000Z'
+          analysis_cutoff_date: '2025-07-15T23:59:59.000Z'
         }
       ];
 
@@ -192,7 +192,7 @@ describe('Cutoff Enforcement Validation Tests', () => {
           acceptance_date: '2025-06-02',
           adjudication_date: '2025-06-10',
           approval_date: '2025-07-20', // After cutoff
-          analysis_cutoff_date: '2025-07-15T00:00:00.000Z'
+          analysis_cutoff_date: '2025-07-15T23:59:59.000Z'
         }
       ];
 
@@ -224,7 +224,7 @@ describe('Cutoff Enforcement Validation Tests', () => {
           adjudication_date: '2025-06-10',
           approval_date: '2025-06-10',
           payment_date: '2025-07-20', // After cutoff
-          analysis_cutoff_date: '2025-07-15T00:00:00.000Z'
+          analysis_cutoff_date: '2025-07-15T23:59:59.000Z'
         }
       ];
 
@@ -255,7 +255,7 @@ describe('Cutoff Enforcement Validation Tests', () => {
           status: 'paid',
           submission_date: '2025-06-10',
           acceptance_date: '2025-06-05', // Before submission
-          analysis_cutoff_date: '2025-07-15T00:00:00.000Z'
+          analysis_cutoff_date: '2025-07-15T23:59:59.000Z'
         }
       ];
 
@@ -286,7 +286,7 @@ describe('Cutoff Enforcement Validation Tests', () => {
           acceptance_date: '2025-06-10',
           adjudication_date: '2025-06-05', // Before acceptance
           approval_date: '2025-06-05',
-          analysis_cutoff_date: '2025-07-15T00:00:00.000Z'
+          analysis_cutoff_date: '2025-07-15T23:59:59.000Z'
         }
       ];
 
@@ -317,7 +317,7 @@ describe('Cutoff Enforcement Validation Tests', () => {
           acceptance_date: '2025-06-02',
           adjudication_date: '2025-06-10',
           approval_date: '2025-06-05', // Before adjudication
-          analysis_cutoff_date: '2025-07-15T00:00:00.000Z'
+          analysis_cutoff_date: '2025-07-15T23:59:59.000Z'
         }
       ];
 
@@ -349,7 +349,7 @@ describe('Cutoff Enforcement Validation Tests', () => {
           adjudication_date: '2025-06-10',
           approval_date: '2025-06-15',
           payment_date: '2025-06-12', // Before approval
-          analysis_cutoff_date: '2025-07-15T00:00:00.000Z'
+          analysis_cutoff_date: '2025-07-15T23:59:59.000Z'
         }
       ];
 
@@ -380,7 +380,7 @@ describe('Cutoff Enforcement Validation Tests', () => {
           status: 'pending_acceptance',
           submission_date: '2025-06-01',
           days_pending: -5, // Negative
-          analysis_cutoff_date: '2025-07-15T00:00:00.000Z'
+          analysis_cutoff_date: '2025-07-15T23:59:59.000Z'
         }
       ];
 
@@ -412,7 +412,7 @@ describe('Cutoff Enforcement Validation Tests', () => {
           adjudication_date: '2025-06-10',
           approval_date: '2025-08-01', // After cutoff - should trigger negative calc
           days_since_approval: -10,
-          analysis_cutoff_date: '2025-07-15T00:00:00.000Z'
+          analysis_cutoff_date: '2025-07-15T23:59:59.000Z'
         }
       ];
 
@@ -463,7 +463,7 @@ describe('Cutoff Enforcement Validation Tests', () => {
           payment_status: 'paid_full',
           denial_reason: null,
           days_since_approval: null,
-          analysis_cutoff_date: '2025-07-15T00:00:00.000Z'
+          analysis_cutoff_date: '2025-07-15T23:59:59.000Z'
         },
         {
           claim_id: 'CLM002',
@@ -486,7 +486,7 @@ describe('Cutoff Enforcement Validation Tests', () => {
           denial_reason: null,
           days_pending: 30,
           days_since_approval: null,
-          analysis_cutoff_date: '2025-07-15T00:00:00.000Z'
+          analysis_cutoff_date: '2025-07-15T23:59:59.000Z'
         }
       ];
 

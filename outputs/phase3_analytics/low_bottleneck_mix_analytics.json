@@ -1,6 +1,6 @@
 {
   "scenario": "Low Activity",
-  "timestamp": "2026-10-25T17:09:11.815Z",
+  "timestamp": "2026-10-25T17:17:32.622Z",
   "validationResults": {
     "valid": true,
     "errorCount": 0,
@@ -121,7 +121,7 @@
           "count": 62,
           "percentage": "41.3%",
           "label": "Approved but payment pending",
-          "avgDaysSinceApproval": "22.5 days (as of 2025-07-15T00:00:00.000Z)"
+          "avgDaysSinceApproval": "22.5 days (as of 2025-07-15T23:59:59.000Z)"
         },
         "denied": {
           "count": 16,
@@ -419,7 +419,7 @@
       ]
     },
     "metadata": {
-      "timestamp": "2026-10-25T17:09:11.814Z",
+      "timestamp": "2026-10-25T17:17:32.621Z",
       "disclaimer": "All data is synthetic for diagnostic purposes. Does not represent actual PhilHealth performance.",
       "validation": {
         "hasErrors": false,

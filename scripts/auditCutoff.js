@@ -10,8 +10,12 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Analysis cutoff date (must match configuration)
-const ANALYSIS_CUTOFF = new Date('2025-07-15T23:59:59Z');
+// V3.2: Load centralized cutoff configuration
+const cutoffConfigPath = path.join(__dirname, '..', 'public', 'config', 'cutoffConfig.json');
+const cutoffConfig = JSON.parse(fs.readFileSync(cutoffConfigPath, 'utf8'));
+
+// Analysis cutoff date (end of reporting day)
+const ANALYSIS_CUTOFF = new Date(cutoffConfig.analysisCutoffDate);
 
 function auditDataset(scenario) {
   console.log(`\n${'='.repeat(60)}`);
@@ -199,8 +203,8 @@ function auditDataset(scenario) {
     cutoffDates.forEach(date => console.error(`   - ${date}`));
   } else if (cutoffDates.size === 1) {
     const cutoffDate = Array.from(cutoffDates)[0];
-    if (cutoffDate !== '2025-07-15T23:59:59.000Z') {
-      console.error(`\n⚠️  WARNING: Cutoff date is ${cutoffDate}, expected 2025-07-15T23:59:59.000Z`);
+    if (cutoffDate !== cutoffConfig.analysisCutoffDate) {
+      console.error(`\n⚠️  WARNING: Cutoff date is ${cutoffDate}, expected ${cutoffConfig.analysisCutoffDate}`);
     } else {
       console.log(`\n✅ Cutoff date consistent: ${cutoffDate}`);
     }
