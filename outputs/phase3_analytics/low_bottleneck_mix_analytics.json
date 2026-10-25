@@ -1,6 +1,6 @@
 {
   "scenario": "Low Activity",
-  "timestamp": "2026-10-25T16:47:19.560Z",
+  "timestamp": "2026-10-25T16:57:36.848Z",
   "validationResults": {
     "valid": true,
     "errorCount": 0,
@@ -24,29 +24,29 @@
         "note": "Uses distinct facility IDs"
       },
       "stage3_claiming": {
-        "count": 14,
-        "numerator": 14,
+        "count": 15,
+        "numerator": 15,
         "denominator": 69,
-        "rate": "20.3%",
+        "rate": "21.7%",
         "label": "Accredited facilities that submitted at least one claim",
         "note": "Distinct facilities, not claim count"
       },
       "stage4_receiving_payment": {
-        "count": 13,
-        "numerator": 13,
-        "denominator": 14,
-        "rate": "92.9%",
+        "count": 12,
+        "numerator": 12,
+        "denominator": 15,
+        "rate": "80.0%",
         "label": "Facilities with at least one claim receiving payment",
         "note": "Includes both fully paid and partially paid claims"
       },
       "summary": {
         "eligible": 1500,
         "accredited": 69,
-        "claiming": 14,
-        "receivingPayment": 13,
+        "claiming": 15,
+        "receivingPayment": 12,
         "dropoff_accreditation": 1431,
-        "dropoff_claiming": 55,
-        "dropoff_payment": 1
+        "dropoff_claiming": 54,
+        "dropoff_payment": 3
       }
     },
     "claimsProcessingCascade": {
@@ -57,75 +57,75 @@
         "note": "All claims with claim IDs"
       },
       "stage1a_pending_acceptance": {
-        "count": 8,
-        "numerator": 8,
+        "count": 9,
+        "numerator": 9,
         "denominator": 150,
-        "rate": "5.3%",
-        "avgDaysPending": "61.4 days",
+        "rate": "6.0%",
+        "avgDaysPending": "45.3 days",
         "label": "Pending acceptance (administrative review)",
         "note": "V3: Claims awaiting acceptance"
       },
       "stage2_accepted": {
-        "count": 142,
-        "numerator": 142,
+        "count": 141,
+        "numerator": 141,
         "denominator": 150,
-        "rate": "94.7%",
+        "rate": "94.0%",
         "label": "Accepted for processing",
         "note": "Claims with acceptance_date"
       },
       "stage2a_pending_adjudication": {
-        "count": 15,
-        "numerator": 15,
-        "denominator": 142,
-        "rate": "10.6%",
-        "avgDaysPending": "55.3 days",
+        "count": 14,
+        "numerator": 14,
+        "denominator": 141,
+        "rate": "9.9%",
+        "avgDaysPending": "61.1 days",
         "label": "Pending adjudication (awaiting review)",
         "note": "V3: Claims awaiting adjudication"
       },
       "stage3_adjudicated": {
         "count": 127,
         "numerator": 127,
-        "denominator": 142,
-        "rate": "89.4%",
+        "denominator": 141,
+        "rate": "90.1%",
         "label": "Adjudicated",
         "note": "Claims with adjudication_date"
       },
       "stage4_approved": {
-        "count": 106,
-        "numerator": 106,
+        "count": 109,
+        "numerator": 109,
         "denominator": 127,
-        "rate": "83.5%",
+        "rate": "85.8%",
         "label": "Approved for payment",
         "note": "Includes paid, partial_payment, and approved (unpaid) statuses"
       },
       "stage5_paid": {
-        "count": 79,
-        "numerator": 79,
-        "denominator": 106,
-        "rate": "74.5%",
+        "count": 47,
+        "numerator": 47,
+        "denominator": 109,
+        "rate": "43.1%",
         "label": "Receiving payment",
         "note": "Includes both fully paid and partially paid"
       },
       "breakdown": {
         "fullyPaid": {
-          "count": 75,
-          "percentage": "50.0%",
+          "count": 42,
+          "percentage": "28.0%",
           "label": "Fully paid"
         },
         "partiallyPaid": {
-          "count": 4,
-          "percentage": "2.7%",
+          "count": 5,
+          "percentage": "3.3%",
           "label": "Partially paid"
         },
         "approvedUnpaid": {
-          "count": 27,
-          "percentage": "18.0%",
+          "count": 62,
+          "percentage": "41.3%",
           "label": "Approved but payment pending",
-          "avgDaysSinceApproval": "31.8 days (as of 2025-07-15)"
+          "avgDaysSinceApproval": "22.6 days (as of 2025-07-15)"
         },
         "denied": {
-          "count": 21,
-          "percentage": "14.0%",
+          "count": 18,
+          "percentage": "12.0%",
           "label": "Denied"
         },
         "pendingEarlierStages": {
@@ -137,56 +137,56 @@
       "summary": {
         "totalClaims": 150,
         "distinctClaims": 150,
-        "reachedPayment": 79,
-        "awaitingPayment": 27,
-        "denied": 21,
+        "reachedPayment": 47,
+        "awaitingPayment": 62,
+        "denied": 18,
         "pendingProcessing": 23
       }
     },
     "financialCalculations": {
       "totalBilled": {
-        "amount": 1476000,
-        "formatted": "₱1,476,000",
+        "amount": 1546000,
+        "formatted": "₱1,546,000",
         "label": "Total billed"
       },
       "totalApproved": {
-        "amount": 903938,
-        "formatted": "₱903,938",
-        "percentage": "61.2%",
+        "amount": 943643,
+        "formatted": "₱943,643",
+        "percentage": "61.0%",
         "label": "Total approved",
         "note": "Percentage of billed amount"
       },
       "totalDisbursed": {
-        "amount": 677171,
-        "formatted": "₱677,171",
-        "percentage": "74.9%",
+        "amount": 410270,
+        "formatted": "₱410,270",
+        "percentage": "43.5%",
         "label": "Total disbursed",
         "note": "Percentage of approved amount"
       },
       "totalOutstanding": {
-        "amount": 226767,
-        "formatted": "₱226,767",
-        "percentage": "25.1%",
+        "amount": 533373,
+        "formatted": "₱533,373",
+        "percentage": "56.5%",
         "label": "Total outstanding",
         "note": "Approved but not yet disbursed"
       },
       "approvalToDisbursementRatio": {
-        "ratio": "74.9%",
+        "ratio": "43.5%",
         "label": "Approval-to-disbursement ratio",
         "note": "Percentage of approved amounts that have been disbursed"
       },
       "paymentProcessingTime": {
-        "average": "25.6 days",
-        "median": "25.0 days",
-        "sampleSize": 79,
-        "missingDates": 71,
+        "average": "20.7 days",
+        "median": "17.0 days",
+        "sampleSize": 47,
+        "missingDates": 103,
         "label": "Payment processing time (approval to payment)",
-        "note": "Excludes claims with missing dates. Reports missingness: 71 claims"
+        "note": "Excludes claims with missing dates. Reports missingness: 103 claims"
       },
       "reconciliation": {
         "reconciles": true,
-        "expected": 226767,
-        "actual": 226767,
+        "expected": 533373,
+        "actual": 533373,
         "difference": 0,
         "status": "PASS",
         "note": "Outstanding should equal Approved minus Disbursed"
@@ -195,22 +195,22 @@
     "serviceSpecificAnalysis": {
       "general": {
         "accreditedFacilities": 69,
-        "claims": 132,
+        "claims": 122,
         "financial": {
-          "billed": "₱1,188,000",
-          "approved": "₱689,335",
-          "disbursed": "₱490,281"
+          "billed": "₱1,098,000",
+          "approved": "₱671,104",
+          "disbursed": "₱264,238"
         },
         "label": "General mental health consultation",
         "serviceCode": "PSYCH_CONSULT_GEN"
       },
       "specialty": {
-        "accreditedFacilities": 37,
-        "claims": 18,
+        "accreditedFacilities": 30,
+        "claims": 28,
         "financial": {
-          "billed": "₱288,000",
-          "approved": "₱214,603",
-          "disbursed": "₱186,890"
+          "billed": "₱448,000",
+          "approved": "₱272,539",
+          "disbursed": "₱146,032"
         },
         "label": "Specialty mental health services",
         "serviceCode": "PSYCH_CONSULT_SPEC"
@@ -224,23 +224,23 @@
       "byRegion": {
         "National Capital Region": {
           "facilities": 88,
-          "accredited": 4,
-          "accreditationRate": "4.5%",
-          "claims": 10,
+          "accredited": 6,
+          "accreditationRate": "6.8%",
+          "claims": 20,
           "financial": {
-            "billed": "₱90,000",
-            "approved": "₱71,637",
-            "disbursed": "₱0"
+            "billed": "₱180,000",
+            "approved": "₱120,866",
+            "disbursed": "₱66,403"
           }
         },
         "Region I (Ilocos Region)": {
           "facilities": 88,
           "accredited": 4,
           "accreditationRate": "4.5%",
-          "claims": 0,
+          "claims": 10,
           "financial": {
-            "billed": "₱0",
-            "approved": "₱0",
+            "billed": "₱90,000",
+            "approved": "₱38,034",
             "disbursed": "₱0"
           }
         },
@@ -248,50 +248,61 @@
           "facilities": 88,
           "accredited": 4,
           "accreditationRate": "4.5%",
-          "claims": 22,
+          "claims": 0,
           "financial": {
-            "billed": "₱198,000",
-            "approved": "₱83,630",
-            "disbursed": "₱61,559"
+            "billed": "₱0",
+            "approved": "₱0",
+            "disbursed": "₱0"
           }
         },
         "Region III (Central Luzon)": {
           "facilities": 88,
           "accredited": 4,
           "accreditationRate": "4.5%",
-          "claims": 11,
+          "claims": 10,
           "financial": {
-            "billed": "₱99,000",
-            "approved": "₱53,511",
-            "disbursed": "₱46,406"
+            "billed": "₱104,000",
+            "approved": "₱78,163",
+            "disbursed": "₱36,115"
           }
         },
         "Region IV-A (CALABARZON)": {
           "facilities": 88,
           "accredited": 4,
           "accreditationRate": "4.5%",
-          "claims": 0,
+          "claims": 10,
           "financial": {
-            "billed": "₱0",
-            "approved": "₱0",
-            "disbursed": "₱0"
+            "billed": "₱90,000",
+            "approved": "₱60,225",
+            "disbursed": "₱45,513"
           }
         },
         "Region IV-B (MIMAROPA)": {
           "facilities": 88,
           "accredited": 4,
           "accreditationRate": "4.5%",
-          "claims": 0,
+          "claims": 10,
           "financial": {
-            "billed": "₱0",
-            "approved": "₱0",
-            "disbursed": "₱0"
+            "billed": "₱97,000",
+            "approved": "₱50,540",
+            "disbursed": "₱43,031"
           }
         },
         "Region V (Bicol Region)": {
           "facilities": 88,
           "accredited": 4,
           "accreditationRate": "4.5%",
+          "claims": 10,
+          "financial": {
+            "billed": "₱90,000",
+            "approved": "₱36,135",
+            "disbursed": "₱29,205"
+          }
+        },
+        "Region VI (Western Visayas)": {
+          "facilities": 88,
+          "accredited": 4,
+          "accreditationRate": "4.5%",
           "claims": 0,
           "financial": {
             "billed": "₱0",
@@ -299,26 +310,15 @@
             "disbursed": "₱0"
           }
         },
-        "Region VI (Western Visayas)": {
-          "facilities": 88,
-          "accredited": 4,
-          "accreditationRate": "4.5%",
-          "claims": 22,
-          "financial": {
-            "billed": "₱198,000",
-            "approved": "₱108,280",
-            "disbursed": "₱90,393"
-          }
-        },
         "Region VII (Central Visayas)": {
           "facilities": 88,
-          "accredited": 4,
-          "accreditationRate": "4.5%",
-          "claims": 10,
+          "accredited": 6,
+          "accreditationRate": "6.8%",
+          "claims": 20,
           "financial": {
-            "billed": "₱90,000",
-            "approved": "₱39,032",
-            "disbursed": "₱36,612"
+            "billed": "₱180,000",
+            "approved": "₱137,377",
+            "disbursed": "₱30,988"
           }
         },
         "Region VIII (Eastern Visayas)": {
@@ -328,85 +328,85 @@
           "claims": 10,
           "financial": {
             "billed": "₱90,000",
-            "approved": "₱62,109",
-            "disbursed": "₱32,594"
+            "approved": "₱59,387",
+            "disbursed": "₱0"
           }
         },
         "Region IX (Zamboanga Peninsula)": {
           "facilities": 88,
-          "accredited": 4,
-          "accreditationRate": "4.5%",
-          "claims": 11,
+          "accredited": 2,
+          "accreditationRate": "2.3%",
+          "claims": 0,
           "financial": {
-            "billed": "₱99,000",
-            "approved": "₱59,147",
-            "disbursed": "₱59,147"
+            "billed": "₱0",
+            "approved": "₱0",
+            "disbursed": "₱0"
           }
         },
         "Region X (Northern Mindanao)": {
           "facilities": 88,
           "accredited": 4,
           "accreditationRate": "4.5%",
-          "claims": 0,
+          "claims": 10,
           "financial": {
-            "billed": "₱0",
-            "approved": "₱0",
-            "disbursed": "₱0"
+            "billed": "₱111,000",
+            "approved": "₱60,266",
+            "disbursed": "₱41,388"
           }
         },
         "Region XI (Davao Region)": {
           "facilities": 88,
           "accredited": 4,
           "accreditationRate": "4.5%",
+          "claims": 10,
+          "financial": {
+            "billed": "₱132,000",
+            "approved": "₱60,895",
+            "disbursed": "₱47,754"
+          }
+        },
+        "Region XII (SOCCSKSARGEN)": {
+          "facilities": 88,
+          "accredited": 2,
+          "accreditationRate": "2.3%",
           "claims": 0,
           "financial": {
             "billed": "₱0",
             "approved": "₱0",
             "disbursed": "₱0"
-          }
-        },
-        "Region XII (SOCCSKSARGEN)": {
-          "facilities": 88,
-          "accredited": 4,
-          "accreditationRate": "4.5%",
-          "claims": 11,
-          "financial": {
-            "billed": "₱120,000",
-            "approved": "₱92,458",
-            "disbursed": "₱69,993"
           }
         },
         "Region XIII (Caraga)": {
           "facilities": 88,
           "accredited": 4,
           "accreditationRate": "4.5%",
-          "claims": 0,
+          "claims": 10,
           "financial": {
-            "billed": "₱0",
-            "approved": "₱0",
-            "disbursed": "₱0"
+            "billed": "₱125,000",
+            "approved": "₱59,706",
+            "disbursed": "₱5,335"
           }
         },
         "CAR (Cordillera Administrative Region)": {
           "facilities": 88,
           "accredited": 4,
           "accreditationRate": "4.5%",
-          "claims": 21,
+          "claims": 10,
           "financial": {
-            "billed": "₱217,000",
-            "approved": "₱161,873",
-            "disbursed": "₱132,788"
+            "billed": "₱132,000",
+            "approved": "₱75,330",
+            "disbursed": "₱35,773"
           }
         },
         "BARMM (Bangsamoro)": {
           "facilities": 92,
           "accredited": 5,
           "accreditationRate": "5.4%",
-          "claims": 22,
+          "claims": 10,
           "financial": {
-            "billed": "₱275,000",
-            "approved": "₱172,261",
-            "disbursed": "₱147,679"
+            "billed": "₱125,000",
+            "approved": "₱106,719",
+            "disbursed": "₱28,765"
           }
         }
       },
@@ -419,7 +419,7 @@
       ]
     },
     "metadata": {
-      "timestamp": "2026-10-25T16:47:19.559Z",
+      "timestamp": "2026-10-25T16:57:36.847Z",
       "disclaimer": "All data is synthetic for diagnostic purposes. Does not represent actual PhilHealth performance.",
       "validation": {
         "hasErrors": false,

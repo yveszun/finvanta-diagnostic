@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "generatedDate": "2026-10-25T16:46:18.697Z",
+  "generatedDate": "2026-10-25T16:56:42.807Z",
   "generatedBy": "Finvanta Data Generator V2",
   "scenario": "high",
   "regionalProfile": "bottleneck_mix",
@@ -9,17 +9,17 @@
   "disclaimer": "This data is entirely synthetic and illustrative. It does not represent actual PhilHealth facilities, claims, or performance. All assumptions are labeled as illustrative rather than actual PhilHealth reimbursement parameters.",
   "recordCounts": {
     "facilities": 1500,
-    "accreditations": 528,
+    "accreditations": 514,
     "claims": 2000,
     "eligibleFacilities": 1500,
-    "filingFacilities": 370,
-    "approvedClaims": 1161,
-    "deniedClaims": 92
+    "filingFacilities": 358,
+    "approvedClaims": 803,
+    "deniedClaims": 86
   },
   "financials": {
-    "totalBilled": 21346000,
-    "totalApproved": 14867673,
-    "totalDisbursed": 10961576,
+    "totalBilled": 21220000,
+    "totalApproved": 14709215,
+    "totalDisbursed": 7453306,
     "currency": "PHP",
     "note": "Billed = package ceiling; Approved = adjudicated amount; Disbursed = actual payment"
   },

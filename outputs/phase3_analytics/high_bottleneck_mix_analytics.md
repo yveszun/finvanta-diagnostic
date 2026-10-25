@@ -1,6 +1,6 @@
 # Phase 3 Analytics Report: High Activity
 
-**Generated:** 2026-10-25T16:47:19.611Z
+**Generated:** 2026-10-25T16:57:36.898Z
 
 ---
 
@@ -18,9 +18,9 @@ This cascade shows distinct facilities at each stage:
 | Stage | Count | Rate |
 |-------|-------|------|
 | Eligible Population | 1,500 | - |
-| Accredited | 528 | 35.2% |
-| Submitted Claims | 370 | 70.1% |
-| Receiving Payment | 333 | 90.0% |
+| Accredited | 514 | 34.3% |
+| Submitted Claims | 358 | 69.6% |
+| Receiving Payment | 292 | 81.6% |
 
 **Note:** Each facility is counted only once, regardless of multiple claims or accreditations.
 
@@ -33,30 +33,30 @@ This cascade shows claim counts (not facility counts) at each stage:
 | Stage | Count | Rate |
 |-------|-------|------|
 | Submitted | 2,000 | - |
-| **Pending Acceptance** | 107 | 5.3% |
-| Accepted | 1,893 | 94.7% |
-| **Pending Adjudication** | 164 | 8.7% |
-| Adjudicated | 1,729 | 91.3% |
-| Approved | 1,637 | 94.7% |
-| Paid | 1,235 | 75.4% |
+| **Pending Acceptance** | 115 | 5.8% |
+| Accepted | 1,885 | 94.3% |
+| **Pending Adjudication** | 162 | 8.6% |
+| Adjudicated | 1,723 | 91.4% |
+| Approved | 1,637 | 95.0% |
+| Paid | 846 | 51.7% |
 
 ### Administrative Bottlenecks
 
 | Bottleneck Stage | Count | Avg Days Pending |
 |------------------|-------|------------------|
-| Pending Acceptance | 107 | 61.6 days |
-| Pending Adjudication | 164 | 52.9 days |
+| Pending Acceptance | 115 | 57.7 days |
+| Pending Adjudication | 162 | 55.5 days |
 
 ### Payment Breakdown
 
 | Category | Count | Percentage |
 |----------|-------|------------|
-| Fully Paid | 1,161 | 58.1% |
-| Partially Paid | 74 | 3.7% |
-| Approved but Unpaid | 402 | 20.1% |
-| → Avg time awaiting payment | 48.2 days (as of 2025-07-15) | - |
-| Denied | 92 | 4.6% |
-| Pending Earlier Stages | 271 | 13.6% |
+| Fully Paid | 803 | 40.2% |
+| Partially Paid | 43 | 2.1% |
+| Approved but Unpaid | 791 | 39.6% |
+| → Avg time awaiting payment | 34.8 days (as of 2025-07-15) | - |
+| Denied | 86 | 4.3% |
+| Pending Earlier Stages | 277 | 13.9% |
 
 **Note:** Approval ≠ Payment. Claims may be approved but remain unpaid. V3 tracks time since approval for unpaid claims.
 
@@ -64,21 +64,21 @@ This cascade shows claim counts (not facility counts) at each stage:
 
 | Metric | Amount |
 |--------|--------|
-| Total Billed | ₱21,346,000 |
-| Total Approved | ₱14,867,673 (69.7% of billed) |
-| Total Disbursed | ₱10,961,576 (73.7% of approved) |
-| Outstanding (Approved - Disbursed) | ₱3,906,097 |
+| Total Billed | ₱21,220,000 |
+| Total Approved | ₱14,709,215 (69.3% of billed) |
+| Total Disbursed | ₱7,453,306 (50.7% of approved) |
+| Outstanding (Approved - Disbursed) | ₱7,255,909 |
 
 ### Approval-to-Disbursement Ratio
 
-**73.7%** of approved amounts have been disbursed.
+**50.7%** of approved amounts have been disbursed.
 
 ### Payment Processing Time
 
-- **Average:** 25.1 days
-- **Median:** 25.0 days
-- **Sample Size:** 1,235 claims
-- **Claims with Missing Dates:** 765
+- **Average:** 22.3 days
+- **Median:** 21.0 days
+- **Sample Size:** 846 claims
+- **Claims with Missing Dates:** 1,154
 
 **Note:** Claims with missing dates excluded from time calculations.
 
@@ -92,21 +92,21 @@ This cascade shows claim counts (not facility counts) at each stage:
 
 | Metric | Value |
 |--------|-------|
-| Accredited Facilities | 528 |
-| Claims Submitted | 1,522 |
-| Total Billed | ₱13,698,000 |
-| Total Approved | ₱9,605,051 |
-| Total Disbursed | ₱7,177,295 |
+| Accredited Facilities | 514 |
+| Claims Submitted | 1,540 |
+| Total Billed | ₱13,860,000 |
+| Total Approved | ₱9,665,167 |
+| Total Disbursed | ₱4,980,228 |
 
 ### Specialty Mental Health Services
 
 | Metric | Value |
 |--------|-------|
-| Accredited Facilities | 256 |
-| Claims Submitted | 478 |
-| Total Billed | ₱7,648,000 |
-| Total Approved | ₱5,262,622 |
-| Total Disbursed | ₱3,784,281 |
+| Accredited Facilities | 253 |
+| Claims Submitted | 460 |
+| Total Billed | ₱7,360,000 |
+| Total Approved | ₱5,044,048 |
+| Total Disbursed | ₱2,473,078 |
 
 **Note:** No double-counting: facilities with both service types counted once
 
@@ -116,29 +116,29 @@ This cascade shows claim counts (not facility counts) at each stage:
 
 | Region | Facilities | Accredited | Claims | Total Billed | Total Approved |
 |--------|------------|------------|--------|--------------|----------------|
-| BARMM (Bangsamoro) | 92 | 32 (34.8%) | 130 | ₱1,401,000 | ₱1,025,894 |
-| CAR (Cordillera Administrative Region) | 88 | 31 (35.2%) | 135 | ₱1,432,000 | ₱984,357 |
-| National Capital Region | 88 | 31 (35.2%) | 116 | ₱1,226,000 | ₱868,866 |
-| Region I (Ilocos Region) | 88 | 31 (35.2%) | 141 | ₱1,479,000 | ₱1,009,197 |
-| Region II (Cagayan Valley) | 88 | 31 (35.2%) | 118 | ₱1,300,000 | ₱906,365 |
-| Region III (Central Luzon) | 88 | 31 (35.2%) | 105 | ₱1,225,000 | ₱834,731 |
-| Region IV-A (CALABARZON) | 88 | 31 (35.2%) | 116 | ₱1,142,000 | ₱840,754 |
-| Region IV-B (MIMAROPA) | 88 | 31 (35.2%) | 122 | ₱1,259,000 | ₱917,092 |
-| Region IX (Zamboanga Peninsula) | 88 | 31 (35.2%) | 136 | ₱1,448,000 | ₱978,715 |
-| Region V (Bicol Region) | 88 | 31 (35.2%) | 109 | ₱1,107,000 | ₱737,716 |
-| Region VI (Western Visayas) | 88 | 31 (35.2%) | 111 | ₱1,237,000 | ₱811,603 |
-| Region VII (Central Visayas) | 88 | 31 (35.2%) | 114 | ₱1,271,000 | ₱899,570 |
-| Region VIII (Eastern Visayas) | 88 | 31 (35.2%) | 119 | ₱1,288,000 | ₱893,884 |
-| Region X (Northern Mindanao) | 88 | 31 (35.2%) | 106 | ₱1,066,000 | ₱675,246 |
-| Region XI (Davao Region) | 88 | 31 (35.2%) | 116 | ₱1,296,000 | ₱937,464 |
-| Region XII (SOCCSKSARGEN) | 88 | 31 (35.2%) | 98 | ₱994,000 | ₱728,954 |
-| Region XIII (Caraga) | 88 | 31 (35.2%) | 108 | ₱1,175,000 | ₱817,265 |
+| BARMM (Bangsamoro) | 92 | 32 (34.8%) | 110 | ₱1,137,000 | ₱784,553 |
+| CAR (Cordillera Administrative Region) | 88 | 31 (35.2%) | 110 | ₱1,277,000 | ₱868,701 |
+| National Capital Region | 88 | 43 (48.9%) | 234 | ₱2,477,000 | ₱1,864,399 |
+| Region I (Ilocos Region) | 88 | 31 (35.2%) | 132 | ₱1,370,000 | ₱997,054 |
+| Region II (Cagayan Valley) | 88 | 31 (35.2%) | 66 | ₱685,000 | ₱444,859 |
+| Region III (Central Luzon) | 88 | 31 (35.2%) | 132 | ₱1,335,000 | ₱956,571 |
+| Region IV-A (CALABARZON) | 88 | 31 (35.2%) | 132 | ₱1,377,000 | ₱952,839 |
+| Region IV-B (MIMAROPA) | 88 | 31 (35.2%) | 132 | ₱1,370,000 | ₱1,008,833 |
+| Region IX (Zamboanga Peninsula) | 88 | 12 (13.6%) | 40 | ₱409,000 | ₱286,717 |
+| Region V (Bicol Region) | 88 | 31 (35.2%) | 132 | ₱1,482,000 | ₱896,904 |
+| Region VI (Western Visayas) | 88 | 31 (35.2%) | 66 | ₱685,000 | ₱521,254 |
+| Region VII (Central Visayas) | 88 | 43 (48.9%) | 234 | ₱2,540,000 | ₱1,663,148 |
+| Region VIII (Eastern Visayas) | 88 | 31 (35.2%) | 110 | ₱1,151,000 | ₱791,542 |
+| Region X (Northern Mindanao) | 88 | 31 (35.2%) | 110 | ₱1,263,000 | ₱780,121 |
+| Region XI (Davao Region) | 88 | 31 (35.2%) | 110 | ₱1,158,000 | ₱839,782 |
+| Region XII (SOCCSKSARGEN) | 88 | 12 (13.6%) | 40 | ₱374,000 | ₱276,145 |
+| Region XIII (Caraga) | 88 | 31 (35.2%) | 110 | ₱1,130,000 | ₱775,793 |
 
 **Disclaimer:** Regional patterns are synthetically generated for illustrative purposes only.
 
 ## Metadata
 
-- **Analysis Timestamp:** 2026-10-25T16:47:19.611Z
+- **Analysis Timestamp:** 2026-10-25T16:57:36.898Z
 - **Validation Errors:** 0
 - **Validation Warnings:** 1
 

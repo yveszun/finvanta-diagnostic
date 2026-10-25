@@ -155,12 +155,17 @@ function generateFacilities(scenarioConfig, regionalProfile, seed) {
 
 /**
  * Generate accreditations with regional variation
+ * V3.1: Apply bottleneck_mix multipliers correctly
  */
 function generateAccreditations(facilities, scenarioConfig, regionalProfile, seed) {
     const rng = new SeededRandom(seed + 1000);
     const accreditations = [];
     const eligibleFacilities = facilities.filter(f => f.eligible);
     const baseRate = scenarioConfig.accreditationRate;
+    
+    // V3.1: Load regional profile configuration
+    const profileConfig = config.regionalDistribution.profiles[regionalProfile] || config.regionalDistribution.profiles.neutral;
+    const bottleneckPatterns = profileConfig.patterns || {};
     
     console.log(`\nGenerating accreditations (base rate: ${(baseRate * 100).toFixed(1)}%)...`);
     
@@ -170,6 +175,9 @@ function generateAccreditations(facilities, scenarioConfig, regionalProfile, see
         facilityByRegion[region] = eligibleFacilities.filter(f => f.region === region);
     });
     
+    // V3.1: Track regional rates for verification
+    const regionalRates = {};
+    
     // Apply regional variation based on profile
     REGIONS.forEach((region, index) => {
         const regionalFacilities = facilityByRegion[region];
@@ -177,21 +185,33 @@ function generateAccreditations(facilities, scenarioConfig, regionalProfile, see
         
         let regionalRate = baseRate;
         
-        if (regionalProfile === 'differentiated') {
+        // V3.1: Apply bottleneck_mix multipliers
+        if (regionalProfile === 'bottleneck_mix' && bottleneckPatterns) {
+            // Check each pattern to see if this region is affected
+            Object.entries(bottleneckPatterns).forEach(([patternName, pattern]) => {
+                if (pattern.regions && pattern.regions.includes(region)) {
+                    // Apply accreditation multiplier if defined
+                    if (pattern.accreditationMultiplier !== undefined) {
+                        regionalRate = baseRate * pattern.accreditationMultiplier;
+                    }
+                }
+            });
+        } else if (regionalProfile === 'differentiated') {
             // NCR gets higher rate, rural regions lower
             if (region === "National Capital Region") {
-                regionalRate = baseRate * config.regionalDistribution.profiles.differentiated.urbanMultiplier;
+                regionalRate = baseRate * profileConfig.urbanMultiplier;
             } else if (region.includes("BARMM") || region.includes("MIMAROPA")) {
-                regionalRate = baseRate * config.regionalDistribution.profiles.differentiated.ruralMultiplier;
+                regionalRate = baseRate * profileConfig.ruralMultiplier;
             } else {
                 // Other regions vary around base
-                const variation = (rng.next() - 0.5) * config.regionalDistribution.profiles.differentiated.variationCoefficient;
+                const variation = (rng.next() - 0.5) * profileConfig.variationCoefficient;
                 regionalRate = baseRate * (1 + variation);
             }
         }
         
         // Ensure rate stays in reasonable bounds
         regionalRate = Math.max(0.01, Math.min(0.95, regionalRate));
+        regionalRates[region] = regionalRate;
         
         const targetCount = Math.round(regionalFacilities.length * regionalRate);
         const shuffled = rng.shuffle(regionalFacilities);
@@ -240,7 +260,26 @@ function generateAccreditations(facilities, scenarioConfig, regionalProfile, see
     
     console.log(`✓ Generated ${accreditations.length} accreditations`);
     console.log(`  - Overall rate: ${(accreditations.length / eligibleFacilities.length * 100).toFixed(1)}%`);
-    if (regionalProfile === 'differentiated') {
+    
+    // V3.1: Report bottleneck-affected regions
+    if (regionalProfile === 'bottleneck_mix' && bottleneckPatterns) {
+        Object.entries(bottleneckPatterns).forEach(([patternName, pattern]) => {
+            if (pattern.accreditationMultiplier !== undefined && pattern.regions) {
+                pattern.regions.forEach(region => {
+                    const regionalFacilities = facilityByRegion[region];
+                    const regionalAccreds = accreditations.filter(a => {
+                        const facility = facilities.find(f => f.facility_id === a.facility_id);
+                        return facility && facility.region === region;
+                    });
+                    if (regionalFacilities && regionalFacilities.length > 0) {
+                        const actualRate = (regionalAccreds.length / regionalFacilities.length * 100).toFixed(1);
+                        const expectedRate = (baseRate * pattern.accreditationMultiplier * 100).toFixed(1);
+                        console.log(`  - ${region}: ${actualRate}% (${patternName}, expected ~${expectedRate}%)`);
+                    }
+                });
+            }
+        });
+    } else if (regionalProfile === 'differentiated') {
         const ncrAccreds = accreditations.filter(a => {
             const facility = facilities.find(f => f.facility_id === a.facility_id);
             return facility && facility.region === "National Capital Region";
@@ -272,14 +311,60 @@ function generateClaims(accreditations, facilities, scenarioConfig, regionalProf
     
     console.log(`\nGenerating claims (target: ${targetClaimsCount} claims)...`);
     
-    // Select facilities that will file claims
+    // V3.1: Select filing facilities with regional bottleneck multipliers applied
     const accreditedIds = new Set(accreditations.map(a => a.facility_id));
     const accreditedFacilities = facilities.filter(f => accreditedIds.has(f.facility_id));
-    const numFilingFacilities = Math.round(accreditedFacilities.length * filingRate);
-    const filingFacilities = rng.shuffle(accreditedFacilities).slice(0, numFilingFacilities);
+    
+    // Group accredited facilities by region
+    const accreditedByRegion = {};
+    REGIONS.forEach(region => {
+        accreditedByRegion[region] = accreditedFacilities.filter(f => f.region === region);
+    });
+    
+    // V3.1: Apply regional filing multipliers
+    const filingFacilities = [];
+    REGIONS.forEach(region => {
+        const regionalAccredited = accreditedByRegion[region];
+        if (regionalAccredited.length === 0) return;
+        
+        let regionalFilingRate = filingRate;
+        
+        // V3.1: Apply claims-filing bottleneck multipliers
+        if (regionalProfile === 'bottleneck_mix' && bottleneckPatterns) {
+            Object.values(bottleneckPatterns).forEach(pattern => {
+                if (pattern.regions && pattern.regions.includes(region) && pattern.claimsMultiplier !== undefined) {
+                    regionalFilingRate = filingRate * pattern.claimsMultiplier;
+                }
+            });
+        }
+        
+        // Ensure rate stays in reasonable bounds
+        regionalFilingRate = Math.max(0.05, Math.min(0.95, regionalFilingRate));
+        
+        const numRegionalFiling = Math.round(regionalAccredited.length * regionalFilingRate);
+        const shuffled = rng.shuffle(regionalAccredited);
+        filingFacilities.push(...shuffled.slice(0, numRegionalFiling));
+    });
     
     console.log(`  - Accredited facilities: ${accreditedFacilities.length}`);
-    console.log(`  - Filing facilities: ${filingFacilities.length} (${(filingRate * 100).toFixed(1)}%)`);
+    console.log(`  - Filing facilities: ${filingFacilities.length} (${((filingFacilities.length / accreditedFacilities.length) * 100).toFixed(1)}%)`);
+    
+    // V3.1: Report claims-filing bottleneck regions
+    if (regionalProfile === 'bottleneck_mix' && bottleneckPatterns) {
+        Object.entries(bottleneckPatterns).forEach(([patternName, pattern]) => {
+            if (pattern.claimsMultiplier !== undefined && pattern.regions) {
+                pattern.regions.forEach(region => {
+                    const regionalAccredited = accreditedByRegion[region];
+                    const regionalFiling = filingFacilities.filter(f => f.region === region);
+                    if (regionalAccredited && regionalAccredited.length > 0) {
+                        const actualRate = (regionalFiling.length / regionalAccredited.length * 100).toFixed(1);
+                        const expectedRate = (filingRate * pattern.claimsMultiplier * 100).toFixed(1);
+                        console.log(`  - ${region}: ${actualRate}% filing (${patternName}, expected ~${expectedRate}%)`);
+                    }
+                });
+            }
+        });
+    }
     
     // V3: Select facilities that will receive NO payments (10% of filing facilities)
     const facilityPaymentRate = config.claimsProcessing.paymentProcessing.facilitiesWithoutPayment.rate;
@@ -298,6 +383,7 @@ function generateClaims(accreditations, facilities, scenarioConfig, regionalProf
     const serviceDistribution = scenarioConfig.serviceTypeDistribution;
     
     // V3: Analysis cutoff date for time-since-approval calculations
+    // V3.1: Use this as genuine snapshot boundary
     const analysisCutoffDate = new Date(2025, 6, 15); // July 15, 2025
     
     filingFacilities.forEach((facility, facilityIndex) => {
@@ -470,7 +556,9 @@ function generateClaims(accreditations, facilities, scenarioConfig, regionalProf
                 approvedAmount = Math.round(billedAmount * reimbursementRatio * variation);
                 
                 // V3: Calculate days since approval (for approved-but-unpaid reporting)
-                daysSinceApproval = Math.floor((analysisCutoffDate - adjudicationDate) / (1000 * 60 * 60 * 24));
+                // V3.1: Only calculate if approved before cutoff
+                const approvalBeforeCutoff = adjudicationDate <= analysisCutoffDate;
+                daysSinceApproval = approvalBeforeCutoff ? Math.floor((analysisCutoffDate - adjudicationDate) / (1000 * 60 * 60 * 24)) : null;
                 
                 // V3: Force no payment if facility is in no-payment group
                 if (facilityNoPayments) {
@@ -500,38 +588,55 @@ function generateClaims(accreditations, facilities, scenarioConfig, regionalProf
                         
                     } else if (paymentRoll < adjustedApprovedButUnpaidRate + paymentProcessing.partialPaymentRate) {
                         // Partial payment
-                        status = "partial_payment";
-                        
                         const paymentDelay = rng.nextInt(
                             paymentProcessing.paymentDelayDays.minimum,
                             paymentProcessing.paymentDelayDays.maximum
                         );
                         const paymentDateObj = new Date(adjudicationDate);
                         paymentDateObj.setDate(paymentDateObj.getDate() + paymentDelay);
-                        paymentDate = paymentDateObj.toISOString().split('T')[0];
                         
-                        // Partial payment (70% of approved amount)
-                        disbursedAmount = Math.round(approvedAmount * paymentProcessing.illustrativePartialPaymentRatio);
-                        paymentStatus = "partial";
-                        daysSinceApproval = null;  // Has payment, so not "awaiting" payment
+                        // V3.1: Enforce cutoff - payment must be before analysis date
+                        if (paymentDateObj <= analysisCutoffDate) {
+                            status = "partial_payment";
+                            paymentDate = paymentDateObj.toISOString().split('T')[0];
+                            // Partial payment (70% of approved amount)
+                            disbursedAmount = Math.round(approvedAmount * paymentProcessing.illustrativePartialPaymentRatio);
+                            paymentStatus = "partial";
+                            daysSinceApproval = null;  // Has payment, so not "awaiting" payment
+                        } else {
+                            // Payment would occur after cutoff - treat as pending
+                            status = "approved";
+                            paymentDate = null;
+                            disbursedAmount = null;
+                            paymentStatus = "pending";
+                            // Keep daysSinceApproval from above
+                        }
                         
                     } else {
                         // Full payment - 100% of approved amount
-                        status = "paid";
-                        
-                        // Stage 5: Payment (5-45 days after approval)
                         const paymentDelay = rng.nextInt(
                             paymentProcessing.paymentDelayDays.minimum,
                             paymentProcessing.paymentDelayDays.maximum
                         );
                         const paymentDateObj = new Date(adjudicationDate);
                         paymentDateObj.setDate(paymentDateObj.getDate() + paymentDelay);
-                        paymentDate = paymentDateObj.toISOString().split('T')[0];
                         
-                        // Fully paid claims receive 100% of approved amount
-                        disbursedAmount = approvedAmount;
-                        paymentStatus = "paid_full";
-                        daysSinceApproval = null;  // Has payment, so not "awaiting" payment
+                        // V3.1: Enforce cutoff - payment must be before analysis date
+                        if (paymentDateObj <= analysisCutoffDate) {
+                            status = "paid";
+                            paymentDate = paymentDateObj.toISOString().split('T')[0];
+                            // Fully paid claims receive 100% of approved amount
+                            disbursedAmount = approvedAmount;
+                            paymentStatus = "paid_full";
+                            daysSinceApproval = null;  // Has payment, so not "awaiting" payment
+                        } else {
+                            // Payment would occur after cutoff - treat as pending
+                            status = "approved";
+                            paymentDate = null;
+                            disbursedAmount = null;
+                            paymentStatus = "pending";
+                            // Keep daysSinceApproval from above
+                        }
                     }
                 }
                 

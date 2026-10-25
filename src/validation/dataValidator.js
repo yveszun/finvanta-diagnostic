@@ -58,6 +58,7 @@ export class DataValidator {
     this.validateUniqueness(facilities, accreditations, claims);
     this.validateReferences(facilities, accreditations, claims);
     this.validateChronology(accreditations, claims);
+    this.validateTemporalFields(claims);  // V3.1: Validate temporal fields
     this.validateServiceCompliance(facilities, accreditations, claims);
     this.validatePaymentLogic(claims);
     this.validateFinancialConsistency(claims);
@@ -254,14 +255,125 @@ export class DataValidator {
       }
     }
 
-    // Claim IDs
+    // Claim IDs - V3.1: Strengthen with detailed duplicate reporting
     if (claims && claims.length > 0) {
       const claimIds = claims.map(c => c.claim_id).filter(id => id);
       const uniqueClaimIds = new Set(claimIds);
       if (claimIds.length !== uniqueClaimIds.size) {
+        // Find actual duplicates
+        const claimIdCounts = {};
+        claimIds.forEach(id => {
+          claimIdCounts[id] = (claimIdCounts[id] || 0) + 1;
+        });
+        const duplicates = Object.entries(claimIdCounts)
+          .filter(([id, count]) => count > 1)
+          .map(([id, count]) => ({ claim_id: id, occurrences: count }));
+        
         this.addError('CRITICAL', 'DUPLICATE_CLAIM_IDS',
-          `Found ${claimIds.length - uniqueClaimIds.size} duplicate claim IDs`);
+          `Found ${duplicates.length} duplicate claim IDs (${claimIds.length - uniqueClaimIds.size} total duplicates)`,
+          duplicates.slice(0, 5));
       }
+    }
+  }
+
+  /**
+   * V3.1: Validate temporal fields (analysis_cutoff_date, days_pending, days_since_approval)
+   */
+  validateTemporalFields(claims) {
+    if (!claims || claims.length === 0) return;
+
+    const issues = [];
+    let analysisCutoffDate = null;
+
+    claims.forEach((claim, idx) => {
+      // V3.1: Check analysis_cutoff_date consistency
+      if (claim.analysis_cutoff_date) {
+        if (analysisCutoffDate === null) {
+          analysisCutoffDate = claim.analysis_cutoff_date;
+        } else if (claim.analysis_cutoff_date !== analysisCutoffDate) {
+          issues.push({
+            claim_id: claim.claim_id,
+            issue: 'inconsistent_cutoff_date',
+            expected: analysisCutoffDate,
+            actual: claim.analysis_cutoff_date
+          });
+        }
+        
+        // V3.1: Ensure no events after cutoff are counted as completed
+        const cutoff = new Date(claim.analysis_cutoff_date);
+        if (claim.payment_date) {
+          const paymentDate = new Date(claim.payment_date);
+          if (paymentDate > cutoff) {
+            issues.push({
+              claim_id: claim.claim_id,
+              issue: 'payment_after_cutoff',
+              payment_date: claim.payment_date,
+              cutoff_date: claim.analysis_cutoff_date
+            });
+          }
+        }
+      }
+
+      // V3.1: Validate days_since_approval calculation
+      if (claim.days_since_approval !== null && claim.days_since_approval !== undefined) {
+        if (claim.status !== 'approved' || claim.payment_date !== null) {
+          issues.push({
+            claim_id: claim.claim_id,
+            issue: 'days_since_approval_inappropriate',
+            status: claim.status,
+            note: 'days_since_approval should only be set for approved-unpaid claims'
+          });
+        }
+        
+        // Verify calculation if we have dates
+        if (claim.approval_date && claim.analysis_cutoff_date) {
+          const approvalDate = new Date(claim.approval_date);
+          const cutoffDate = new Date(claim.analysis_cutoff_date);
+          const expectedDays = Math.floor((cutoffDate - approvalDate) / (1000 * 60 * 60 * 24));
+          
+          if (expectedDays < 0) {
+            issues.push({
+              claim_id: claim.claim_id,
+              issue: 'negative_days_since_approval',
+              calculated: expectedDays,
+              stored: claim.days_since_approval
+            });
+          } else if (Math.abs(expectedDays - claim.days_since_approval) > 1) {
+            issues.push({
+              claim_id: claim.claim_id,
+              issue: 'days_since_approval_mismatch',
+              calculated: expectedDays,
+              stored: claim.days_since_approval
+            });
+          }
+        }
+      }
+
+      // V3.1: Validate days_pending for pending claims
+      if (claim.days_pending !== null && claim.days_pending !== undefined) {
+        if (claim.status !== 'pending_acceptance' && claim.status !== 'pending_adjudication') {
+          issues.push({
+            claim_id: claim.claim_id,
+            issue: 'days_pending_inappropriate',
+            status: claim.status,
+            note: 'days_pending should only be set for pending claims'
+          });
+        }
+        
+        if (claim.days_pending < 0) {
+          issues.push({
+            claim_id: claim.claim_id,
+            issue: 'negative_days_pending',
+            value: claim.days_pending
+          });
+        }
+      }
+    });
+
+    if (issues.length > 0) {
+      this.addError('ERROR', 'TEMPORAL_FIELD_VALIDATION_FAILED',
+        `Found ${issues.length} temporal field validation issues`,
+        issues.slice(0, 10));
     }
   }
 

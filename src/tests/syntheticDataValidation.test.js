@@ -108,7 +108,8 @@ describe('Synthetic Data Validation', () => {
 
         it('all claims should have valid statuses', () => {
           const claims = dataByScenario[scenario].claims;
-          const validStatuses = ['submitted', 'accepted', 'adjudicated', 'approved', 'paid', 'denied', 'partial_payment'];
+          // V3.1: Include pending statuses
+          const validStatuses = ['submitted', 'accepted', 'adjudicated', 'approved', 'paid', 'denied', 'partial_payment', 'pending_acceptance', 'pending_adjudication'];
           
           claims.forEach(claim => {
             expect(
@@ -167,10 +168,27 @@ describe('Synthetic Data Validation', () => {
           
           claims.forEach(claim => {
             const submission = new Date(claim.submission_date);
-            const acceptance = new Date(claim.acceptance_date);
-            const adjudication = new Date(claim.adjudication_date);
             
+            // V3.1: Handle pending claims that don't have all dates yet
+            if (claim.status === 'pending_acceptance') {
+              // Pending acceptance: only has submission date
+              expect(claim.acceptance_date).toBeNull();
+              expect(claim.adjudication_date).toBeNull();
+              expect(claim.approval_date).toBeNull();
+              return;
+            }
+            
+            const acceptance = new Date(claim.acceptance_date);
             expect(acceptance >= submission, `Claim ${claim.claim_id}: acceptance before submission`).toBe(true);
+            
+            if (claim.status === 'pending_adjudication') {
+              // Pending adjudication: has submission and acceptance, but not adjudication
+              expect(claim.adjudication_date).toBeNull();
+              expect(claim.approval_date).toBeNull();
+              return;
+            }
+            
+            const adjudication = new Date(claim.adjudication_date);
             expect(adjudication >= acceptance, `Claim ${claim.claim_id}: adjudication before acceptance`).toBe(true);
             
             if (claim.approval_date) {
