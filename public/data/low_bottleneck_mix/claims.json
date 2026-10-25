@@ -18,7 +18,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000002",
@@ -39,7 +39,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 25,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000003",
@@ -60,7 +60,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000004",
@@ -81,7 +81,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000005",
@@ -102,7 +102,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 8,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000006",
@@ -123,7 +123,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000007",
@@ -144,7 +144,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000008",
@@ -165,7 +165,8 @@
     "status": "pending_adjudication",
     "payment_status": "not_applicable",
     "denial_reason": null,
-    "days_pending": 22
+    "days_pending": 22,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000009",
@@ -186,7 +187,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000010",
@@ -207,7 +208,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 13,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000011",
@@ -228,7 +229,8 @@
     "status": "pending_adjudication",
     "payment_status": "not_applicable",
     "denial_reason": null,
-    "days_pending": 31
+    "days_pending": 31,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000012",
@@ -249,7 +251,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000013",
@@ -270,7 +272,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 7,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000014",
@@ -291,7 +293,7 @@
     "status": "partial_payment",
     "payment_status": "partial",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000015",
@@ -313,7 +315,7 @@
     "payment_status": "denied",
     "denial_reason": "Patient eligibility could not be verified",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000016",
@@ -334,7 +336,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000017",
@@ -355,7 +357,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 29,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000018",
@@ -376,7 +378,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 23,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000019",
@@ -397,7 +399,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 16,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000020",
@@ -418,7 +420,8 @@
     "status": "pending_adjudication",
     "payment_status": "not_applicable",
     "denial_reason": null,
-    "days_pending": 37
+    "days_pending": 37,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000021",
@@ -439,7 +442,8 @@
     "status": "pending_acceptance",
     "payment_status": "not_applicable",
     "denial_reason": null,
-    "days_pending": 23
+    "days_pending": 23,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000022",
@@ -461,7 +465,7 @@
     "payment_status": "denied",
     "denial_reason": "Patient eligibility could not be verified",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000023",
@@ -482,7 +486,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 7,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000024",
@@ -504,7 +508,7 @@
     "payment_status": "denied",
     "denial_reason": "Exceeded package ceiling",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000025",
@@ -525,7 +529,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 9,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000026",
@@ -546,7 +550,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 11,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000027",
@@ -568,7 +572,7 @@
     "payment_status": "denied",
     "denial_reason": "Facility not accredited for this service type",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000028",
@@ -589,7 +593,8 @@
     "status": "pending_acceptance",
     "payment_status": "not_applicable",
     "denial_reason": null,
-    "days_pending": 24
+    "days_pending": 24,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000029",
@@ -610,7 +615,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 0,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000030",
@@ -631,7 +636,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 17,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000031",
@@ -652,7 +657,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 36,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000032",
@@ -673,7 +678,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 16,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000033",
@@ -694,7 +699,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 12,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000034",
@@ -715,7 +720,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 25,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000035",
@@ -736,7 +741,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000036",
@@ -758,7 +763,7 @@
     "payment_status": "denied",
     "denial_reason": "Service date outside coverage period",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000037",
@@ -779,7 +784,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000038",
@@ -800,7 +805,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 3,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000039",
@@ -821,7 +826,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000040",
@@ -842,7 +847,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000041",
@@ -863,7 +868,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000042",
@@ -885,7 +890,7 @@
     "payment_status": "denied",
     "denial_reason": "Duplicate claim",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000043",
@@ -906,7 +911,8 @@
     "status": "pending_acceptance",
     "payment_status": "not_applicable",
     "denial_reason": null,
-    "days_pending": 70
+    "days_pending": 70,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000044",
@@ -927,7 +933,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 28,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000045",
@@ -948,7 +954,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000046",
@@ -969,7 +975,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000047",
@@ -990,7 +996,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000048",
@@ -1011,7 +1017,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000049",
@@ -1032,7 +1038,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 19,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000050",
@@ -1053,7 +1059,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000051",
@@ -1074,7 +1080,8 @@
     "status": "pending_acceptance",
     "payment_status": "not_applicable",
     "denial_reason": null,
-    "days_pending": 103
+    "days_pending": 103,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000052",
@@ -1096,7 +1103,7 @@
     "payment_status": "denied",
     "denial_reason": "Incomplete documentation",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000053",
@@ -1117,7 +1124,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000054",
@@ -1138,7 +1145,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000055",
@@ -1159,7 +1166,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000056",
@@ -1180,7 +1187,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000057",
@@ -1201,7 +1208,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 100,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000058",
@@ -1222,7 +1229,8 @@
     "status": "pending_acceptance",
     "payment_status": "not_applicable",
     "denial_reason": null,
-    "days_pending": 34
+    "days_pending": 34,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000059",
@@ -1243,7 +1251,8 @@
     "status": "pending_adjudication",
     "payment_status": "not_applicable",
     "denial_reason": null,
-    "days_pending": 109
+    "days_pending": 109,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000060",
@@ -1264,7 +1273,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000061",
@@ -1285,7 +1294,8 @@
     "status": "pending_adjudication",
     "payment_status": "not_applicable",
     "denial_reason": null,
-    "days_pending": 15
+    "days_pending": 15,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000062",
@@ -1307,7 +1317,7 @@
     "payment_status": "denied",
     "denial_reason": "Service date outside coverage period",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000063",
@@ -1328,7 +1338,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 9,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000064",
@@ -1349,7 +1359,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000065",
@@ -1370,7 +1380,8 @@
     "status": "pending_adjudication",
     "payment_status": "not_applicable",
     "denial_reason": null,
-    "days_pending": 133
+    "days_pending": 133,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000066",
@@ -1391,7 +1402,8 @@
     "status": "pending_adjudication",
     "payment_status": "not_applicable",
     "denial_reason": null,
-    "days_pending": 121
+    "days_pending": 121,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000067",
@@ -1412,7 +1424,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000068",
@@ -1433,7 +1445,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000069",
@@ -1454,7 +1466,8 @@
     "status": "pending_adjudication",
     "payment_status": "not_applicable",
     "denial_reason": null,
-    "days_pending": 137
+    "days_pending": 137,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000070",
@@ -1475,7 +1488,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000071",
@@ -1496,7 +1509,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 56,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000072",
@@ -1517,7 +1530,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 26,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000073",
@@ -1538,7 +1551,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 69,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000074",
@@ -1559,7 +1572,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 59,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000075",
@@ -1580,7 +1593,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 78,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000076",
@@ -1601,7 +1614,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 4,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000077",
@@ -1622,7 +1635,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 9,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000078",
@@ -1643,7 +1656,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 56,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000079",
@@ -1664,7 +1677,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 36,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000080",
@@ -1685,7 +1698,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 21,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000081",
@@ -1707,7 +1720,7 @@
     "payment_status": "denied",
     "denial_reason": "Service date outside coverage period",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000082",
@@ -1728,7 +1741,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 25,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000083",
@@ -1749,7 +1762,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 14,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000084",
@@ -1770,7 +1783,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000085",
@@ -1791,7 +1804,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000086",
@@ -1812,7 +1825,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 20,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000087",
@@ -1833,7 +1846,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000088",
@@ -1854,7 +1867,8 @@
     "status": "pending_adjudication",
     "payment_status": "not_applicable",
     "denial_reason": null,
-    "days_pending": 12
+    "days_pending": 12,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000089",
@@ -1875,7 +1889,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 15,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000090",
@@ -1896,7 +1910,7 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000091",
@@ -1917,7 +1931,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 9,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000092",
@@ -1938,7 +1952,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 6,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000093",
@@ -1959,7 +1973,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 8,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000094",
@@ -1980,7 +1994,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 13,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000095",
@@ -2001,7 +2015,7 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 3,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000096",
@@ -2013,105 +2027,127 @@
     "billed_amount": 9000,
     "submission_date": "2025-07-05",
     "acceptance_date": "2025-07-08",
-    "adjudication_date": "2025-07-16",
+    "adjudication_date": null,
     "approval_date": null,
     "approved_amount": null,
     "payment_date": null,
     "disbursed_amount": null,
     "outstanding_balance": null,
-    "status": "denied",
-    "payment_status": "denied",
-    "denial_reason": "Patient eligibility could not be verified",
-    "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "status": "pending_adjudication",
+    "payment_status": "not_applicable",
+    "denial_reason": null,
+    "days_pending": 7,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000097",
     "facility_id": "FAC_REG_0867",
-    "patient_id": "PAT_376030",
-    "service_date": "2025-06-29",
+    "patient_id": "PAT_379679",
+    "service_date": "2025-06-30",
     "service_type": "general",
     "service_code": "PSYCH_CONSULT_GEN",
     "billed_amount": 9000,
-    "submission_date": "2025-07-04",
-    "acceptance_date": "2025-07-05",
-    "adjudication_date": "2025-07-08",
-    "approval_date": "2025-07-08",
-    "approved_amount": 7816,
+    "submission_date": "2025-07-03",
+    "acceptance_date": "2025-07-06",
+    "adjudication_date": "2025-07-11",
+    "approval_date": "2025-07-11",
+    "approved_amount": 7049,
     "payment_date": null,
     "disbursed_amount": null,
-    "outstanding_balance": 7816,
+    "outstanding_balance": 7049,
     "status": "approved",
     "payment_status": "pending",
-    "days_since_approval": 7,
-    "analysis_cutoff_date": "2025-07-15"
+    "days_since_approval": 4,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000098",
     "facility_id": "FAC_REG_0867",
-    "patient_id": "PAT_692183",
+    "patient_id": "PAT_707727",
     "service_date": "2025-06-29",
     "service_type": "general",
     "service_code": "PSYCH_CONSULT_GEN",
     "billed_amount": 9000,
-    "submission_date": "2025-06-30",
-    "acceptance_date": "2025-07-02",
-    "adjudication_date": "2025-07-08",
-    "approval_date": "2025-07-08",
-    "approved_amount": 7114,
+    "submission_date": "2025-07-03",
+    "acceptance_date": "2025-07-05",
+    "adjudication_date": "2025-07-14",
+    "approval_date": "2025-07-14",
+    "approved_amount": 8056,
     "payment_date": null,
     "disbursed_amount": null,
-    "outstanding_balance": 7114,
+    "outstanding_balance": 8056,
     "status": "approved",
     "payment_status": "pending",
-    "days_since_approval": 7,
-    "analysis_cutoff_date": "2025-07-15"
+    "days_since_approval": 1,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000099",
     "facility_id": "FAC_REG_0867",
-    "patient_id": "PAT_552550",
-    "service_date": "2025-06-29",
+    "patient_id": "PAT_825733",
+    "service_date": "2025-06-27",
     "service_type": "general",
     "service_code": "PSYCH_CONSULT_GEN",
     "billed_amount": 9000,
-    "submission_date": "2025-06-30",
-    "acceptance_date": "2025-07-03",
-    "adjudication_date": "2025-07-12",
-    "approval_date": "2025-07-12",
-    "approved_amount": 7786,
+    "submission_date": "2025-06-29",
+    "acceptance_date": "2025-07-01",
+    "adjudication_date": null,
+    "approval_date": null,
+    "approved_amount": null,
     "payment_date": null,
     "disbursed_amount": null,
-    "outstanding_balance": 7786,
-    "status": "approved",
-    "payment_status": "pending",
-    "days_since_approval": 3,
-    "analysis_cutoff_date": "2025-07-15"
+    "outstanding_balance": null,
+    "status": "pending_adjudication",
+    "payment_status": "not_applicable",
+    "denial_reason": null,
+    "days_pending": 14,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
     "claim_id": "CLM_2025_000100",
     "facility_id": "FAC_REG_0867",
-    "patient_id": "PAT_225042",
-    "service_date": "2025-06-28",
+    "patient_id": "PAT_902283",
+    "service_date": "2025-06-29",
     "service_type": "general",
     "service_code": "PSYCH_CONSULT_GEN",
     "billed_amount": 9000,
     "submission_date": "2025-07-01",
     "acceptance_date": "2025-07-03",
-    "adjudication_date": "2025-07-11",
+    "adjudication_date": "2025-07-07",
+    "approval_date": "2025-07-07",
+    "approved_amount": 7098,
+    "payment_date": null,
+    "disbursed_amount": null,
+    "outstanding_balance": 7098,
+    "status": "approved",
+    "payment_status": "pending",
+    "days_since_approval": 8,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
+  },
+  {
+    "claim_id": "CLM_2025_000101",
+    "facility_id": "FAC_REG_0987",
+    "patient_id": "PAT_730385",
+    "service_date": "2025-04-15",
+    "service_type": "specialty",
+    "service_code": "PSYCH_CONSULT_SPEC",
+    "billed_amount": 16000,
+    "submission_date": "2025-04-20",
+    "acceptance_date": null,
+    "adjudication_date": null,
     "approval_date": null,
     "approved_amount": null,
     "payment_date": null,
     "disbursed_amount": null,
     "outstanding_balance": null,
-    "status": "denied",
-    "payment_status": "denied",
-    "denial_reason": "Incomplete documentation",
-    "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "status": "pending_acceptance",
+    "payment_status": "not_applicable",
+    "denial_reason": null,
+    "days_pending": 86,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000101",
+    "claim_id": "CLM_2025_000102",
     "facility_id": "FAC_REG_0987",
     "patient_id": "PAT_229942",
     "service_date": "2025-06-03",
@@ -2129,10 +2165,10 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000102",
+    "claim_id": "CLM_2025_000103",
     "facility_id": "FAC_REG_0987",
     "patient_id": "PAT_627488",
     "service_date": "2025-03-25",
@@ -2150,10 +2186,11 @@
     "status": "pending_adjudication",
     "payment_status": "not_applicable",
     "denial_reason": null,
-    "days_pending": 108
+    "days_pending": 108,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000103",
+    "claim_id": "CLM_2025_000104",
     "facility_id": "FAC_REG_0987",
     "patient_id": "PAT_286589",
     "service_date": "2025-05-25",
@@ -2171,10 +2208,10 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000104",
+    "claim_id": "CLM_2025_000105",
     "facility_id": "FAC_REG_0987",
     "patient_id": "PAT_314691",
     "service_date": "2025-06-30",
@@ -2192,10 +2229,10 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 1,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000105",
+    "claim_id": "CLM_2025_000106",
     "facility_id": "FAC_REG_0987",
     "patient_id": "PAT_709459",
     "service_date": "2025-06-15",
@@ -2213,10 +2250,11 @@
     "status": "pending_acceptance",
     "payment_status": "not_applicable",
     "denial_reason": null,
-    "days_pending": 26
+    "days_pending": 26,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000106",
+    "claim_id": "CLM_2025_000107",
     "facility_id": "FAC_REG_0987",
     "patient_id": "PAT_720127",
     "service_date": "2025-06-10",
@@ -2234,10 +2272,11 @@
     "status": "pending_adjudication",
     "payment_status": "not_applicable",
     "denial_reason": null,
-    "days_pending": 28
+    "days_pending": 28,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000107",
+    "claim_id": "CLM_2025_000108",
     "facility_id": "FAC_REG_0987",
     "patient_id": "PAT_270895",
     "service_date": "2025-02-24",
@@ -2256,10 +2295,10 @@
     "payment_status": "denied",
     "denial_reason": "Facility not accredited for this service type",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000108",
+    "claim_id": "CLM_2025_000109",
     "facility_id": "FAC_REG_0987",
     "patient_id": "PAT_294776",
     "service_date": "2025-04-08",
@@ -2277,10 +2316,10 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 91,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000109",
+    "claim_id": "CLM_2025_000110",
     "facility_id": "FAC_REG_0987",
     "patient_id": "PAT_610698",
     "service_date": "2025-05-06",
@@ -2298,31 +2337,31 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000110",
-    "facility_id": "FAC_REG_0987",
+    "claim_id": "CLM_2025_000111",
+    "facility_id": "FAC_REG_1083",
     "patient_id": "PAT_130466",
-    "service_date": "2025-06-09",
+    "service_date": "2025-06-14",
     "service_type": "general",
     "service_code": "PSYCH_CONSULT_GEN",
     "billed_amount": 9000,
-    "submission_date": "2025-06-10",
-    "acceptance_date": "2025-06-13",
-    "adjudication_date": "2025-06-18",
-    "approval_date": "2025-06-18",
+    "submission_date": "2025-06-15",
+    "acceptance_date": "2025-06-18",
+    "adjudication_date": "2025-06-23",
+    "approval_date": "2025-06-23",
     "approved_amount": 7536,
-    "payment_date": "2025-06-30",
+    "payment_date": "2025-07-05",
     "disbursed_amount": 5275,
     "outstanding_balance": 2261,
     "status": "partial_payment",
     "payment_status": "partial",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000111",
+    "claim_id": "CLM_2025_000112",
     "facility_id": "FAC_REG_1083",
     "patient_id": "PAT_616902",
     "service_date": "2025-04-27",
@@ -2340,10 +2379,10 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000112",
+    "claim_id": "CLM_2025_000113",
     "facility_id": "FAC_REG_1083",
     "patient_id": "PAT_870003",
     "service_date": "2025-06-20",
@@ -2362,10 +2401,10 @@
     "payment_status": "denied",
     "denial_reason": "Patient eligibility could not be verified",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000113",
+    "claim_id": "CLM_2025_000114",
     "facility_id": "FAC_REG_1083",
     "patient_id": "PAT_136940",
     "service_date": "2025-06-19",
@@ -2384,10 +2423,10 @@
     "payment_status": "denied",
     "denial_reason": "Service not covered under benefit package",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000114",
+    "claim_id": "CLM_2025_000115",
     "facility_id": "FAC_REG_1083",
     "patient_id": "PAT_269618",
     "service_date": "2025-06-17",
@@ -2406,10 +2445,10 @@
     "payment_status": "denied",
     "denial_reason": "Service date outside coverage period",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000115",
+    "claim_id": "CLM_2025_000116",
     "facility_id": "FAC_REG_1083",
     "patient_id": "PAT_256925",
     "service_date": "2025-03-18",
@@ -2427,10 +2466,10 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000116",
+    "claim_id": "CLM_2025_000117",
     "facility_id": "FAC_REG_1083",
     "patient_id": "PAT_593360",
     "service_date": "2025-04-27",
@@ -2448,10 +2487,10 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000117",
+    "claim_id": "CLM_2025_000118",
     "facility_id": "FAC_REG_1083",
     "patient_id": "PAT_696462",
     "service_date": "2025-06-03",
@@ -2469,10 +2508,10 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000118",
+    "claim_id": "CLM_2025_000119",
     "facility_id": "FAC_REG_1083",
     "patient_id": "PAT_266230",
     "service_date": "2025-05-31",
@@ -2490,10 +2529,10 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 33,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000119",
+    "claim_id": "CLM_2025_000120",
     "facility_id": "FAC_REG_1083",
     "patient_id": "PAT_594421",
     "service_date": "2025-04-26",
@@ -2511,17 +2550,18 @@
     "status": "pending_adjudication",
     "payment_status": "not_applicable",
     "denial_reason": null,
-    "days_pending": 73
+    "days_pending": 73,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000120",
-    "facility_id": "FAC_REG_1083",
+    "claim_id": "CLM_2025_000121",
+    "facility_id": "FAC_REG_1292",
     "patient_id": "PAT_608383",
-    "service_date": "2025-05-01",
+    "service_date": "2025-05-12",
     "service_type": "general",
     "service_code": "PSYCH_CONSULT_GEN",
     "billed_amount": 9000,
-    "submission_date": "2025-05-02",
+    "submission_date": "2025-05-13",
     "acceptance_date": null,
     "adjudication_date": null,
     "approval_date": null,
@@ -2532,10 +2572,11 @@
     "status": "pending_acceptance",
     "payment_status": "not_applicable",
     "denial_reason": null,
-    "days_pending": 74
+    "days_pending": 63,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000121",
+    "claim_id": "CLM_2025_000122",
     "facility_id": "FAC_REG_1292",
     "patient_id": "PAT_916967",
     "service_date": "2025-06-12",
@@ -2553,10 +2594,10 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 23,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000122",
+    "claim_id": "CLM_2025_000123",
     "facility_id": "FAC_REG_1292",
     "patient_id": "PAT_506180",
     "service_date": "2025-06-24",
@@ -2574,10 +2615,10 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 5,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000123",
+    "claim_id": "CLM_2025_000124",
     "facility_id": "FAC_REG_1292",
     "patient_id": "PAT_306361",
     "service_date": "2025-04-23",
@@ -2595,10 +2636,10 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 68,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000124",
+    "claim_id": "CLM_2025_000125",
     "facility_id": "FAC_REG_1292",
     "patient_id": "PAT_192422",
     "service_date": "2025-06-08",
@@ -2617,10 +2658,10 @@
     "payment_status": "denied",
     "denial_reason": "Service date outside coverage period",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000125",
+    "claim_id": "CLM_2025_000126",
     "facility_id": "FAC_REG_1292",
     "patient_id": "PAT_399637",
     "service_date": "2025-05-07",
@@ -2638,10 +2679,10 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 60,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000126",
+    "claim_id": "CLM_2025_000127",
     "facility_id": "FAC_REG_1292",
     "patient_id": "PAT_707226",
     "service_date": "2025-06-13",
@@ -2659,10 +2700,11 @@
     "status": "pending_acceptance",
     "payment_status": "not_applicable",
     "denial_reason": null,
-    "days_pending": 29
+    "days_pending": 29,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000127",
+    "claim_id": "CLM_2025_000128",
     "facility_id": "FAC_REG_1292",
     "patient_id": "PAT_829699",
     "service_date": "2025-04-25",
@@ -2681,10 +2723,10 @@
     "payment_status": "denied",
     "denial_reason": "Service not covered under benefit package",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000128",
+    "claim_id": "CLM_2025_000129",
     "facility_id": "FAC_REG_1292",
     "patient_id": "PAT_176728",
     "service_date": "2025-04-11",
@@ -2702,10 +2744,10 @@
     "status": "partial_payment",
     "payment_status": "partial",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000129",
+    "claim_id": "CLM_2025_000130",
     "facility_id": "FAC_REG_1292",
     "patient_id": "PAT_704830",
     "service_date": "2025-05-23",
@@ -2724,31 +2766,31 @@
     "payment_status": "denied",
     "denial_reason": "Exceeded package ceiling",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000130",
-    "facility_id": "FAC_REG_1292",
+    "claim_id": "CLM_2025_000131",
+    "facility_id": "FAC_CAR_1380",
     "patient_id": "PAT_700933",
-    "service_date": "2025-06-23",
+    "service_date": "2025-06-27",
     "service_type": "general",
     "service_code": "PSYCH_CONSULT_GEN",
     "billed_amount": 9000,
-    "submission_date": "2025-06-26",
-    "acceptance_date": "2025-06-29",
-    "adjudication_date": "2025-07-05",
-    "approval_date": "2025-07-05",
+    "submission_date": "2025-06-30",
+    "acceptance_date": "2025-07-03",
+    "adjudication_date": "2025-07-09",
+    "approval_date": "2025-07-09",
     "approved_amount": 7002,
     "payment_date": null,
     "disbursed_amount": null,
     "outstanding_balance": 7002,
     "status": "approved",
     "payment_status": "pending",
-    "days_since_approval": 10,
-    "analysis_cutoff_date": "2025-07-15"
+    "days_since_approval": 6,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000131",
+    "claim_id": "CLM_2025_000132",
     "facility_id": "FAC_CAR_1380",
     "patient_id": "PAT_186300",
     "service_date": "2025-05-26",
@@ -2766,10 +2808,10 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 40,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000132",
+    "claim_id": "CLM_2025_000133",
     "facility_id": "FAC_CAR_1380",
     "patient_id": "PAT_668657",
     "service_date": "2025-06-22",
@@ -2787,10 +2829,10 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000133",
+    "claim_id": "CLM_2025_000134",
     "facility_id": "FAC_CAR_1380",
     "patient_id": "PAT_941203",
     "service_date": "2025-06-10",
@@ -2808,10 +2850,10 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 19,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000134",
+    "claim_id": "CLM_2025_000135",
     "facility_id": "FAC_CAR_1380",
     "patient_id": "PAT_480416",
     "service_date": "2025-06-25",
@@ -2829,10 +2871,11 @@
     "status": "pending_adjudication",
     "payment_status": "not_applicable",
     "denial_reason": null,
-    "days_pending": 13
+    "days_pending": 13,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000135",
+    "claim_id": "CLM_2025_000136",
     "facility_id": "FAC_CAR_1380",
     "patient_id": "PAT_642989",
     "service_date": "2025-06-22",
@@ -2850,10 +2893,10 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 7,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000136",
+    "claim_id": "CLM_2025_000137",
     "facility_id": "FAC_CAR_1380",
     "patient_id": "PAT_312758",
     "service_date": "2025-06-01",
@@ -2871,10 +2914,10 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000137",
+    "claim_id": "CLM_2025_000138",
     "facility_id": "FAC_CAR_1380",
     "patient_id": "PAT_949193",
     "service_date": "2025-06-27",
@@ -2892,10 +2935,11 @@
     "status": "pending_adjudication",
     "payment_status": "not_applicable",
     "denial_reason": null,
-    "days_pending": 16
+    "days_pending": 16,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000138",
+    "claim_id": "CLM_2025_000139",
     "facility_id": "FAC_CAR_1380",
     "patient_id": "PAT_169868",
     "service_date": "2025-06-18",
@@ -2913,10 +2957,11 @@
     "status": "pending_acceptance",
     "payment_status": "not_applicable",
     "denial_reason": null,
-    "days_pending": 25
+    "days_pending": 25,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000139",
+    "claim_id": "CLM_2025_000140",
     "facility_id": "FAC_CAR_1380",
     "patient_id": "PAT_452295",
     "service_date": "2025-06-15",
@@ -2934,31 +2979,31 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000140",
-    "facility_id": "FAC_CAR_1380",
+    "claim_id": "CLM_2025_000141",
+    "facility_id": "FAC_BAR_1459",
     "patient_id": "PAT_322064",
-    "service_date": "2025-06-26",
+    "service_date": "2025-06-28",
     "service_type": "general",
     "service_code": "PSYCH_CONSULT_GEN",
     "billed_amount": 9000,
-    "submission_date": "2025-06-27",
-    "acceptance_date": "2025-06-29",
-    "adjudication_date": "2025-07-09",
-    "approval_date": "2025-07-09",
+    "submission_date": "2025-06-29",
+    "acceptance_date": "2025-07-01",
+    "adjudication_date": "2025-07-11",
+    "approval_date": "2025-07-11",
     "approved_amount": 6892,
     "payment_date": null,
     "disbursed_amount": null,
     "outstanding_balance": 6892,
     "status": "approved",
     "payment_status": "pending",
-    "days_since_approval": 6,
-    "analysis_cutoff_date": "2025-07-15"
+    "days_since_approval": 4,
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000141",
+    "claim_id": "CLM_2025_000142",
     "facility_id": "FAC_BAR_1459",
     "patient_id": "PAT_400254",
     "service_date": "2025-06-29",
@@ -2976,10 +3021,10 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 6,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000142",
+    "claim_id": "CLM_2025_000143",
     "facility_id": "FAC_BAR_1459",
     "patient_id": "PAT_144880",
     "service_date": "2025-06-15",
@@ -2997,10 +3042,10 @@
     "status": "partial_payment",
     "payment_status": "partial",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000143",
+    "claim_id": "CLM_2025_000144",
     "facility_id": "FAC_BAR_1459",
     "patient_id": "PAT_320204",
     "service_date": "2025-06-12",
@@ -3018,10 +3063,10 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 15,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000144",
+    "claim_id": "CLM_2025_000145",
     "facility_id": "FAC_BAR_1459",
     "patient_id": "PAT_762195",
     "service_date": "2025-06-12",
@@ -3039,10 +3084,10 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 16,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000145",
+    "claim_id": "CLM_2025_000146",
     "facility_id": "FAC_BAR_1459",
     "patient_id": "PAT_998256",
     "service_date": "2025-06-25",
@@ -3060,10 +3105,10 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 13,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000146",
+    "claim_id": "CLM_2025_000147",
     "facility_id": "FAC_BAR_1459",
     "patient_id": "PAT_726358",
     "service_date": "2025-06-23",
@@ -3081,10 +3126,10 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 14,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000147",
+    "claim_id": "CLM_2025_000148",
     "facility_id": "FAC_BAR_1459",
     "patient_id": "PAT_821126",
     "service_date": "2025-06-14",
@@ -3102,10 +3147,10 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 15,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000148",
+    "claim_id": "CLM_2025_000149",
     "facility_id": "FAC_BAR_1459",
     "patient_id": "PAT_982561",
     "service_date": "2025-06-10",
@@ -3123,10 +3168,10 @@
     "status": "paid",
     "payment_status": "paid_full",
     "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   },
   {
-    "claim_id": "CLM_2025_000149",
+    "claim_id": "CLM_2025_000150",
     "facility_id": "FAC_BAR_1459",
     "patient_id": "PAT_910663",
     "service_date": "2025-06-28",
@@ -3144,27 +3189,6 @@
     "status": "approved",
     "payment_status": "pending",
     "days_since_approval": 5,
-    "analysis_cutoff_date": "2025-07-15"
-  },
-  {
-    "claim_id": "CLM_2025_000150",
-    "facility_id": "FAC_BAR_1459",
-    "patient_id": "PAT_529826",
-    "service_date": "2025-06-09",
-    "service_type": "general",
-    "service_code": "PSYCH_CONSULT_GEN",
-    "billed_amount": 9000,
-    "submission_date": "2025-06-11",
-    "acceptance_date": "2025-06-12",
-    "adjudication_date": "2025-06-18",
-    "approval_date": "2025-06-18",
-    "approved_amount": 7464,
-    "payment_date": "2025-07-05",
-    "disbursed_amount": 5225,
-    "outstanding_balance": 2239,
-    "status": "partial_payment",
-    "payment_status": "partial",
-    "days_since_approval": null,
-    "analysis_cutoff_date": "2025-07-15"
+    "analysis_cutoff_date": "2025-07-15T00:00:00.000Z"
   }
 ]

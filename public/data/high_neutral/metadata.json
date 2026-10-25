@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "generatedDate": "2026-10-25T16:27:03.838Z",
+  "generatedDate": "2026-10-25T17:09:02.844Z",
   "generatedBy": "Finvanta Data Generator V2",
   "scenario": "high",
   "regionalProfile": "neutral",
@@ -12,14 +12,14 @@
     "accreditations": 528,
     "claims": 2000,
     "eligibleFacilities": 1500,
-    "filingFacilities": 370,
-    "approvedClaims": 1551,
-    "deniedClaims": 94
+    "filingFacilities": 374,
+    "approvedClaims": 818,
+    "deniedClaims": 85
   },
   "financials": {
-    "totalBilled": 21486000,
-    "totalApproved": 17420842,
-    "totalDisbursed": 14749833,
+    "totalBilled": 21318000,
+    "totalApproved": 15119477,
+    "totalDisbursed": 7797719,
     "currency": "PHP",
     "note": "Billed = package ceiling; Approved = adjudicated amount; Disbursed = actual payment"
   },

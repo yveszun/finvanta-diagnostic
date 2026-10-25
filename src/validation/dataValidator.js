@@ -277,7 +277,7 @@ export class DataValidator {
   }
 
   /**
-   * V3.1: Validate temporal fields (analysis_cutoff_date, days_pending, days_since_approval)
+   * V3.2: Validate temporal fields with comprehensive cutoff enforcement
    */
   validateTemporalFields(claims) {
     if (!claims || claims.length === 0) return;
@@ -286,40 +286,105 @@ export class DataValidator {
     let analysisCutoffDate = null;
 
     claims.forEach((claim, idx) => {
-      // V3.1: Check analysis_cutoff_date consistency
-      if (claim.analysis_cutoff_date) {
-        if (analysisCutoffDate === null) {
-          analysisCutoffDate = claim.analysis_cutoff_date;
-        } else if (claim.analysis_cutoff_date !== analysisCutoffDate) {
+      // V3.2: MANDATORY - All claims must have analysis_cutoff_date
+      if (!claim.analysis_cutoff_date) {
+        issues.push({
+          claim_id: claim.claim_id,
+          issue: 'missing_cutoff_date',
+          severity: 'BLOCKING',
+          note: 'All claims must have analysis_cutoff_date'
+        });
+        return; // Can't validate further without cutoff date
+      }
+
+      // V3.2: Check analysis_cutoff_date consistency
+      if (analysisCutoffDate === null) {
+        analysisCutoffDate = claim.analysis_cutoff_date;
+      } else if (claim.analysis_cutoff_date !== analysisCutoffDate) {
+        issues.push({
+          claim_id: claim.claim_id,
+          issue: 'inconsistent_cutoff_date',
+          severity: 'BLOCKING',
+          expected: analysisCutoffDate,
+          actual: claim.analysis_cutoff_date
+        });
+      }
+      
+      const cutoff = new Date(claim.analysis_cutoff_date);
+      
+      // V3.2: BLOCKING - Validate no events after cutoff for each stage
+      if (claim.submission_date) {
+        const submissionDate = new Date(claim.submission_date);
+        if (submissionDate > cutoff) {
           issues.push({
             claim_id: claim.claim_id,
-            issue: 'inconsistent_cutoff_date',
-            expected: analysisCutoffDate,
-            actual: claim.analysis_cutoff_date
+            issue: 'submission_after_cutoff',
+            severity: 'BLOCKING',
+            submission_date: claim.submission_date,
+            cutoff_date: claim.analysis_cutoff_date
           });
         }
-        
-        // V3.1: Ensure no events after cutoff are counted as completed
-        const cutoff = new Date(claim.analysis_cutoff_date);
-        if (claim.payment_date) {
-          const paymentDate = new Date(claim.payment_date);
-          if (paymentDate > cutoff) {
-            issues.push({
-              claim_id: claim.claim_id,
-              issue: 'payment_after_cutoff',
-              payment_date: claim.payment_date,
-              cutoff_date: claim.analysis_cutoff_date
-            });
-          }
+      }
+      
+      if (claim.acceptance_date) {
+        const acceptanceDate = new Date(claim.acceptance_date);
+        if (acceptanceDate > cutoff) {
+          issues.push({
+            claim_id: claim.claim_id,
+            issue: 'acceptance_after_cutoff',
+            severity: 'BLOCKING',
+            acceptance_date: claim.acceptance_date,
+            cutoff_date: claim.analysis_cutoff_date
+          });
+        }
+      }
+      
+      if (claim.adjudication_date) {
+        const adjudicationDate = new Date(claim.adjudication_date);
+        if (adjudicationDate > cutoff) {
+          issues.push({
+            claim_id: claim.claim_id,
+            issue: 'adjudication_after_cutoff',
+            severity: 'BLOCKING',
+            adjudication_date: claim.adjudication_date,
+            cutoff_date: claim.analysis_cutoff_date
+          });
+        }
+      }
+      
+      if (claim.approval_date) {
+        const approvalDate = new Date(claim.approval_date);
+        if (approvalDate > cutoff) {
+          issues.push({
+            claim_id: claim.claim_id,
+            issue: 'approval_after_cutoff',
+            severity: 'BLOCKING',
+            approval_date: claim.approval_date,
+            cutoff_date: claim.analysis_cutoff_date
+          });
+        }
+      }
+      
+      if (claim.payment_date) {
+        const paymentDate = new Date(claim.payment_date);
+        if (paymentDate > cutoff) {
+          issues.push({
+            claim_id: claim.claim_id,
+            issue: 'payment_after_cutoff',
+            severity: 'BLOCKING',
+            payment_date: claim.payment_date,
+            cutoff_date: claim.analysis_cutoff_date
+          });
         }
       }
 
-      // V3.1: Validate days_since_approval calculation
+      // V3.2: Validate days_since_approval calculation
       if (claim.days_since_approval !== null && claim.days_since_approval !== undefined) {
         if (claim.status !== 'approved' || claim.payment_date !== null) {
           issues.push({
             claim_id: claim.claim_id,
             issue: 'days_since_approval_inappropriate',
+            severity: 'WARNING',
             status: claim.status,
             note: 'days_since_approval should only be set for approved-unpaid claims'
           });
@@ -335,6 +400,7 @@ export class DataValidator {
             issues.push({
               claim_id: claim.claim_id,
               issue: 'negative_days_since_approval',
+              severity: 'BLOCKING',
               calculated: expectedDays,
               stored: claim.days_since_approval
             });
@@ -342,6 +408,7 @@ export class DataValidator {
             issues.push({
               claim_id: claim.claim_id,
               issue: 'days_since_approval_mismatch',
+              severity: 'WARNING',
               calculated: expectedDays,
               stored: claim.days_since_approval
             });
@@ -349,12 +416,13 @@ export class DataValidator {
         }
       }
 
-      // V3.1: Validate days_pending for pending claims
+      // V3.2: Validate days_pending for pending claims
       if (claim.days_pending !== null && claim.days_pending !== undefined) {
         if (claim.status !== 'pending_acceptance' && claim.status !== 'pending_adjudication') {
           issues.push({
             claim_id: claim.claim_id,
             issue: 'days_pending_inappropriate',
+            severity: 'WARNING',
             status: claim.status,
             note: 'days_pending should only be set for pending claims'
           });
@@ -364,16 +432,111 @@ export class DataValidator {
           issues.push({
             claim_id: claim.claim_id,
             issue: 'negative_days_pending',
+            severity: 'BLOCKING',
             value: claim.days_pending
+          });
+        }
+        
+        // Verify calculation
+        if (claim.status === 'pending_acceptance' && claim.submission_date) {
+          const submissionDate = new Date(claim.submission_date);
+          const expectedDays = Math.floor((cutoff - submissionDate) / (1000 * 60 * 60 * 24));
+          if (Math.abs(expectedDays - claim.days_pending) > 1) {
+            issues.push({
+              claim_id: claim.claim_id,
+              issue: 'days_pending_mismatch',
+              severity: 'WARNING',
+              calculated: expectedDays,
+              stored: claim.days_pending
+            });
+          }
+        } else if (claim.status === 'pending_adjudication' && claim.acceptance_date) {
+          const acceptanceDate = new Date(claim.acceptance_date);
+          const expectedDays = Math.floor((cutoff - acceptanceDate) / (1000 * 60 * 60 * 24));
+          if (Math.abs(expectedDays - claim.days_pending) > 1) {
+            issues.push({
+              claim_id: claim.claim_id,
+              issue: 'days_pending_mismatch',
+              severity: 'WARNING',
+              calculated: expectedDays,
+              stored: claim.days_pending
+            });
+          }
+        }
+      }
+      
+      // V3.2: Validate chronologically impossible stage transitions
+      if (claim.acceptance_date && claim.submission_date) {
+        const submissionDate = new Date(claim.submission_date);
+        const acceptanceDate = new Date(claim.acceptance_date);
+        if (acceptanceDate < submissionDate) {
+          issues.push({
+            claim_id: claim.claim_id,
+            issue: 'acceptance_before_submission',
+            severity: 'BLOCKING',
+            submission_date: claim.submission_date,
+            acceptance_date: claim.acceptance_date
+          });
+        }
+      }
+      
+      if (claim.adjudication_date && claim.acceptance_date) {
+        const acceptanceDate = new Date(claim.acceptance_date);
+        const adjudicationDate = new Date(claim.adjudication_date);
+        if (adjudicationDate < acceptanceDate) {
+          issues.push({
+            claim_id: claim.claim_id,
+            issue: 'adjudication_before_acceptance',
+            severity: 'BLOCKING',
+            acceptance_date: claim.acceptance_date,
+            adjudication_date: claim.adjudication_date
+          });
+        }
+      }
+      
+      if (claim.approval_date && claim.adjudication_date) {
+        const adjudicationDate = new Date(claim.adjudication_date);
+        const approvalDate = new Date(claim.approval_date);
+        if (approvalDate < adjudicationDate) {
+          issues.push({
+            claim_id: claim.claim_id,
+            issue: 'approval_before_adjudication',
+            severity: 'BLOCKING',
+            adjudication_date: claim.adjudication_date,
+            approval_date: claim.approval_date
+          });
+        }
+      }
+      
+      if (claim.payment_date && claim.approval_date) {
+        const approvalDate = new Date(claim.approval_date);
+        const paymentDate = new Date(claim.payment_date);
+        if (paymentDate < approvalDate) {
+          issues.push({
+            claim_id: claim.claim_id,
+            issue: 'payment_before_approval',
+            severity: 'BLOCKING',
+            approval_date: claim.approval_date,
+            payment_date: claim.payment_date
           });
         }
       }
     });
 
-    if (issues.length > 0) {
-      this.addError('ERROR', 'TEMPORAL_FIELD_VALIDATION_FAILED',
-        `Found ${issues.length} temporal field validation issues`,
-        issues.slice(0, 10));
+    // Separate blocking vs warning issues
+    const blockingIssues = issues.filter(i => i.severity === 'BLOCKING');
+    const warningIssues = issues.filter(i => i.severity === 'WARNING');
+
+    if (blockingIssues.length > 0) {
+      this.addError('CRITICAL', 'TEMPORAL_VALIDATION_BLOCKING',
+        `Found ${blockingIssues.length} BLOCKING temporal validation issues`,
+        blockingIssues.slice(0, 10));
+    }
+    
+    if (warningIssues.length > 0) {
+      this.addError('WARNING', 'TEMPORAL_VALIDATION_WARNING',
+        `Found ${warningIssues.length} temporal field warnings`,
+        warningIssues.slice(0, 10));
     }
   }
 

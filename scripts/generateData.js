@@ -492,7 +492,8 @@ function generateClaims(accreditations, facilities, scenarioConfig, regionalProf
                     status: "pending_acceptance",
                     payment_status: "not_applicable",
                     denial_reason: null,
-                    days_pending: Math.floor((analysisCutoffDate - submissionDate) / (1000 * 60 * 60 * 24))
+                    days_pending: Math.floor((analysisCutoffDate - submissionDate) / (1000 * 60 * 60 * 24)),
+                    analysis_cutoff_date: analysisCutoffDate.toISOString()  // V3.2: Mandatory for all claims
                 });
                 claimCounter++;
                 continue;
@@ -505,6 +506,35 @@ function generateClaims(accreditations, facilities, scenarioConfig, regionalProf
             // V3: Determine if claim is pending at adjudication stage
             const basePendingAdjudicationRate = pendingRates.pendingAdjudicationRate * regionalPendingAdjudicationMult;
             const isPendingAdjudication = rng.next() < basePendingAdjudicationRate;
+            
+            // V3.2: Check if acceptance would occur after cutoff
+            if (acceptanceDate > analysisCutoffDate) {
+                // Acceptance would be after cutoff - claim stays pending_acceptance
+                claims.push({
+                    claim_id: claimId,
+                    facility_id: facility.facility_id,
+                    patient_id: patientId,
+                    service_date: serviceDate.toISOString().split('T')[0],
+                    service_type: serviceType,
+                    service_code: serviceConfig.code,
+                    billed_amount: billedAmount,
+                    submission_date: submissionDate.toISOString().split('T')[0],
+                    acceptance_date: null,  // Not yet accepted by cutoff
+                    adjudication_date: null,
+                    approval_date: null,
+                    approved_amount: null,
+                    payment_date: null,
+                    disbursed_amount: null,
+                    outstanding_balance: null,
+                    status: "pending_acceptance",
+                    payment_status: "not_applicable",
+                    denial_reason: null,
+                    days_pending: Math.floor((analysisCutoffDate - submissionDate) / (1000 * 60 * 60 * 24)),
+                    analysis_cutoff_date: analysisCutoffDate.toISOString()  // V3.2: Mandatory for all claims
+                });
+                claimCounter++;
+                continue;
+            }
             
             if (isPendingAdjudication) {
                 // Claim stuck at pending adjudication
@@ -527,7 +557,8 @@ function generateClaims(accreditations, facilities, scenarioConfig, regionalProf
                     status: "pending_adjudication",
                     payment_status: "not_applicable",
                     denial_reason: null,
-                    days_pending: Math.floor((analysisCutoffDate - acceptanceDate) / (1000 * 60 * 60 * 24))
+                    days_pending: Math.floor((analysisCutoffDate - acceptanceDate) / (1000 * 60 * 60 * 24)),
+                    analysis_cutoff_date: analysisCutoffDate.toISOString()  // V3.2: Mandatory for all claims
                 });
                 claimCounter++;
                 continue;
@@ -536,6 +567,35 @@ function generateClaims(accreditations, facilities, scenarioConfig, regionalProf
             // Stage 3: Adjudication (3-10 days after acceptance)
             const adjudicationDate = new Date(acceptanceDate);
             adjudicationDate.setDate(adjudicationDate.getDate() + rng.nextInt(3, 10));
+            
+            // V3.2: Check if adjudication would occur after cutoff
+            if (adjudicationDate > analysisCutoffDate) {
+                // Adjudication would be after cutoff - claim stays pending_adjudication
+                claims.push({
+                    claim_id: claimId,
+                    facility_id: facility.facility_id,
+                    patient_id: patientId,
+                    service_date: serviceDate.toISOString().split('T')[0],
+                    service_type: serviceType,
+                    service_code: serviceConfig.code,
+                    billed_amount: billedAmount,
+                    submission_date: submissionDate.toISOString().split('T')[0],
+                    acceptance_date: acceptanceDate.toISOString().split('T')[0],
+                    adjudication_date: null,  // Not yet adjudicated by cutoff
+                    approval_date: null,
+                    approved_amount: null,
+                    payment_date: null,
+                    disbursed_amount: null,
+                    outstanding_balance: null,
+                    status: "pending_adjudication",
+                    payment_status: "not_applicable",
+                    denial_reason: null,
+                    days_pending: Math.floor((analysisCutoffDate - acceptanceDate) / (1000 * 60 * 60 * 24)),
+                    analysis_cutoff_date: analysisCutoffDate.toISOString()  // V3.2: Mandatory for all claims
+                });
+                claimCounter++;
+                continue;
+            }
             
             // Determine if claim is approved or denied
             const isApproved = rng.next() < approvalRate;
@@ -681,7 +741,7 @@ function generateClaims(accreditations, facilities, scenarioConfig, regionalProf
                 payment_status: paymentStatus,
                 denial_reason: denialReason,
                 days_since_approval: daysSinceApproval,  // V3: For approved-but-unpaid reporting
-                analysis_cutoff_date: analysisCutoffDate.toISOString().split('T')[0]  // V3: Reference date
+                analysis_cutoff_date: analysisCutoffDate.toISOString()  // V3.2: Mandatory for all claims
             });
             
             claimCounter++;

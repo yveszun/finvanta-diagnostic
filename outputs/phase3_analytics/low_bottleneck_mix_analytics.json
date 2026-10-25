@@ -1,6 +1,6 @@
 {
   "scenario": "Low Activity",
-  "timestamp": "2026-10-25T16:57:36.848Z",
+  "timestamp": "2026-10-25T17:09:11.815Z",
   "validationResults": {
     "valid": true,
     "errorCount": 0,
@@ -57,52 +57,52 @@
         "note": "All claims with claim IDs"
       },
       "stage1a_pending_acceptance": {
-        "count": 9,
-        "numerator": 9,
+        "count": 10,
+        "numerator": 10,
         "denominator": 150,
-        "rate": "6.0%",
-        "avgDaysPending": "45.3 days",
+        "rate": "6.7%",
+        "avgDaysPending": "48.3 days",
         "label": "Pending acceptance (administrative review)",
         "note": "V3: Claims awaiting acceptance"
       },
       "stage2_accepted": {
-        "count": 141,
-        "numerator": 141,
+        "count": 140,
+        "numerator": 140,
         "denominator": 150,
-        "rate": "94.0%",
+        "rate": "93.3%",
         "label": "Accepted for processing",
         "note": "Claims with acceptance_date"
       },
       "stage2a_pending_adjudication": {
-        "count": 14,
-        "numerator": 14,
-        "denominator": 141,
-        "rate": "9.9%",
-        "avgDaysPending": "61.1 days",
+        "count": 16,
+        "numerator": 16,
+        "denominator": 140,
+        "rate": "11.4%",
+        "avgDaysPending": "54.8 days",
         "label": "Pending adjudication (awaiting review)",
         "note": "V3: Claims awaiting adjudication"
       },
       "stage3_adjudicated": {
-        "count": 127,
-        "numerator": 127,
-        "denominator": 141,
-        "rate": "90.1%",
+        "count": 124,
+        "numerator": 124,
+        "denominator": 140,
+        "rate": "88.6%",
         "label": "Adjudicated",
         "note": "Claims with adjudication_date"
       },
       "stage4_approved": {
-        "count": 109,
-        "numerator": 109,
-        "denominator": 127,
-        "rate": "85.8%",
+        "count": 108,
+        "numerator": 108,
+        "denominator": 124,
+        "rate": "87.1%",
         "label": "Approved for payment",
         "note": "Includes paid, partial_payment, and approved (unpaid) statuses"
       },
       "stage5_paid": {
-        "count": 47,
-        "numerator": 47,
-        "denominator": 109,
-        "rate": "43.1%",
+        "count": 46,
+        "numerator": 46,
+        "denominator": 108,
+        "rate": "42.6%",
         "label": "Receiving payment",
         "note": "Includes both fully paid and partially paid"
       },
@@ -113,80 +113,80 @@
           "label": "Fully paid"
         },
         "partiallyPaid": {
-          "count": 5,
-          "percentage": "3.3%",
+          "count": 4,
+          "percentage": "2.7%",
           "label": "Partially paid"
         },
         "approvedUnpaid": {
           "count": 62,
           "percentage": "41.3%",
           "label": "Approved but payment pending",
-          "avgDaysSinceApproval": "22.6 days (as of 2025-07-15)"
+          "avgDaysSinceApproval": "22.5 days (as of 2025-07-15T00:00:00.000Z)"
         },
         "denied": {
-          "count": 18,
-          "percentage": "12.0%",
+          "count": 16,
+          "percentage": "10.7%",
           "label": "Denied"
         },
         "pendingEarlierStages": {
-          "count": 23,
-          "percentage": "15.3%",
+          "count": 26,
+          "percentage": "17.3%",
           "label": "Pending at earlier stages (acceptance/adjudication)"
         }
       },
       "summary": {
         "totalClaims": 150,
         "distinctClaims": 150,
-        "reachedPayment": 47,
+        "reachedPayment": 46,
         "awaitingPayment": 62,
-        "denied": 18,
-        "pendingProcessing": 23
+        "denied": 16,
+        "pendingProcessing": 26
       }
     },
     "financialCalculations": {
       "totalBilled": {
-        "amount": 1546000,
-        "formatted": "₱1,546,000",
+        "amount": 1553000,
+        "formatted": "₱1,553,000",
         "label": "Total billed"
       },
       "totalApproved": {
-        "amount": 943643,
-        "formatted": "₱943,643",
-        "percentage": "61.0%",
+        "amount": 935666,
+        "formatted": "₱935,666",
+        "percentage": "60.2%",
         "label": "Total approved",
         "note": "Percentage of billed amount"
       },
       "totalDisbursed": {
-        "amount": 410270,
-        "formatted": "₱410,270",
-        "percentage": "43.5%",
+        "amount": 405045,
+        "formatted": "₱405,045",
+        "percentage": "43.3%",
         "label": "Total disbursed",
         "note": "Percentage of approved amount"
       },
       "totalOutstanding": {
-        "amount": 533373,
-        "formatted": "₱533,373",
-        "percentage": "56.5%",
+        "amount": 530621,
+        "formatted": "₱530,621",
+        "percentage": "56.7%",
         "label": "Total outstanding",
         "note": "Approved but not yet disbursed"
       },
       "approvalToDisbursementRatio": {
-        "ratio": "43.5%",
+        "ratio": "43.3%",
         "label": "Approval-to-disbursement ratio",
         "note": "Percentage of approved amounts that have been disbursed"
       },
       "paymentProcessingTime": {
-        "average": "20.7 days",
-        "median": "17.0 days",
-        "sampleSize": 47,
-        "missingDates": 103,
+        "average": "20.8 days",
+        "median": "16.5 days",
+        "sampleSize": 46,
+        "missingDates": 104,
         "label": "Payment processing time (approval to payment)",
-        "note": "Excludes claims with missing dates. Reports missingness: 103 claims"
+        "note": "Excludes claims with missing dates. Reports missingness: 104 claims"
       },
       "reconciliation": {
         "reconciles": true,
-        "expected": 533373,
-        "actual": 533373,
+        "expected": 530621,
+        "actual": 530621,
         "difference": 0,
         "status": "PASS",
         "note": "Outstanding should equal Approved minus Disbursed"
@@ -195,20 +195,20 @@
     "serviceSpecificAnalysis": {
       "general": {
         "accreditedFacilities": 69,
-        "claims": 122,
+        "claims": 121,
         "financial": {
-          "billed": "₱1,098,000",
-          "approved": "₱671,104",
-          "disbursed": "₱264,238"
+          "billed": "₱1,089,000",
+          "approved": "₱663,127",
+          "disbursed": "₱259,013"
         },
         "label": "General mental health consultation",
         "serviceCode": "PSYCH_CONSULT_GEN"
       },
       "specialty": {
         "accreditedFacilities": 30,
-        "claims": 28,
+        "claims": 29,
         "financial": {
-          "billed": "₱448,000",
+          "billed": "₱464,000",
           "approved": "₱272,539",
           "disbursed": "₱146,032"
         },
@@ -328,7 +328,7 @@
           "claims": 10,
           "financial": {
             "billed": "₱90,000",
-            "approved": "₱59,387",
+            "approved": "₱58,874",
             "disbursed": "₱0"
           }
         },
@@ -349,9 +349,9 @@
           "accreditationRate": "4.5%",
           "claims": 10,
           "financial": {
-            "billed": "₱111,000",
-            "approved": "₱60,266",
-            "disbursed": "₱41,388"
+            "billed": "₱118,000",
+            "approved": "₱52,730",
+            "disbursed": "₱36,113"
           }
         },
         "Region XI (Davao Region)": {
@@ -361,8 +361,8 @@
           "claims": 10,
           "financial": {
             "billed": "₱132,000",
-            "approved": "₱60,895",
-            "disbursed": "₱47,754"
+            "approved": "₱68,431",
+            "disbursed": "₱53,029"
           }
         },
         "Region XII (SOCCSKSARGEN)": {
@@ -383,7 +383,7 @@
           "claims": 10,
           "financial": {
             "billed": "₱125,000",
-            "approved": "₱59,706",
+            "approved": "₱52,704",
             "disbursed": "₱5,335"
           }
         },
@@ -394,7 +394,7 @@
           "claims": 10,
           "financial": {
             "billed": "₱132,000",
-            "approved": "₱75,330",
+            "approved": "₱75,440",
             "disbursed": "₱35,773"
           }
         },
@@ -405,8 +405,8 @@
           "claims": 10,
           "financial": {
             "billed": "₱125,000",
-            "approved": "₱106,719",
-            "disbursed": "₱28,765"
+            "approved": "₱106,147",
+            "disbursed": "₱23,540"
           }
         }
       },
@@ -419,7 +419,7 @@
       ]
     },
     "metadata": {
-      "timestamp": "2026-10-25T16:57:36.847Z",
+      "timestamp": "2026-10-25T17:09:11.814Z",
       "disclaimer": "All data is synthetic for diagnostic purposes. Does not represent actual PhilHealth performance.",
       "validation": {
         "hasErrors": false,
