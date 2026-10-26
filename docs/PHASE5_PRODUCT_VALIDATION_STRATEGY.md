@@ -232,7 +232,134 @@ Health insurance institutions introducing new benefit packages often struggle to
 
 ---
 
-## B. Target Users
+## B. Target Users and Institutional Roles
+
+### B.0 Institutional Roles Framework
+
+**Critical Distinction:** Finvanta's adoption requires buy-in from multiple stakeholder groups with different needs, authority, and influence.
+
+**Do NOT assume that operational users, institutional champions, budget holders, and data custodians are the same people.**
+
+---
+
+#### Role 1: Primary Operational Users
+
+**Who They Are:**
+- Staff who would use Finvanta regularly for benefit implementation monitoring
+- Analysts, program managers, or monitoring teams who review facility, claims, and reimbursement data
+- Individuals responsible for identifying implementation problems and recommending interventions
+
+**Their Needs:**
+- Dashboard must address real information gaps they experience
+- Must fit into existing workflow without excessive friction
+- Must provide actionable insights they can act on or escalate
+- Must be more useful than current tools/reports
+
+**Their Authority:**
+- Can recommend tools but typically cannot procure or approve budgets
+- Can advocate to supervisors or department heads
+- May pilot tools informally but cannot authorize formal pilots
+- Limited influence over data governance or IT infrastructure decisions
+
+**Validation Evidence Needed:**
+- Do they correctly identify bottlenecks in decision-based exercises?
+- Do they articulate specific use cases and decisions?
+- Do they confirm dashboard addresses unmet needs (not duplicates existing tools)?
+- Would they actually use it if available (not just express polite interest)?
+
+**Hypothesis to Test:** Even if operational users find Finvanta useful, they may lack authority to secure adoption.
+
+---
+
+#### Role 2: Institutional Champions
+
+**Who They Are:**
+- Mid-to-senior leaders who recognize implementation monitoring challenges
+- Individuals with cross-functional visibility (benefit development, operations, finance)
+- People with influence over infrastructure, process, or tool decisions
+- Internal advocates who can navigate organizational politics
+
+**Their Needs:**
+- Evidence that current monitoring is insufficient (problem validation)
+- Clear value proposition for improved monitoring (what changes with better data)
+- Alignment with organizational priorities (benefit rollout, performance accountability)
+- Manageable risk (pilot scope, data security, resource requirements)
+
+**Their Authority:**
+- Can advocate to executive leadership or steering committees
+- Can facilitate pilot discussions across departments
+- Can coordinate data access conversations (though may not control final decision)
+- Influence (not direct authority) over budget and procurement
+
+**Validation Evidence Needed:**
+- Do they confirm bottleneck identification is a real institutional challenge?
+- Do they express willingness to advocate internally (not just "this looks interesting")?
+- Can they articulate what evidence would convince leadership to pilot?
+- Do they have credibility and influence within PhilHealth?
+
+**Hypothesis to Test:** Finding operational users is easier than finding champions willing to advocate.
+
+---
+
+#### Role 3: Budget and Procurement Decision-Makers
+
+**Who They Are:**
+- Department heads, directors, or executive leadership who approve budgets
+- Procurement officers who manage vendor selection and contracting
+- Finance teams who allocate resources to IT, analytics, or monitoring infrastructure
+- Decision-makers who control spending authority for software/tools
+
+**Their Needs:**
+- Business case for investment (ROI, impact on implementation performance)
+- Comparison to alternatives (build vs buy, existing tools vs new tool)
+- Budget fit (available funds, competing priorities, procurement cycles)
+- Risk assessment (vendor viability, security, long-term support)
+
+**Their Authority:**
+- Approve budgets and procurement decisions
+- Can greenlight pilots with resource allocation
+- Can deprioritize if not aligned with strategic goals
+- Final say on whether to proceed
+
+**Validation Evidence Needed:**
+- What is the procurement process? (RFP, budget approval levels, timelines)
+- What budget range would this require? (small tool vs major infrastructure)
+- What are competing priorities? (other monitoring initiatives, budget constraints)
+- What is the business case threshold for approval?
+
+**Hypothesis to Test:** Budget holders may not engage until operational users and champions validate the need.
+
+---
+
+#### Role 4: Data Custodians and Technical Gatekeepers
+
+**Who They Are:**
+- Data governance committees or data privacy officers
+- IT directors, database administrators, or infrastructure teams
+- Legal/compliance teams responsible for data-sharing agreements
+- Security teams assessing risk of external access or new tools
+
+**Their Needs:**
+- Data privacy and security compliance (anonymization, access controls)
+- Technical feasibility (data schema compatibility, API availability)
+- Governance precedent (have external tools been granted access before?)
+- Risk mitigation (data breaches, misuse, audit trails)
+
+**Their Authority:**
+- Control access to administrative data (facilities, claims, reimbursement)
+- Can block or delay pilot if data governance concerns unresolved
+- Set requirements for data-sharing agreements
+- Influence technical architecture decisions (on-premise vs cloud, APIs vs file exports)
+
+**Validation Evidence Needed:**
+- Who controls data access decisions? (committee, individual, department)
+- What is the data governance process? (request, review, approval timeline)
+- What precedents exist? (have other tools accessed this data?)
+- What are non-negotiable requirements? (anonymization, encryption, audit logs)
+
+**Hypothesis to Test:** Data access is a critical blocker; positive user feedback does NOT guarantee data access.
+
+---
 
 ### B.1 User Group 1: PhilHealth Benefit Development Teams
 
@@ -440,6 +567,41 @@ Health insurance institutions introducing new benefit packages often struggle to
 **Future Exploration:** DOH Program Managers and Local Health System Administrators
 - Defer until primary user needs are validated
 - May have different value propositions (coordination, equity focus)
+
+---
+
+### B.7 Critical Assumption: Operational Usefulness ≠ Institutional Demand
+
+**Finvanta may demonstrate operational usefulness without establishing institutional demand or a viable purchasing pathway.**
+
+**Scenario:**  
+- Operational users confirm dashboard addresses information gaps ✅
+- Users successfully complete decision-based exercises ✅
+- Users express willingness to use tool if available ✅  
+**BUT:**
+- No champions willing to advocate to leadership ❌
+- Budget holders have competing priorities ❌
+- Data custodians unwilling to grant access ❌
+- Procurement process prohibitively complex ❌
+
+**Result:** Strong user validation does NOT guarantee institutional adoption.
+
+**Implications for Phase 5:**
+1. **Target validation across roles:** Interview operational users AND champions AND (if possible) budget/data stakeholders
+2. **Distinguish types of evidence:** User feedback ≠ Champion commitment ≠ Budget approval
+3. **Assess institutional complexity early:** Map decision-making pathways, approval processes, data governance
+4. **Manage expectations:** High validation scores may indicate "useful if available" not "will be adopted"
+5. **Honest assessment:** If institutional barriers are insurmountable, operational usefulness is insufficient
+
+**Phase 5 validation must address:**
+- Problem validation (Do users struggle with bottleneck identification?) — **User interviews, Section 2**
+- Solution validation (Does dashboard help?) — **Demonstrations, user interviews**
+- Decision-making usefulness (Can users make better decisions?) — **Decision-based exercise (NEW)**
+- Champion feasibility (Will anyone advocate internally?) — **Institutional role mapping (NEW)**
+- Institutional adoption feasibility (Are barriers surmountable?) — **Data governance, procurement assessment**
+- Commercial viability (Is there a purchasing pathway?) — **Beyond Phase 5 scope**
+
+These are related but **separate dimensions**. Success on one does not imply success on others.
 
 ---
 

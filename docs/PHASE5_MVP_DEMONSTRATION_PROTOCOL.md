@@ -338,56 +338,249 @@ Do these recommendations seem useful? Are the thresholds (70% disbursement, 50 f
 
 ---
 
-## Section 5: Scenario Comparison (3-5 minutes)
+## Section 5: Decision-Based Exercise (5-8 minutes)
 
-**[Switch to HIGH scenario]**
+**Purpose:** Assess whether participants can identify bottlenecks, interpret evidence, and articulate decision-making steps based on dashboard insights
+
+**[Switch to HIGH scenario if not already displayed]**
+
+### HIGH Bottleneck Scenario Introduction
 
 ### Script
 
-"Let me now show you a different scenario—this one represents a more severe bottleneck pattern.
+"I'm now going to show you a specific scenario and ask you to work through a decision-making exercise.
+
+**Important reminder:** These are synthetic, fabricated numbers—not real PhilHealth data. I'm asking you to imagine this represents a benefit program you're monitoring.
 
 **HIGH Bottleneck Scenario:**
-- 514 accredited facilities
-- ₱14.7M approved
-- ₱7.6M disbursed (only **51% disbursement ratio**)
-- **₱7.2M outstanding** (approved but not paid)
-- 66 facilities without payment
-- 43 claims partially paid
+- 514 accredited facilities (out of 1,500 eligible)
+- ₱14,746,459 approved by PhilHealth
+- ₱7,559,094 disbursed to facilities
+- ₱7,187,365 outstanding (approved but not yet paid)
+- Disbursement ratio: 51.3%
+- 66 facilities have approved claims but have received zero payments
+- 43 claims have been partially paid (not fully reimbursed)
 
-Compare this to the MODERATE scenario we just saw:
-- MODERATE: 60% disbursement, ₱5.8M outstanding
-- HIGH: 51% disbursement, ₱7.2M outstanding
+These numbers are entirely synthetic—created for demonstration purposes."
 
-In the HIGH scenario, the dashboard now triggers a **CRITICAL REIMBURSEMENT BOTTLENECK** alert.
-
-Notice how the recommendations escalate:
-- MODERATE scenario → 'Investigate reimbursement processes'
-- HIGH scenario → 'CRITICAL: Urgent action required. Substantial claims approved but not reimbursed.'
-
-The dashboard also flags:
-- 66 facilities without payment (vs 57 in MODERATE)
-- 43 partially paid claims (new alert)
-
-**Question for you:** If you saw this HIGH scenario for a benefit you were monitoring, what would you do? Who would you escalate this to? What additional information would you need?"
-
-### Key Points
-- Demonstrate scenario differences (MODERATE vs HIGH)
-- Show how recommendations escalate with severity
-- Ask participant to articulate decision-making based on scenario
-
-### Observation Notes
-- Does participant clearly distinguish MODERATE vs HIGH severity?
-- Does participant describe concrete actions they would take?
-- Does participant mention escalation paths or institutional processes?
-- Does participant identify information gaps (what else they'd need)?
+**[Give participant 30-60 seconds to review the dashboard]**
 
 ---
 
-**[Switch to LOW scenario]**
+### Task A: Identify the Primary Bottleneck
 
-### Script (Optional, if time permits)
+### Script
 
-"For completeness, here's a LOW bottleneck scenario:
+"Based on what you see in this dashboard, **what is the most important implementation bottleneck?**"
+
+**[Allow participant to respond without prompting]**
+
+**Facilitator Notes:**
+- Do NOT lead participant to "reimbursement bottleneck" answer
+- Record participant's exact phrasing
+- If participant identifies something other than reimbursement (e.g., low accreditation), note it without correcting
+
+**Observation Criteria:**
+- ✅ **Correctly identifies reimbursement/disbursement bottleneck** (e.g., "payment delays," "money not reaching facilities," "low disbursement ratio")
+- ⚠️ **Identifies related issue** (e.g., "facilities without payment," "partially paid claims") but doesn't explicitly name reimbursement bottleneck
+- ❌ **Identifies unrelated bottleneck** (e.g., "low accreditation," "few facilities claiming") when reimbursement is more severe
+- ❌ **Cannot identify any bottleneck** (confused or uncertain)
+
+---
+
+### Task B: Interpret the Evidence
+
+### Script
+
+"You mentioned [restate participant's answer]. **What evidence from the dashboard supports that interpretation?**"
+
+**[Allow participant to point to specific metrics]**
+
+**Facilitator Notes:**
+- Listen for which metrics participant references
+- Note whether participant distinguishes approved vs disbursed amounts
+- Note whether participant interprets metrics correctly
+
+**Observation Criteria:**
+- ✅ **Accurately interprets financial indicators:** References disbursement ratio (51.3%), outstanding amount (₱7.2M), or facilities without payment (66)
+- ✅ **Distinguishes approved vs disbursed:** Explicitly notes difference between PhilHealth approving claims (₱14.7M) and money actually reaching facilities (₱7.6M)
+- ⚠️ **Partially correct interpretation:** References relevant metrics but with minor misunderstanding
+- ❌ **Misinterprets metrics:** Confuses approval with payment, misreads percentages, or focuses on irrelevant indicators
+- ❌ **Cannot articulate evidence:** Relies on intuition without referencing specific dashboard metrics
+
+---
+
+### Task C: Prioritize Next Steps
+
+### Script
+
+"If you were responsible for monitoring this benefit package and saw these numbers, **which issue would you investigate first, and why?**"
+
+**[Allow participant to articulate reasoning]**
+
+**Facilitator Notes:**
+- Listen for decision-making logic (severity, impact, feasibility)
+- Note whether participant identifies realistic next steps
+- Note whether participant acknowledges limitations of dashboard data
+
+**Observation Criteria:**
+- ✅ **Articulates plausible investigative step:** (e.g., "I'd investigate why 66 facilities have no payments—is it a banking issue, documentation problem, or budget constraint?")
+- ✅ **Provides clear rationale:** Explains why this issue is prioritized (e.g., "Facilities without payment may stop participating")
+- ⚠️ **Vague next step:** (e.g., "I'd look into reimbursement") without specificity
+- ❌ **Unrealistic or inappropriate action:** (e.g., "I'd fire the finance team") without investigation
+- ❌ **Cannot articulate next step:** Uncertain what to do with the information
+
+---
+
+### Task D: Identify Missing Information
+
+### Script
+
+"Before recommending a specific intervention, **what additional information would you need that the dashboard doesn't currently show?**"
+
+**[Allow participant to identify information gaps]**
+
+**Facilitator Notes:**
+- Record specific requests for additional data or context
+- Note whether requests are reasonable vs out-of-scope (e.g., patient satisfaction data)
+- Assess whether participant recognizes dashboard's limitations
+
+**Observation Criteria:**
+- ✅ **Identifies specific, actionable gaps:** (e.g., "I'd need to know WHY payments are delayed—budget issues, banking problems, documentation errors?")
+- ✅ **Recognizes causality limitation:** Acknowledges dashboard shows WHAT (low disbursement) but not WHY
+- ⚠️ **Identifies relevant but out-of-scope gaps:** (e.g., patient outcomes, clinical quality) that dashboard can't address
+- ❌ **Cannot identify gaps:** Believes dashboard provides sufficient information for intervention
+- ❌ **Misunderstands dashboard scope:** Expects dashboard to show causal explanations or prescriptive solutions
+
+---
+
+### Scenario Comparison (Optional, if time permits - 2 minutes)
+
+**[Switch to MODERATE scenario]**
+
+### Script
+
+"For comparison, here's a different scenario with a **MODERATE** bottleneck pattern:
+- 60% disbursement ratio (vs 51% in HIGH)
+- ₱5.8M outstanding (vs ₱7.2M in HIGH)
+- 57 facilities without payment (vs 66 in HIGH)
+
+**Quick question:** How would your response differ between the HIGH and MODERATE scenarios? Would you prioritize differently?"
+
+**Observation Criteria:**
+- ✅ Distinguishes severity levels and adjusts prioritization accordingly
+- ⚠️ Treats both scenarios similarly (doesn't calibrate urgency)
+- ❌ Cannot distinguish scenarios or articulate different responses
+
+---
+
+## Observation Framework: Decision-Based Performance
+
+### For Each Participant, Document:
+
+**1. Bottleneck Identification (Task A):**
+- [ ] Correctly identified reimbursement/disbursement bottleneck
+- [ ] Identified related issue (facilities without payment, partial payments)
+- [ ] Identified unrelated bottleneck (accreditation, claiming)
+- [ ] Could not identify any bottleneck
+
+**2. Evidence Interpretation (Task B):**
+- [ ] Accurately interpreted financial indicators (disbursement ratio, outstanding, facilities without payment)
+- [ ] Distinguished approved vs disbursed amounts
+- [ ] Referenced specific metrics to support interpretation
+- [ ] Misinterpreted metrics or provided vague evidence
+
+**3. Approved vs Paid Distinction:**
+- [ ] Clearly understands difference between approved (PhilHealth commitment) and disbursed (actual payment)
+- [ ] Somewhat understands distinction but not fully clear
+- [ ] Confuses or conflates approved and paid
+
+**4. Plausible Next Step (Task C):**
+- [ ] Articulated specific, realistic investigative action
+- [ ] Provided clear rationale for prioritization
+- [ ] Vague or generic next step
+- [ ] Unrealistic action or no articulated next step
+
+**5. Information Gaps (Task D):**
+- [ ] Identified specific, actionable missing information (e.g., reasons for delay)
+- [ ] Recognized causality limitation (dashboard shows WHAT, not WHY)
+- [ ] Identified out-of-scope gaps (patient outcomes, clinical data)
+- [ ] Could not identify gaps or misunderstood dashboard scope
+
+**6. Potential Misinterpretations:**
+- [ ] Misinterpreted synthetic data as real PhilHealth performance
+- [ ] Treated dashboard recommendations as definitive conclusions
+- [ ] Overlooked limitations or uncertainty in data
+- [ ] Appropriately acknowledged synthetic data and limitations
+
+**7. Decision-Making Quality:**
+- [ ] Demonstrated analytical thinking (evidence-based reasoning)
+- [ ] Showed institutional awareness (escalation paths, decision authority)
+- [ ] Acknowledged complexity and uncertainty
+- [ ] Oversimplified or made premature conclusions
+
+---
+
+## Data Collection: Task Performance vs Self-Reported Perceptions
+
+**Distinguish three types of evidence:**
+
+1. **Observed Task Performance (Objective):**
+   - Did participant correctly identify reimbursement bottleneck? (Yes/No)
+   - Did participant accurately interpret disbursement ratio? (Yes/No)
+   - Did participant distinguish approved vs disbursed? (Yes/No)
+   - Did participant articulate plausible next step? (Yes/No)
+
+2. **Participant Self-Reported Perceptions (Subjective):**
+   - Usefulness rating: __/5
+   - Clarity rating: __/5
+   - Credibility rating: __/5
+   - Pilot interest: Yes/Maybe/No
+
+3. **Facilitator Interpretation (Analytical):**
+   - Overall assessment of decision-making quality
+   - Themes in missing information requests
+   - Patterns in misinterpretations
+   - Insights about institutional context
+
+**Important:** Self-reported usefulness ("I think this would be useful") ≠ Observed task performance ("I successfully used it to make a decision")
+
+Both types of evidence matter, but observed performance is more predictive of actual adoption and effective use.
+
+---
+
+## Avoiding Confirmation Bias
+
+**Do NOT treat agreement with dashboard recommendations as proof of correctness.**
+
+The dashboard flags reimbursement bottleneck in HIGH scenario. If participant also identifies reimbursement bottleneck, this demonstrates:
+- ✅ Participant can interpret dashboard indicators
+- ✅ Participant's assessment aligns with automated recommendation
+- ⚠️ NOT: Participant would have identified bottleneck without dashboard
+- ⚠️ NOT: Dashboard provides unique insight participant lacked
+
+**Critical validation question:** Does the dashboard help participants identify bottlenecks they would NOT have identified otherwise, or does it simply confirm what they already knew?
+
+**Follow-up probe (if time permits):**  
+"Before seeing this dashboard, if I had just told you those numbers verbally, would you have identified the same bottleneck?"
+
+---
+
+## Time Management
+
+**Target: 5-8 minutes for exercise**
+- Task A (Identify): 1-2 minutes
+- Task B (Interpret): 1-2 minutes  
+- Task C (Prioritize): 2-3 minutes
+- Task D (Missing Info): 1-2 minutes
+- Optional comparison: 1-2 minutes
+
+**If running over time:**
+- Prioritize Tasks A, B, C (core decision-making)
+- Abbreviate or skip Task D and scenario comparison
+- Maintain 25-30 minute total demonstration time
+
+---
 - 71% disbursement ratio
 - ₱4.6M outstanding
 - 59 facilities without payment

@@ -349,6 +349,110 @@ Do you have any questions before we begin? Are you comfortable proceeding?"
 
 ---
 
+### Institutional Roles Framework
+
+**Before proceeding with Questions 16-18, establish which institutional roles the participant can speak to.**
+
+**Do NOT assume user, champion, buyer, and data custodian are the same person.**
+
+---
+
+**Question 15A: Institutional Role Mapping**
+
+"To understand how decisions like this are made at PhilHealth, I'd like to clarify a few roles. These might be different people or teams, or some might overlap."
+
+**A. Operational Users**
+
+"**Who would actually use this dashboard regularly** to monitor benefit implementation?"
+
+**Probes:**
+- What is their role/title?
+- What decisions can they make based on the information?
+- Do they currently use monitoring tools? Which ones?
+- How much time do they spend on benefit monitoring?
+- Would they have authority to act on diagnostic findings, or would they escalate?
+
+**Listening For:**
+- Identification of actual users (not just interested parties)
+- User decision-making authority and constraints
+- Daily workflow and existing tool usage
+- Distinction between information consumers and decision-makers
+
+---
+
+**B. Institutional Champions**
+
+"**Who would recognize the value of improved benefit monitoring and could advocate for a tool like this internally?**"
+
+**Probes:**
+- Who has visibility into implementation challenges across departments?
+- Who has influence over monitoring infrastructure decisions?
+- Who could facilitate testing or piloting of new approaches?
+- Who could coordinate across benefit development, operations, and finance teams?
+- What evidence would convince them to support exploration of this tool?
+
+**Listening For:**
+- Champions with cross-functional visibility
+- Individuals with institutional influence (not just operational interest)
+- Criteria for champion support (evidence requirements)
+- Distinction between interested users and institutional advocates
+
+---
+
+**C. Budget and Procurement Decision-Makers**
+
+"**Who controls decisions about acquiring or developing monitoring software?**"
+
+**Probes:**
+- Who approves budgets for IT tools or analytical infrastructure?
+- What is the procurement process for software tools? (RFP, vendor selection, budget approval)
+- Who has authority to allocate resources for tool development or customization?
+- Are there ongoing procurement cycles or budget windows?
+- What approval levels are required for different budget sizes?
+
+**Listening For:**
+- Organizational hierarchy for procurement decisions
+- Budget approval processes and timelines
+- Decision-making authority at different spending levels
+- Whether participant has visibility into procurement processes
+
+---
+
+**D. Data Custodians and Technical Gatekeepers**
+
+"**Who controls access to administrative data** (facilities, claims, reimbursement data)?"
+
+**Probes:**
+- Is there a data governance committee or data privacy officer?
+- Who has authority to grant data access to internal tools or external partners?
+- What technical teams (IT, database administrators) control data infrastructure?
+- Are there legal or compliance teams involved in data-sharing decisions?
+- Have there been precedents for granting data access to analytical tools?
+
+**Listening For:**
+- Data governance structure and authority
+- Technical gatekeepers distinct from operational users
+- Legal/compliance considerations
+- Precedents that might facilitate or complicate access
+
+---
+
+**Participant Self-Assessment:**
+
+"Based on these categories, **which roles do you have direct knowledge of or influence over?**"
+
+**[Document which roles participant can speak to authoritatively vs those they can only speculate about]**
+
+**Listening For:**
+- Participant's institutional position and influence
+- Boundaries of participant's knowledge
+- Whether participant can facilitate introductions to other stakeholders
+- Realistic assessment of what participant can advocate for vs decide
+
+**Important:** Do NOT ask participant to speculate beyond their institutional knowledge. If they lack visibility into procurement or data governance, acknowledge that and note it as a gap requiring additional interviews.
+
+---
+
 **Question 16: Institutional Barriers**
 
 "What barriers do you foresee to adopting a tool like this at PhilHealth?"
@@ -368,21 +472,98 @@ Do you have any questions before we begin? Are you comfortable proceeding?"
 
 ---
 
-**Question 17: Pilot Interest**
+**Question 17: Pilot Interest and Adoption Feasibility**
 
 "If we refined this tool based on feedback and it used real PhilHealth data, would you be interested in piloting it?"
 
+**[Record initial interest level: High / Medium / Low / No]**
+
+**Then distinguish operational interest from institutional adoption authority:**
+
+**Follow-Up A: Operational Interest**
+
+"From your perspective as a **[potential user/benefit monitoring team member]**, would this tool be useful in your day-to-day work?"
+
 **Probes:**
-- Under what conditions would you pilot this? (data quality, feature completeness, approval from leadership)
-- What would a successful pilot look like to you? (outcomes, duration, scope)
-- Who else would need to be involved in a pilot decision?
-- What concerns would you want addressed before piloting?
+- What specific problems would it help you solve?
+- How would it fit into your current workflow?
+- What concerns would you have about using it?
 
 **Listening For:**
-- Willingness to pilot (adoption signal)
-- Pilot readiness requirements (prerequisites)
-- Decision-making process (stakeholder map)
-- Risk tolerance (pilot scope and commitments)
+- Genuine operational interest (not just polite enthusiasm)
+- Realistic assessment of utility
+- Workflow integration challenges
+
+---
+
+**Follow-Up B: Advocacy Capacity**
+
+"Would you be willing to **advocate for piloting this tool** to decision-makers at PhilHealth?"
+
+**Probes:**
+- What evidence would you need to feel comfortable recommending it?
+- Who would you present this to? (immediate supervisor, department head, leadership)
+- What concerns do you think they would raise?
+- How much influence do you have in tool adoption decisions?
+
+**Listening For:**
+- Champion potential (willingness to advocate internally)
+- Advocacy constraints (limited influence, risk aversion)
+- Decision-making pathways (who participant would approach)
+- Realistic assessment of institutional barriers
+
+---
+
+**Follow-Up C: Decision Authority**
+
+"Do you have authority to **approve or initiate a pilot**, or would that require approval from others?"
+
+**Probes:**
+- If others: Who specifically needs to approve? (supervisor, department head, IT director, executive leadership)
+- What is the approval process? (proposal, budget request, committee review)
+- How long does approval typically take?
+- What budget or resource allocation would pilot require?
+
+**Listening For:**
+- Participant's actual decision-making authority
+- Organizational hierarchy for pilot decisions
+- Bureaucratic complexity (simple vs multi-level approval)
+- Distinction between user interest and institutional gatekeeping
+
+---
+
+**Follow-Up D: Pilot Prerequisites**
+
+"What conditions would need to be met before a pilot could proceed?"
+
+**Probes:**
+- Feature completeness: What's missing that's essential for pilot?
+- Data access: Has data governance been consulted?
+- Institutional readiness: Are there competing priorities or initiatives?
+- Resource allocation: Who would support/manage the pilot?
+- Success criteria: How would you evaluate whether pilot was successful?
+
+**Listening For:**
+- Realistic prerequisites (feasible vs aspirational)
+- Unresolved barriers (data access, budget, organizational bandwidth)
+- Pilot scope expectations (national vs regional, duration, user count)
+- Success definition (usage, decisions made, satisfaction, continued adoption)
+
+---
+
+**Important Distinction:**
+
+**Operational Interest:** "I would find this useful" (user perspective)  
+≠  
+**Institutional Adoption:** "PhilHealth would approve and support a pilot" (organizational perspective)
+
+Positive signals on operational interest do NOT guarantee institutional adoption feasibility.
+
+Document which level of interest participant expresses:
+- [ ] Operational interest only (would use if available, but cannot advocate/approve)
+- [ ] Advocacy willingness (would recommend to decision-makers)
+- [ ] Decision authority (can approve pilot or allocate resources)
+- [ ] Referral only (knows who to connect us with, but not personally interested)
 
 ---
 

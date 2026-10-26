@@ -13,33 +13,45 @@
 ### Option A: Proceed to Real-Data Pilot
 **Description:** Pursue authorized access to PhilHealth administrative data for limited pilot deployment
 
+**Important:** This option does NOT establish product-market fit. It advances to pilot based on strong preliminary validation signals that warrant further testing with real data and real users.
+
 **Prerequisites:**
-- ✅ Validation score ≥14/21 (MODERATE or STRONG product-market fit)
-- ✅ At least 2 institutional champions identified and willing to support
-- ✅ Data access feasible within 6 months
-- ✅ No insurmountable technical or organizational barriers
-- ✅ Pilot scope and success criteria defined
+- ✅ Validation score ≥14/21 (strong early validation signals or promising with further validation needed)
+- ✅ At least 2 institutional champions identified **and willing to advocate internally** (not just express interest)
+- ✅ Data access feasibility confirmed through preliminary conversations with data governance (not just assumed)
+- ✅ No insurmountable technical or organizational barriers identified
+- ✅ **Observed task performance:** Participants successfully complete decision-based exercises (not just satisfaction ratings)
+- ✅ Problem validation: STRONG or MODERATE (users confirm bottleneck identification challenges)
+- ✅ Institutional fit: MODERATE or better (pilot interest, champion support, data access pathway exists)
 
-**Next Steps:**
-1. Initiate formal data access request with PhilHealth data governance
-2. Refine dashboard based on validation feedback
-3. Develop pilot plan (scope, timeline, participants, success metrics)
-4. Establish data-sharing agreement (legal, security, privacy compliance)
-5. Conduct pilot with 1-2 PhilHealth teams for 3-6 months
-6. Evaluate pilot results against success criteria
+**Next Steps (NOT automatic authorizations):**
+1. **Champion commitment:** Secure explicit commitment (not just interest) from identified champions to advocate for pilot
+2. **Data governance engagement:** Initiate formal conversations with data custodians about access requirements, timeline, compliance
+3. **Institutional feasibility:** Assess procurement process, budget approval pathway, organizational priorities
+4. **Dashboard refinement:** Address critical feature gaps identified in validation
+5. **Pilot scope definition:** Negotiate scope, timeline, success criteria, resource requirements with potential institutional partners
+6. **Data-sharing agreement:** Legal, security, privacy compliance (may take months)
+7. **Technical development:** Backend API, ETL pipeline, schema mapping (only if pilot formally approved)
+8. **Pilot execution:** 3-6 months with 1-2 PhilHealth teams
+9. **Pilot evaluation:** Assess against success criteria
 
-**Resources Required:**
+**Resources Required (Provisional Estimates):**
 - Data integration: 2-4 months development (backend API, ETL pipeline, schema mapping)
 - Pilot support: Ongoing technical support, user training, feedback collection
-- Budget: Infrastructure (hosting, database), personnel (developer, product manager)
+- **Budget: $30,000-$60,000** (infrastructure, development, support) — **PRELIMINARY ESTIMATE, NOT VALIDATED**
+- Personnel: Full-time developer, product manager/support, data governance liaison
 
 **Risks:**
-- Data access delays or denials
-- Data quality issues requiring significant rework
-- Pilot participants lack time or engagement
-- Pilot results inconclusive or negative
+- Data access delays, denials, or prohibitive requirements
+- Data quality issues requiring significant rework beyond budget
+- Pilot participants lack time, engagement, or decision authority
+- Pilot results inconclusive, negative, or undermine assumptions
+- Procurement/budget approval fails despite user validation
+- Champion commitment wanes during long approval processes
 
-**Timeline:** 6-12 months (data access + pilot + evaluation)
+**Timeline:** 6-12 months minimum (data access negotiations + development + pilot + evaluation)
+
+**Critical Caveat:** Even with score ≥14/21, proceeding to pilot requires separate institutional commitments on data access, budget, and organizational bandwidth. Validation score is necessary but NOT sufficient for pilot decision.
 
 ---
 
@@ -47,30 +59,34 @@
 **Description:** Iterate on dashboard based on validation feedback, conduct additional demonstrations
 
 **Prerequisites:**
-- ⚠️ Validation score 10-13/21 (WEAK validation with refinement potential)
+- ⚠️ Validation score 10-13/21 (significant refinements required)
 - ⚠️ Users find concept promising but identify critical missing features
 - ⚠️ Users uncertain about value until they see refined version or real data
-- ⚠️ Institutional fit unclear due to limited stakeholder access (need more validation)
+- ⚠️ Institutional fit unclear due to limited stakeholder access or unresolved barriers
 
 **Next Steps:**
-1. Address critical feature gaps (facility drill-down, historical trends, customizable thresholds)
-2. Improve UX/clarity based on comprehension issues
-3. Recalibrate diagnostic thresholds based on user feedback
-4. Conduct 5-10 additional demonstrations with refined MVP
-5. Re-assess validation scorecard with new findings
-6. Make GO/NO-GO decision again after refinement
+1. Address critical feature gaps identified across multiple participants
+2. Improve UX/clarity if comprehension scores weak (User Comprehension dimension)
+3. Recalibrate diagnostic thresholds based on credibility feedback
+4. Refine value proposition if competitive positioning weak (duplicates existing tools)
+5. Conduct 5-10 additional demonstrations with refined MVP
+6. Re-assess validation scorecard with new findings
+7. Make updated decision after refinement cycle
 
 **Resources Required:**
 - Development: 4-8 weeks for feature additions and UX improvements
 - Validation: Additional demonstrations and interviews (2-4 weeks)
-- Budget: Minimal (primarily time investment)
+- **Budget: $6,000-$13,000** (development, validation travel/incentives) — **PRELIMINARY ESTIMATE**
 
 **Risks:**
-- Refinements may not address core product-market fit issues
-- Additional validation may yield same inconclusive results
-- Opportunity cost (time spent refining vs pursuing other opportunities)
+- Refinements may not address fundamental product-market fit issues
+- Additional validation may yield same inconclusive or weak results
+- Opportunity cost (time/resources spent refining vs alternative opportunities)
+- Feature additions may increase complexity without increasing usefulness
 
 **Timeline:** 2-3 months (refinement + re-validation)
+
+**Decision After Refinement:** Re-assess using validation scorecard. If score improves to ≥14, consider Option A or C. If score remains <14, consider Option F (reconsider positioning).
 
 ---
 

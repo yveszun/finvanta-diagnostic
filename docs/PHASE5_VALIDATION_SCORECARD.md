@@ -158,62 +158,211 @@
 
 ### Interpretation
 
-| Total Score | Assessment | Recommendation |
-|-------------|------------|----------------|
-| **18-21 points** | ✅ **STRONG Product-Market Fit** | Pursue pilot with real data, seek institutional partnerships |
-| **14-17 points** | ⚠️ **MODERATE Potential** | Refine product based on feedback, conduct additional validation |
-| **10-13 points** | ⚠️ **WEAK Validation** | Major refinements needed, reconsider approach or target users |
-| **<10 points** | ❌ **POOR Fit** | Reconsider product positioning, pivot, or terminate project |
+| Total Score | Revised Interpretation |
+|-------------|------------------------|
+| **18-21 points** | Strong early validation signals |
+| **14-17 points** | Promising; further validation needed |
+| **10-13 points** | Significant refinements required |
+| **Below 10** | Reconsider positioning or use case |
+
+### Important Qualifications
+
+**This scorecard measures preliminary validation signals, NOT product-market fit.**
+
+**Critical Limitations:**
+1. **Not Product-Market Fit:** The scorecard assesses early indicators of potential usefulness and institutional receptiveness. It does NOT establish that Finvanta addresses a validated market need or has a viable commercial pathway.
+
+2. **Sample Size:** Findings from 8-10 demonstrations and 6-8 interviews cannot be generalized to all PhilHealth users, regions, or benefit programs. This is exploratory research, not statistically significant validation.
+
+3. **Synthetic Data:** Participants evaluate a synthetic-data demonstration. Their assessments may change substantially when confronted with real data quality issues, performance limitations, or workflow integration challenges.
+
+4. **Stated vs Revealed Preferences:** Positive stakeholder feedback ("this looks useful") does NOT necessarily indicate willingness to adopt, allocate budget, champion internally, or grant data access. Stated interest must be validated through behavioral evidence.
+
+5. **Provisional Thresholds:** Success thresholds (≥60%, ≥70%, etc.) are educated guesses, not empirically validated standards. They have not been tested against actual adoption outcomes or institutional success criteria.
+
+6. **User ≠ Buyer:** Operational users who find the dashboard useful may lack authority to procure it, allocate budget, or grant data access. Institutional adoption requires buy-in from multiple stakeholder groups (users, champions, budget holders, data custodians).
+
+7. **Institutional Complexity:** High scores on user comprehension and perceived usefulness do not address procurement processes, data governance barriers, organizational priorities, security requirements, or inter-departmental coordination challenges.
+
+**What High Scores Indicate:**
+- Participants understand the dashboard concept
+- Participants can interpret synthetic scenarios
+- Participants articulate potential use cases
+- Participants do not immediately reject the concept
+- Preliminary evidence warrants further investigation
+
+**What High Scores Do NOT Indicate:**
+- Validated product-market fit
+- Confirmed institutional demand
+- Guaranteed pilot approval
+- Assured data access
+- Commercial viability
+- Readiness for real-data deployment
+
+**Next Steps After Validation:**
+Even with high scores (18-21 points), additional validation is required:
+- Confirmation of institutional champion commitment (not just interest)
+- Assessment of data access feasibility with data governance teams
+- Exploration of procurement and budget approval processes
+- Evaluation of security and compliance requirements
+- Understanding of competing priorities and initiatives
+- Pilot scope negotiation with institutional decision-makers
 
 ---
 
 ## Decision Matrix
 
-### GO: Proceed to Pilot (Score ≥14 AND specific conditions met)
+### Decision Framework: Score as Signal, Not Certainty
 
-**Required Conditions:**
-1. ✅ Problem Validation: STRONG or MODERATE
-2. ✅ Solution Validation: STRONG or MODERATE
-3. ✅ Institutional Fit: STRONG or MODERATE
-4. ✅ At least 2 potential champions identified
-5. ✅ Data access timeline ≤6 months
-6. ✅ No insurmountable technical or organizational barriers
+**The validation score provides directional guidance, not automatic authorization for next steps.**
 
-**Next Steps:**
-- Refine dashboard based on feedback
-- Develop pilot scope and timeline
-- Initiate data access negotiations
-- Engage institutional champions
-- Prepare pilot success criteria
+Each decision option requires separate consideration of institutional context, resource availability, and strategic priorities beyond the scorecard.
 
 ---
 
-### REFINE: Iterate on Product (Score 10-13 OR missing 1-2 GO conditions)
+### EXPLORE: Strong Early Signals (Score 18-21)
+
+**Interpretation:** Multiple indicators suggest potential usefulness and institutional interest
+
+**Evidence Required Beyond Score:**
+1. ✅ Observed task performance: Participants successfully complete decision-based exercises
+2. ✅ Problem validation: STRONG (≥3 criteria met)
+3. ✅ Solution validation: STRONG (≥4 criteria met)
+4. ✅ Institutional fit: STRONG or MODERATE (≥3 criteria met)
+5. ✅ Champion identification: At least 2 individuals express willingness to advocate internally
+6. ✅ Data access preliminary assessment: No immediate insurmountable barriers identified
+
+**Recommended Next Steps:**
+- Engage identified champions to assess commitment level (beyond expressed interest)
+- Initiate exploratory conversations with data governance teams about access requirements
+- Document institutional decision-making processes (procurement, budget, security)
+- Assess competing organizational priorities and initiatives
+- Explore pilot scope and success criteria with potential institutional partners
+- Confirm whether champions have authority/influence to advance pilot discussions
+
+**What This Does NOT Authorize:**
+- ❌ Automatic pilot approval
+- ❌ Real data integration without formal data-sharing agreement
+- ❌ Backend infrastructure development
+- ❌ Claims of validated product-market fit
+- ❌ Institutional partnership announcements
+
+**Timeline:** 2-4 months for institutional feasibility assessment
+
+---
+
+### REFINE: Promising but Gaps Identified (Score 14-17)
+
+**Interpretation:** Some positive signals, but significant refinements needed or institutional context unclear
+
+**Common Patterns:**
+- Users understand dashboard but identify critical missing features
+- Users find concept interesting but uncertain about value with real data
+- Positive feedback on some indicators, weak on others (e.g., strong comprehension, weak institutional fit)
+- Champions interested but data access barriers unclear
+- Tool addresses some needs but partially duplicates existing systems
 
 **Required Actions:**
-1. Address critical feature gaps identified in interviews
-2. Recalibrate thresholds based on user feedback
-3. Improve UX/clarity if comprehension is weak
-4. Conduct additional demonstrations with refined version
-5. Re-assess validation criteria after refinements
+1. Address critical feature gaps identified across multiple participants
+2. Recalibrate diagnostic thresholds based on user feedback on appropriateness
+3. Improve UX/clarity if comprehension scores are weak (≤2/3 on User Comprehension)
+4. Conduct targeted follow-up interviews to clarify institutional barriers
+5. Refine value proposition based on competitive positioning findings
+6. Consider alternative target user groups if current group shows weak fit
 
-**Timeline:** 4-8 weeks for refinement + re-validation
+**Re-Validation:**
+- Conduct 5-10 additional demonstrations with refined MVP
+- Re-assess scorecard after refinements
+- Focus follow-up validation on dimensions that scored WEAK
+
+**Timeline:** 4-8 weeks for refinement + 4-6 weeks for re-validation
 
 ---
 
-### RECONSIDER: Pivot or Terminate (Score <10 OR major issues)
+### INVESTIGATE: Significant Issues (Score 10-13)
 
-**Indicators for Reconsideration:**
-- Users consistently state tool duplicates existing systems
-- No institutional champions willing to support
-- Data access insurmountable (legal, privacy, organizational barriers)
-- Problem validation fails (users don't struggle with bottleneck identification)
-- Solution validation fails (dashboard not useful even after refinements)
+**Interpretation:** Weak signals on multiple dimensions; fundamental questions about problem-solution fit
+
+**Common Patterns:**
+- Users struggle to understand dashboard purpose or metrics (weak comprehension)
+- Users cannot articulate specific use cases or decisions
+- Tool largely duplicates existing systems (weak competitive position)
+- Institutional barriers appear substantial (data access, procurement, priorities)
+- Problem validation weak (users do not confirm bottleneck challenges)
+
+**Critical Questions to Answer:**
+1. Is the core problem hypothesis valid? (Do users actually struggle with bottleneck identification?)
+2. Is Finvanta solving the right problem? (Are we focused on wrong stage of implementation?)
+3. Is the target user group correct? (Should we focus on different roles or institutions?)
+4. Are existing tools already sufficient? (Is incremental value too small?)
+5. Are institutional barriers surmountable? (Can data access, budget, procurement be navigated?)
 
 **Options:**
-1. **Pivot:** Target different user group or use case
-2. **Reframe:** Adjust value proposition or positioning
-3. **Terminate:** Acknowledge poor product-market fit, learn from validation
+- **Pivot to different use case:** Consulting tool, research tool, training tool, different country/institution
+- **Reframe value proposition:** Focus on specific sub-problem (e.g., reimbursement monitoring only)
+- **Target different user group:** Regional offices instead of national teams, DOH instead of PhilHealth
+- **Acknowledge poor fit:** Terminate project with documented learnings
+
+**Timeline:** 4-8 weeks for strategic reassessment
+
+---
+
+### RECONSIDER: Weak Signals (Score Below 10)
+
+**Interpretation:** Fundamental misalignment between Finvanta and institutional needs/context
+
+**Indicators for Reconsideration:**
+- Users consistently state tool duplicates existing systems with no incremental value
+- No institutional champions willing to support or advocate
+- Data access insurmountable due to legal, privacy, or organizational barriers
+- Problem validation fails: Users do not confirm bottleneck identification challenges
+- Solution validation fails: Users find dashboard confusing or not useful
+- Institutional fit weak: Multiple insurmountable adoption barriers identified
+
+**Recommended Actions:**
+1. **Document learnings:** Synthesize findings about implementation monitoring needs, existing tools, institutional barriers
+2. **Assess alternative positioning:**
+   - External consulting tool (for consultants analyzing benefits, not internal PhilHealth use)
+   - Academic research tool (for policy researchers, not operational use)
+   - Civil society advocacy tool (for transparency organizations monitoring PhilHealth)
+   - Training/education tool (for health systems management courses)
+   - Different institutional context (pilot in different country with better access/fit)
+3. **Honest assessment:** If no viable alternative positioning emerges, acknowledge poor product-market fit and terminate project
+4. **Knowledge transfer:** Share findings with health systems community, document what was learned about benefit implementation monitoring
+
+**Timeline:** 4-6 weeks for alternative exploration or formal project closure
+
+---
+
+## Scoring Consistency Check
+
+**Dimension-Level Scoring:**
+- Each dimension scored as STRONG (3), MODERATE (2), or WEAK (1)
+- **Scoring Rule:** Dimension scores are assessed based on number of criteria met within that dimension, as specified in the "Interpretation" section for each dimension
+  - Example: Solution Validation has 5 criteria
+    - STRONG (3 points): ≥4 criteria met
+    - MODERATE (2 points): 3 criteria met  
+    - WEAK (1 point): ≤2 criteria met
+
+**Overall Scoring:**
+- Maximum possible score: 7 dimensions × 3 points = 21 points
+- Minimum possible score: 7 dimensions × 1 point = 7 points
+
+**Consistency Notes:**
+- Original framework had inconsistent scoring (dimensions used different criteria counts and thresholds)
+- Revised framework retains original dimension-specific interpretations but adds overall scoring transparency
+- Scorecard should be applied consistently: count criteria met → assign dimension score → sum for total
+
+**Documented Scoring Rules:**
+1. Problem Validation: ≥3 criteria = STRONG (3), 2 criteria = MODERATE (2), ≤1 = WEAK (1)
+2. Solution Validation: ≥4 criteria = STRONG (3), 3 criteria = MODERATE (2), ≤2 = WEAK (1)
+3. Credibility: 4 criteria = STRONG (3), 3 criteria = MODERATE (2), ≤2 = WEAK (1)
+4. Competitive Position: ≥3 criteria + value prop = STRONG (3), 2 criteria + features = MODERATE (2), ≤1 = WEAK (1)
+5. Institutional Fit: ≥4 criteria = STRONG (3), 3 criteria = MODERATE (2), ≤2 = WEAK (1)
+6. User Comprehension: 4 criteria = STRONG (3), 3 criteria = MODERATE (2), ≤2 = WEAK (1)
+7. Feature Completeness: Core + ≤2 gaps = COMPLETE (3), 3+ gaps = REFINEMENT (2), Missing core = MAJOR GAPS (1)
+
+**Note:** These thresholds are provisional and should be reviewed after initial validation rounds.
 
 ---
 
