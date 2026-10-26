@@ -81,9 +81,14 @@ function App() {
       
       <header className="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-3xl font-bold">
-            Finvanta Health Benefit Implementation Diagnostic
-          </h1>
+          <div className="flex items-center gap-3">
+            <h1 className="text-3xl font-bold">
+              Finvanta Health Benefit Implementation Diagnostic
+            </h1>
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-400 text-gray-900">
+              PROTOTYPE
+            </span>
+          </div>
           <p className="mt-2 text-blue-100">
             Identify implementation bottlenecks in mental health benefit rollout
           </p>
