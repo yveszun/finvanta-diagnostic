@@ -29,6 +29,9 @@ export function evaluateRecommendations(analyticsData, recommendationRules) {
     return (numerator / denominator) * 100;
   };
 
+  // Extract financial data for reimbursement analysis
+  const financialCalcs = analyticsData.analytics?.financialCalculations;
+
   const metrics = cascade ? {
     // Phase 3 analytics structure
     // Facility-level metrics
@@ -45,10 +48,14 @@ export function evaluateRecommendations(analyticsData, recommendationRules) {
       cascade.stage3_claiming?.count
     ),
     
-    // Claim-level metrics - CORRECTED
+    // Claim-level metrics
     approvalRate: safeDivide(
       claimsCascade?.stage4_approved?.count,
       claimsCascade?.stage3_adjudicated?.count
+    ),
+    claimPaymentRate: safeDivide(
+      claimsCascade?.stage5_paid?.count,
+      claimsCascade?.stage4_approved?.count
     ),
     
     // Facility counts
@@ -57,15 +64,34 @@ export function evaluateRecommendations(analyticsData, recommendationRules) {
     stage3_filingFacilities: cascade.stage3_claiming?.count || 0,
     stage4_receivingPaymentFacilities: cascade.stage4_receiving_payment?.count || 0,
     
-    // Claim counts - CORRECTED
+    // Claim counts
     stage1_submittedClaims: claimsCascade?.stage1_submitted?.count || 0,
     stage3_adjudicatedClaims: claimsCascade?.stage3_adjudicated?.count || 0,
     stage4_approvedClaims: claimsCascade?.stage4_approved?.count || 0,
     stage5_paidClaims: claimsCascade?.stage5_paid?.count || 0,
+    approvedUnpaidClaims: claimsCascade?.breakdown?.approvedUnpaid?.count || 0,
+    partiallyPaidClaims: claimsCascade?.breakdown?.partiallyPaid?.count || 0,
+    
+    // AUDIT CORRECTION: Financial reimbursement indicators
+    approvedToDisbursedRatio: financialCalcs?.approvalToDisbursementRatio?.ratio
+      ? parseFloat(financialCalcs.approvalToDisbursementRatio.ratio)
+      : null,
+    outstandingApprovedPercentage: financialCalcs?.totalOutstanding?.percentage
+      ? parseFloat(financialCalcs.totalOutstanding.percentage)
+      : null,
+    totalApprovedAmount: financialCalcs?.totalApproved?.amount || 0,
+    totalDisbursedAmount: financialCalcs?.totalDisbursed?.amount || 0,
+    totalOutstandingAmount: financialCalcs?.totalOutstanding?.amount || 0,
+    facilitiesWithClaimsButNoPayment: (cascade.stage3_claiming?.count || 0) - 
+                                      (cascade.stage4_receiving_payment?.count || 0),
+    facilitiesWithClaimsButNoPaymentPercentage: safeDivide(
+      (cascade.stage3_claiming?.count || 0) - (cascade.stage4_receiving_payment?.count || 0),
+      cascade.stage3_claiming?.count
+    ),
     
     // Processing time
-    averageDaysToPayment: analyticsData.analytics?.financialCalculations?.paymentProcessingTime?.average
-      ? parseFloat(analyticsData.analytics.financialCalculations.paymentProcessingTime.average)
+    averageDaysToPayment: financialCalcs?.paymentProcessingTime?.average
+      ? parseFloat(financialCalcs.paymentProcessingTime.average)
       : null
   } : {
     // Legacy structure for backward compatibility (tests)
@@ -85,14 +111,31 @@ export function evaluateRecommendations(analyticsData, recommendationRules) {
       legacySummary?.approved_claims,
       legacySummary?.total_claims
     ),
+    claimPaymentRate: safeDivide(
+      legacySummary?.paid_claims,
+      legacySummary?.approved_claims
+    ),
     stage1_eligibleFacilities: legacySummary?.total_facilities || 0,
     stage2_accreditedFacilities: legacySummary?.accredited_facilities || 0,
     stage3_filingFacilities: legacySummary?.facilities_filing_claims || 0,
     stage4_receivingPaymentFacilities: legacySummary?.facilities_receiving_payment || 0,
     stage1_submittedClaims: legacySummary?.total_claims || 0,
-    stage3_adjudicatedClaims: legacySummary?.total_claims || 0, // Legacy: total_claims used as proxy
+    stage3_adjudicatedClaims: legacySummary?.total_claims || 0,
     stage4_approvedClaims: legacySummary?.approved_claims || 0,
     stage5_paidClaims: legacySummary?.paid_claims || 0,
+    approvedUnpaidClaims: (legacySummary?.approved_claims || 0) - (legacySummary?.paid_claims || 0),
+    partiallyPaidClaims: 0,
+    approvedToDisbursedRatio: legacySummary?.disbursement_ratio || null,
+    outstandingApprovedPercentage: legacySummary?.outstanding_percentage || null,
+    totalApprovedAmount: legacySummary?.approved_amount || 0,
+    totalDisbursedAmount: legacySummary?.disbursed_amount || 0,
+    totalOutstandingAmount: legacySummary?.outstanding_amount || 0,
+    facilitiesWithClaimsButNoPayment: (legacySummary?.facilities_filing_claims || 0) - 
+                                       (legacySummary?.facilities_receiving_payment || 0),
+    facilitiesWithClaimsButNoPaymentPercentage: safeDivide(
+      (legacySummary?.facilities_filing_claims || 0) - (legacySummary?.facilities_receiving_payment || 0),
+      legacySummary?.facilities_filing_claims
+    ),
     averageDaysToPayment: legacySummary?.avg_days_to_payment || null
   };
 
