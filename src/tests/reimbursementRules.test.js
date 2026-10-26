@@ -552,9 +552,9 @@ describe('Reimbursement Rules Regression Tests', () => {
   });
 
   describe('Real Phase 3 Analytics Integration', () => {
-    it('should work with actual HIGH scenario analytics', async () => {
-      // Load actual Phase 3 analytics
-      const analyticsPath = path.resolve(process.cwd(), 'outputs/phase3_analytics/high_neutral_analytics.json');
+    it('should work with actual HIGH bottleneck_mix analytics', async () => {
+      // Load actual Phase 3 analytics - AUTHORITATIVE bottleneck_mix (matches dashboard)
+      const analyticsPath = path.resolve(process.cwd(), 'outputs/phase3_analytics/high_bottleneck_mix_analytics.json');
       const analytics = JSON.parse(fs.readFileSync(analyticsPath, 'utf-8'));
 
       const recommendations = evaluateRecommendations(analytics, recommendationRules);
@@ -570,6 +570,36 @@ describe('Reimbursement Rules Regression Tests', () => {
         expect(rec.observedFinding).toBeDefined();
         expect(rec.supportingIndicator).toBeDefined();
       });
+    });
+
+    it('should detect critical reimbursement bottleneck in HIGH bottleneck_mix scenario', () => {
+      // Load authoritative HIGH bottleneck_mix scenario
+      const analyticsPath = path.resolve(process.cwd(), 'outputs/phase3_analytics/high_bottleneck_mix_analytics.json');
+      const analytics = JSON.parse(fs.readFileSync(analyticsPath, 'utf-8'));
+
+      const recommendations = evaluateRecommendations(analytics, recommendationRules);
+      
+      // HIGH bottleneck_mix has 51.3% disbursement - should trigger CRITICAL_REIMBURSEMENT_BOTTLENECK
+      const bottleneck = recommendations.find(r => r.id === 'CRITICAL_REIMBURSEMENT_BOTTLENECK');
+      expect(bottleneck, 'HIGH bottleneck_mix should detect critical reimbursement bottleneck').toBeDefined();
+      expect(bottleneck.severity).toBe('critical');
+      
+      // Should NOT trigger STRONG_PERFORMANCE (disbursement too low)
+      const strongPerf = recommendations.find(r => r.id === 'STRONG_PERFORMANCE');
+      expect(strongPerf, 'HIGH bottleneck_mix should NOT show strong performance').toBeUndefined();
+    });
+
+    it('should detect facilities without payment in HIGH bottleneck_mix scenario', () => {
+      // Load authoritative HIGH bottleneck_mix scenario
+      const analyticsPath = path.resolve(process.cwd(), 'outputs/phase3_analytics/high_bottleneck_mix_analytics.json');
+      const analytics = JSON.parse(fs.readFileSync(analyticsPath, 'utf-8'));
+
+      const recommendations = evaluateRecommendations(analytics, recommendationRules);
+      
+      // HIGH bottleneck_mix has 66 facilities with claims but no payment (358-292)
+      const noPayment = recommendations.find(r => r.id === 'FACILITIES_NOT_RECEIVING_PAYMENT');
+      expect(noPayment, 'HIGH bottleneck_mix should detect facilities without payment').toBeDefined();
+      expect(noPayment.severity).toBe('high');
     });
   });
 });

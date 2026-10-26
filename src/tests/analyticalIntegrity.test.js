@@ -28,8 +28,8 @@ import path from 'path';
 describe('Analytical Integrity Tests', () => {
   describe('1. National vs Regional Reconciliation', () => {
     it('should reconcile national totals with regional sums from Phase 3 analytics', () => {
-      // Load actual Phase 3 analytics
-      const analyticsPath = path.resolve(process.cwd(), 'outputs/phase3_analytics/high_neutral_analytics.json');
+      // Load actual Phase 3 analytics - AUTHORITATIVE bottleneck_mix (matches dashboard)
+      const analyticsPath = path.resolve(process.cwd(), 'outputs/phase3_analytics/high_bottleneck_mix_analytics.json');
       const analytics = JSON.parse(fs.readFileSync(analyticsPath, 'utf-8'));
       
       // Extract national totals
@@ -50,8 +50,8 @@ describe('Analytical Integrity Tests', () => {
     });
 
     it('should detect deliberately corrupted regional totals', () => {
-      // Load actual Phase 3 analytics
-      const analyticsPath = path.resolve(process.cwd(), 'outputs/phase3_analytics/moderate_neutral_analytics.json');
+      // Load actual Phase 3 analytics - AUTHORITATIVE bottleneck_mix
+      const analyticsPath = path.resolve(process.cwd(), 'outputs/phase3_analytics/moderate_bottleneck_mix_analytics.json');
       const analytics = JSON.parse(fs.readFileSync(analyticsPath, 'utf-8'));
       
       // Extract national totals
@@ -67,8 +67,8 @@ describe('Analytical Integrity Tests', () => {
     });
 
     it('should reconcile financial amounts across all regions', () => {
-      // Load actual Phase 3 analytics
-      const analyticsPath = path.resolve(process.cwd(), 'outputs/phase3_analytics/low_neutral_analytics.json');
+      // Load actual Phase 3 analytics - AUTHORITATIVE bottleneck_mix
+      const analyticsPath = path.resolve(process.cwd(), 'outputs/phase3_analytics/low_bottleneck_mix_analytics.json');
       const analytics = JSON.parse(fs.readFileSync(analyticsPath, 'utf-8'));
       
       // Extract national financial totals
