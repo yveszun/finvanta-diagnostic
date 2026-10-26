@@ -18,14 +18,22 @@ export function evaluateRecommendations(analyticsData, recommendationRules) {
   const legacySummary = analyticsData.summary;
 
   // Calculate metrics from analytics data
-  // Use safe division that handles zero denominators correctly
+  // Use safe division with explicit null/undefined checks
+  // Returns null for missing data, but returns 0 for valid zero numerators
   const safeDivide = (numerator, denominator) => {
-    if (denominator === null || denominator === undefined || denominator === 0) {
+    // Missing denominator - cannot calculate
+    if (denominator === null || denominator === undefined) {
       return null;
     }
+    // Zero denominator - undefined ratio
+    if (denominator === 0) {
+      return null;
+    }
+    // Missing numerator - cannot calculate
     if (numerator === null || numerator === undefined) {
       return null;
     }
+    // Valid calculation - including zero numerator case (0/positive = 0%)
     return (numerator / denominator) * 100;
   };
 
@@ -73,15 +81,22 @@ export function evaluateRecommendations(analyticsData, recommendationRules) {
     partiallyPaidClaims: claimsCascade?.breakdown?.partiallyPaid?.count || 0,
     
     // AUDIT CORRECTION: Financial reimbursement indicators
-    approvedToDisbursedRatio: financialCalcs?.approvalToDisbursementRatio?.ratio
+    // Use explicit null/undefined checks to preserve valid zero values
+    approvedToDisbursedRatio: financialCalcs?.approvalToDisbursementRatio?.ratio !== undefined && financialCalcs?.approvalToDisbursementRatio?.ratio !== null
       ? parseFloat(financialCalcs.approvalToDisbursementRatio.ratio)
-      : null,
-    outstandingApprovedPercentage: financialCalcs?.totalOutstanding?.percentage
+      : safeDivide(financialCalcs?.totalDisbursed?.amount, financialCalcs?.totalApproved?.amount),
+    outstandingApprovedPercentage: financialCalcs?.totalOutstanding?.percentage !== undefined && financialCalcs?.totalOutstanding?.percentage !== null
       ? parseFloat(financialCalcs.totalOutstanding.percentage)
       : null,
-    totalApprovedAmount: financialCalcs?.totalApproved?.amount || 0,
-    totalDisbursedAmount: financialCalcs?.totalDisbursed?.amount || 0,
-    totalOutstandingAmount: financialCalcs?.totalOutstanding?.amount || 0,
+    totalApprovedAmount: financialCalcs?.totalApproved?.amount !== undefined && financialCalcs?.totalApproved?.amount !== null
+      ? financialCalcs.totalApproved.amount
+      : null,
+    totalDisbursedAmount: financialCalcs?.totalDisbursed?.amount !== undefined && financialCalcs?.totalDisbursed?.amount !== null
+      ? financialCalcs.totalDisbursed.amount
+      : null,
+    totalOutstandingAmount: financialCalcs?.totalOutstanding?.amount !== undefined && financialCalcs?.totalOutstanding?.amount !== null
+      ? financialCalcs.totalOutstanding.amount
+      : null,
     facilitiesWithClaimsButNoPayment: (cascade.stage3_claiming?.count || 0) - 
                                       (cascade.stage4_receiving_payment?.count || 0),
     facilitiesWithClaimsButNoPaymentPercentage: safeDivide(

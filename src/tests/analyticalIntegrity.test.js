@@ -22,13 +22,68 @@
 import { describe, it, expect } from 'vitest';
 import { evaluateRecommendations } from '../utils/recommendationEngine';
 import { formatNumber, formatCurrency, safePercent } from '../utils/formatters';
+import fs from 'fs';
+import path from 'path';
 
 describe('Analytical Integrity Tests', () => {
   describe('1. National vs Regional Reconciliation', () => {
-    it('should verify reconciliation through script output', () => {
-      // Reconciliation is verified through scripts/verifyReconciliation.js
-      // This test documents that requirement and provides assertion
-      expect(true).toBe(true);
+    it('should reconcile national totals with regional sums from Phase 3 analytics', () => {
+      // Load actual Phase 3 analytics
+      const analyticsPath = path.resolve(process.cwd(), 'outputs/phase3_analytics/high_neutral_analytics.json');
+      const analytics = JSON.parse(fs.readFileSync(analyticsPath, 'utf-8'));
+      
+      // Extract national totals
+      const nationalFacilities = analytics.analytics.facilityParticipationCascade.stage1_eligible.count;
+      const nationalAccredited = analytics.analytics.facilityParticipationCascade.stage2_accredited.count;
+      const nationalClaims = analytics.analytics.claimsProcessingCascade.stage1_submitted.count;
+      
+      // Sum regional data
+      const regions = analytics.analytics.regionalComparisons.byRegion;
+      const regionalFacilitiesSum = Object.values(regions).reduce((sum, region) => sum + region.facilities, 0);
+      const regionalAccreditedSum = Object.values(regions).reduce((sum, region) => sum + region.accredited, 0);
+      const regionalClaimsSum = Object.values(regions).reduce((sum, region) => sum + region.claims, 0);
+      
+      // Verify reconciliation
+      expect(regionalFacilitiesSum).toBe(nationalFacilities);
+      expect(regionalAccreditedSum).toBe(nationalAccredited);
+      expect(regionalClaimsSum).toBe(nationalClaims);
+    });
+
+    it('should detect deliberately corrupted regional totals', () => {
+      // Load actual Phase 3 analytics
+      const analyticsPath = path.resolve(process.cwd(), 'outputs/phase3_analytics/moderate_neutral_analytics.json');
+      const analytics = JSON.parse(fs.readFileSync(analyticsPath, 'utf-8'));
+      
+      // Extract national totals
+      const nationalFacilities = analytics.analytics.facilityParticipationCascade.stage1_eligible.count;
+      
+      // Deliberately corrupt regional sum
+      const regions = analytics.analytics.regionalComparisons.byRegion;
+      const corruptedSum = Object.values(regions).reduce((sum, region) => sum + region.facilities, 0) + 100; // Add 100
+      
+      // Should detect discrepancy
+      expect(corruptedSum).not.toBe(nationalFacilities);
+      expect(corruptedSum - nationalFacilities).toBe(100);
+    });
+
+    it('should reconcile financial amounts across all regions', () => {
+      // Load actual Phase 3 analytics
+      const analyticsPath = path.resolve(process.cwd(), 'outputs/phase3_analytics/low_neutral_analytics.json');
+      const analytics = JSON.parse(fs.readFileSync(analyticsPath, 'utf-8'));
+      
+      // Extract national financial totals
+      const nationalBilled = analytics.analytics.financialCalculations.totalBilled.amount;
+      
+      // Sum regional financial data (parse currency strings)
+      const regions = analytics.analytics.regionalComparisons.byRegion;
+      const regionalBilledSum = Object.values(regions).reduce((sum, region) => {
+        const billedStr = region.financial.billed.replace(/[₱,]/g, '');
+        return sum + parseFloat(billedStr);
+      }, 0);
+      
+      // Allow small rounding differences (< 0.1%)
+      const variance = Math.abs(regionalBilledSum - nationalBilled) / nationalBilled;
+      expect(variance).toBeLessThan(0.001); // < 0.1%
     });
   });
 
