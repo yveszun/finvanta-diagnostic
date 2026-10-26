@@ -179,7 +179,7 @@
       "condition": "approvedToDisbursedRatio < 60",
       "severity": "critical",
       "category": "Reimbursement",
-      "metricsRequired": ["approvedToDisbursedRatio", "totalApprovedAmount", "totalDisbursedAmount", "totalOutstandingAmount", "approvedUnpaidClaims"],
+      "metricsRequired": ["approvedToDisbursedRatio", "totalApprovedAmount", "totalDisbursedAmount", "totalOutstandingAmount", "outstandingApprovedPercentage", "approvedUnpaidClaims"],
       
       "observedFinding": "Only {{approvedToDisbursedRatio}}% of approved amounts have been disbursed",
       "supportingIndicator": "₱{{totalOutstandingAmount}} approved but not yet disbursed ({{outstandingApprovedPercentage}}% of approved); {{approvedUnpaidClaims}} claims approved but payment pending",
@@ -207,7 +207,7 @@
       "condition": "approvedToDisbursedRatio >= 60 AND approvedToDisbursedRatio < 80",
       "severity": "medium",
       "category": "Reimbursement",
-      "metricsRequired": ["approvedToDisbursedRatio", "totalOutstandingAmount", "approvedUnpaidClaims"],
+      "metricsRequired": ["approvedToDisbursedRatio", "totalOutstandingAmount", "outstandingApprovedPercentage", "approvedUnpaidClaims"],
       
       "observedFinding": "{{approvedToDisbursedRatio}}% of approved amounts have been disbursed",
       "supportingIndicator": "₱{{totalOutstandingAmount}} approved but awaiting disbursement ({{outstandingApprovedPercentage}}% of approved); {{approvedUnpaidClaims}} claims pending payment",
