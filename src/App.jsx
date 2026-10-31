@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import ExecutiveOverview from './components/ExecutiveOverview';
-import FacilityCascade from './components/FacilityCascade';
-import ClaimsProcessingCascade from './components/ClaimsProcessingCascade';
-import RegionalComparison from './components/RegionalComparison';
-import DiagnosticInsights from './components/DiagnosticInsights';
+import { useViewMode } from './hooks/useViewMode';
+import { ViewToggle } from './components/ViewToggle';
+import { ExecutiveView } from './components/executive/ExecutiveView';
+import { AnalystView } from './components/analyst/AnalystView';
 import SyntheticDataNotice from './components/SyntheticDataNotice';
 import LoadingState from './components/LoadingState';
 import ErrorState from './components/ErrorState';
@@ -14,6 +13,7 @@ function App() {
   const [analyticsData, setAnalyticsData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { viewMode, toggleView } = useViewMode();
 
   useEffect(() => {
     // Create AbortController for this request
@@ -80,19 +80,24 @@ function App() {
     <div className="min-h-screen bg-gray-50">
       <SyntheticDataNotice />
       
-      <header className="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg">
+      <header className="bg-gradient-to-r from-indigo-600 to-indigo-800 text-white shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center gap-3">
-            <h1 className="text-3xl font-bold">
-              Finvanta Health Benefit Implementation Diagnostic
-            </h1>
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-400 text-gray-900">
-              PROTOTYPE
-            </span>
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="flex items-center gap-3">
+                <h1 className="text-3xl font-bold">
+                  Finvanta Health Diagnostic
+                </h1>
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-400 text-gray-900">
+                  PROTOTYPE
+                </span>
+              </div>
+              <p className="mt-2 text-indigo-100">
+                Executive intelligence platform for mental health benefit implementation
+              </p>
+            </div>
+            <ViewToggle viewMode={viewMode} onToggle={toggleView} />
           </div>
-          <p className="mt-2 text-blue-100">
-            Identify implementation bottlenecks in mental health benefit rollout
-          </p>
         </div>
       </header>
 
@@ -116,23 +121,22 @@ function App() {
 
         {analyticsData && (
           <>
-            <ExecutiveOverview data={analyticsData} scenario={scenario} />
-            
-            <FacilityCascade data={analyticsData} />
-            
-            <ClaimsProcessingCascade data={analyticsData} />
-            
-            <RegionalComparison data={analyticsData} />
-            
-            <DiagnosticInsights data={analyticsData} />
+            {viewMode === 'executive' ? (
+              <ExecutiveView data={analyticsData} />
+            ) : (
+              <AnalystView 
+                data={analyticsData} 
+                onScenarioChange={setScenario}
+              />
+            )}
           </>
         )}
       </main>
 
-      <footer className="bg-gray-800 text-gray-300 mt-16">
+      <footer className="bg-slate-800 text-slate-300 mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <p className="text-center text-sm">
-            Finvanta Health Benefit Diagnostic • Phase 4 MVP • Synthetic Data Only
+            Finvanta Health Diagnostic • Phase 4.1 Executive UX • Synthetic Data Only
           </p>
         </div>
       </footer>
