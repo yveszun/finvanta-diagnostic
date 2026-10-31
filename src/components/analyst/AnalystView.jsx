@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { ExecutiveOverview } from '../ExecutiveOverview';
-import { FacilityCascade } from '../FacilityCascade';
-import { ClaimsProcessingCascade } from '../ClaimsProcessingCascade';
-import { RegionalComparison } from '../RegionalComparison';
-import { DiagnosticInsights } from '../DiagnosticInsights';
+import ExecutiveOverview from '../ExecutiveOverview';
+import FacilityCascade from '../FacilityCascade';
+import ClaimsProcessingCascade from '../ClaimsProcessingCascade';
+import RegionalComparison from '../RegionalComparison';
+import DiagnosticInsights from '../DiagnosticInsights';
 
 /**
  * AnalystView Component
