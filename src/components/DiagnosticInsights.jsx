@@ -27,7 +27,11 @@ export default function DiagnosticInsights({ data }) {
 
   const loadRecommendationRules = async () => {
     try {
-      const response = await fetch('/config/recommendationRules.json');
+      // Use import.meta.env.BASE_URL to handle GitHub Pages subdirectory deployment
+      const basePath = import.meta.env.BASE_URL || '/';
+      const configPath = `${basePath}config/recommendationRules.json`;
+      
+      const response = await fetch(configPath);
       
       // CHECK: Verify HTTP response status
       if (!response.ok) {

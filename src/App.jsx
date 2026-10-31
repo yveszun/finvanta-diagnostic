@@ -33,10 +33,11 @@ function App() {
     
     try {
       // Load analytics data for the selected scenario
-      const response = await fetch(
-        `/outputs/phase3_analytics/${selectedScenario}_bottleneck_mix_analytics.json`,
-        { signal }
-      );
+      // Use import.meta.env.BASE_URL to handle GitHub Pages subdirectory deployment
+      const basePath = import.meta.env.BASE_URL || '/';
+      const dataPath = `${basePath}outputs/phase3_analytics/${selectedScenario}_bottleneck_mix_analytics.json`;
+      
+      const response = await fetch(dataPath, { signal });
       
       if (!response.ok) {
         throw new Error(`Failed to load analytics data: ${response.statusText}`);
