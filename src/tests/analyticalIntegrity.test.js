@@ -533,10 +533,13 @@ describe('Analytical Integrity Tests', () => {
         Promise.resolve({
           ok: true,
           json: () => Promise.resolve({
+            metadata: { scenario: 'test' },
             analytics: {
               facilityParticipationCascade: {
-                totalFacilities: 100,
-                accreditedFacilities: 80
+                stage1_eligible: 100,
+                stage2_accredited: 80,
+                stage3_claiming: 60,
+                stage4_receiving_payment: 50
               },
               claimsProcessingCascade: {
                 totalClaims: 1000

@@ -1,0 +1,86 @@
+================================================================================
+PHASE 4.1 VISUAL ACCEPTANCE TESTING - QUICK START
+================================================================================
+
+LOCATION: /projects/sandbox/finvanta-diagnostic
+BRANCH:   phase4-1-executive-ux
+
+================================================================================
+START THE SERVER
+================================================================================
+
+In your terminal, run:
+
+    cd /projects/sandbox/finvanta-diagnostic
+    npm run dev
+
+Wait for the message:
+
+    ➜  Local:   http://localhost:5173/
+
+================================================================================
+OPEN IN BROWSER
+================================================================================
+
+Navigate to:    http://localhost:5173/
+
+Default view:   Executive View (loads automatically)
+
+================================================================================
+BOTTLENECK LOGIC CLARIFICATION
+================================================================================
+
+Primary Bottleneck = Stage with LOWEST CONVERSION RATE
+
+NOT the largest absolute facility drop.
+
+Example:
+  - Accreditation: 70% conversion (300 facilities lost) ← BOTTLENECK
+  - Claims:        86% conversion (100 facilities lost)
+  - Payment:       92% conversion (50 facilities lost)
+
+The interface displays BOTH metrics:
+  ✓ Conversion Rate (%) ← Used to identify bottleneck
+  ✓ Facilities Lost     ← Shows impact
+
+This is accurate and clearly labeled in the UI.
+
+================================================================================
+WHAT TO TEST
+================================================================================
+
+Executive View (default):
+  ✓ Dynamic headline with health status
+  ✓ Primary bottleneck card (lowest conversion rate)
+  ✓ 3 key performance indicators
+  ✓ Simplified cascade visualization
+  ✓ Investigation recommendation
+
+Analyst View (click toggle):
+  ✓ 5 tabs with all Phase 4 components preserved
+  ✓ Scenario switching in Diagnostic Insights tab
+  ✓ All original functionality intact
+
+Both Views:
+  ✓ Synthetic data warning visible (yellow banner)
+  ✓ View persistence after refresh
+
+================================================================================
+ACCEPTANCE TESTING GUIDE
+================================================================================
+
+Full checklist: /projects/sandbox/finvanta-diagnostic/VISUAL_ACCEPTANCE_TESTING.md
+
+================================================================================
+STOP THE SERVER
+================================================================================
+
+Press Ctrl+C in the terminal running npm run dev
+
+================================================================================
+DO NOT MERGE WITHOUT APPROVAL
+================================================================================
+
+This is for visual review only. PR #4 awaits your explicit approval.
+
+================================================================================

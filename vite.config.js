@@ -6,7 +6,10 @@ export default defineConfig({
   plugins: [react()],
   // GitHub Pages deployment configuration
   // When deployed to https://yveszun.github.io/finvanta-diagnostic/
-  base: process.env.GITHUB_PAGES === 'true' ? '/finvanta-diagnostic/' : '/',
+  // Or preview at https://yveszun.github.io/finvanta-preview/
+  base: process.env.GITHUB_PAGES === 'true' 
+    ? (process.env.PREVIEW_DEPLOY === 'true' ? '/finvanta-preview/' : '/finvanta-diagnostic/')
+    : '/',
   build: {
     // Ensure assets are correctly referenced with the base path
     assetsDir: 'assets',
