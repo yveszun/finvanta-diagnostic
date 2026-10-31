@@ -1,0 +1,291 @@
+{
+  "version": "2.0",
+  "lastUpdated": "2026-10-25",
+  "benefit": {
+    "name": "Outpatient Mental Health Benefit Package",
+    "code": "MENTAL_HEALTH_OPD",
+    "effectiveDate": "2025-01-01",
+    "description": "Covers outpatient mental health consultations and services",
+    "disclaimer": "This is a demonstration system using synthetic data only"
+  },
+  
+  "eligibility": {
+    "mode": "configurable",
+    "requiresOfficialVerification": true,
+    "verificationStatus": "PENDING",
+    "verificationNote": "Eligibility criteria not yet verified with PhilHealth. Current configuration is illustrative only.",
+    "officialSource": "Awaiting PhilHealth Circular",
+    
+    "currentConfiguration": {
+      "facilityTypes": ["Hospital", "Infirmary", "Rural Health Unit", "City Health Office"],
+      "includeLevelOne": true,
+      "includeLevelTwo": true,
+      "includeLevelThree": true,
+      "note": "No facility level restrictions applied pending official verification"
+    },
+    
+    "serviceDistinction": {
+      "general": {
+        "description": "General psychiatric consultation",
+        "eligibleFacilityTypes": ["Hospital", "Rural Health Unit", "City Health Office", "Infirmary"],
+        "eligibleLevels": [1, 2, 3],
+        "requiresVerification": true,
+        "illustrativeAssumption": "All facility types and levels eligible for general consultations"
+      },
+      "specialty": {
+        "description": "Specialty mental health services",
+        "eligibleFacilityTypes": ["Hospital"],
+        "eligibleLevels": [2, 3],
+        "requiresVerification": true,
+        "illustrativeAssumption": "Only Level 2+ hospitals eligible for specialty services",
+        "note": "This is an illustrative assumption pending official PhilHealth policy verification"
+      }
+    }
+  },
+  
+  "services": {
+    "general": {
+      "code": "PSYCH_CONSULT_GEN",
+      "name": "General Psychiatric Consultation",
+      "packageCeiling": 9000,
+      "currency": "PHP",
+      "description": "Basic mental health consultation and assessment",
+      "note": "Package ceiling - actual reimbursement may be lower based on adjudication"
+    },
+    "specialty": {
+      "code": "PSYCH_CONSULT_SPEC",
+      "name": "Specialty Mental Health Service",
+      "packageCeiling": 16000,
+      "currency": "PHP",
+      "description": "Specialized mental health intervention or treatment",
+      "note": "Package ceiling - actual reimbursement may be lower based on adjudication"
+    }
+  },
+  
+  "financialAssumptions": {
+    "disclaimer": "Financial estimates are synthetic and illustrative only",
+    "billedToApprovedRatio": 0.92,
+    "approvedToDisbursedRatio": 0.98,
+    "averageReimbursementToPackageRatio": 0.85,
+    "note": "Billed amount = package ceiling; Approved amount accounts for denials; Disbursed amount accounts for payment processing adjustments; Average reimbursement reflects typical adjudication outcomes"
+  },
+  
+  "claimsProcessing": {
+    "stages": {
+      "1_submission": "Claim submitted by facility",
+      "2_acceptance": "Claim accepted for processing (initial validation passed)",
+      "2a_pending_acceptance": "Claim pending acceptance (administrative review)",
+      "3_adjudication": "Claim reviewed and adjudicated",
+      "3a_pending_adjudication": "Claim pending adjudication (awaiting review)",
+      "4_approval": "Claim approved for payment",
+      "5_payment": "Payment disbursed to facility"
+    },
+    "requireBothApprovalAndPaymentDates": true,
+    "pendingRates": {
+      "pendingAcceptanceRate": 0.05,
+      "pendingAdjudicationRate": 0.08,
+      "note": "Configurable rates for claims stuck at earlier stages (V3)"
+    },
+    "paymentProcessing": {
+      "approvedButUnpaidRate": 0.15,
+      "illustrativeAssumption": "15% of approved claims have payment pending to demonstrate reimbursement bottlenecks",
+      "paymentDelayDays": {
+        "minimum": 5,
+        "maximum": 45,
+        "illustrativeNote": "Payment typically occurs 5-45 days after approval"
+      },
+      "partialPaymentRate": 0.05,
+      "illustrativePartialPaymentRatio": 0.70,
+      "disbursementNote": "Fully paid claims receive 100% of approved amount. Partial payments receive 70% (illustrative). No unsupported deduction assumptions.",
+      "facilitiesWithoutPayment": {
+        "rate": 0.10,
+        "note": "V3: 10% of claiming facilities have no claims reaching payment stage"
+      }
+    },
+    "note": "Approval and payment are distinct stages - approved claims may have payment delays, partial payments, or be pending disbursement. V3 adds pending acceptance/adjudication stages."
+  },
+  
+  "scenarios": {
+    "description": "Three demonstration scenarios with different implementation levels",
+    "disclaimer": "All scenarios use synthetic data. Numbers do not represent actual PhilHealth performance.",
+    
+    "low": {
+      "name": "Low Implementation & Utilization",
+      "facilitiesTotal": 1500,
+      "accreditationRate": 0.05,
+      "claimsFilingRate": 0.20,
+      "approvalRate": 0.88,
+      "targetClaimsCount": 150,
+      "serviceTypeDistribution": {
+        "general": 0.65,
+        "specialty": 0.35
+      },
+      "financials": {
+        "totalBilled": 1717500,
+        "totalApproved": 1284690,
+        "totalDisbursed": 1258996,
+        "averageBilledPerClaim": 11450,
+        "averageApprovedPerClaim": 8565,
+        "averageDisbursedPerClaim": 8393,
+        "calculation": "150 claims × (65% × ₱9,000 + 35% × ₱16,000) = ₱1,717,500 billed; × 88% approval × 85% avg reimbursement = ₱1,284,690 approved; × 98% disbursement = ₱1,258,996 disbursed"
+      },
+      "description": "Simulates early implementation phase with limited facility engagement"
+    },
+    
+    "moderate": {
+      "name": "Moderate Implementation & Utilization",
+      "facilitiesTotal": 1500,
+      "accreditationRate": 0.15,
+      "claimsFilingRate": 0.40,
+      "approvalRate": 0.92,
+      "targetClaimsCount": 600,
+      "serviceTypeDistribution": {
+        "general": 0.60,
+        "specialty": 0.40
+      },
+      "financials": {
+        "totalBilled": 7080000,
+        "totalApproved": 5536560,
+        "totalDisbursed": 5425829,
+        "averageBilledPerClaim": 11800,
+        "averageApprovedPerClaim": 9228,
+        "averageDisbursedPerClaim": 9043,
+        "calculation": "600 claims × (60% × ₱9,000 + 40% × ₱16,000) = ₱7,080,000 billed; × 92% approval × 85% avg reimbursement = ₱5,536,560 approved; × 98% disbursement = ₱5,425,829 disbursed"
+      },
+      "description": "Simulates mid-stage implementation with growing participation"
+    },
+    
+    "high": {
+      "name": "High Implementation & Utilization",
+      "facilitiesTotal": 1500,
+      "accreditationRate": 0.35,
+      "claimsFilingRate": 0.70,
+      "approvalRate": 0.95,
+      "targetClaimsCount": 2000,
+      "serviceTypeDistribution": {
+        "general": 0.55,
+        "specialty": 0.45
+      },
+      "financials": {
+        "totalBilled": 24300000,
+        "totalApproved": 19622250,
+        "totalDisbursed": 19229805,
+        "averageBilledPerClaim": 12150,
+        "averageApprovedPerClaim": 9811,
+        "averageDisbursedPerClaim": 9615,
+        "calculation": "2000 claims × (55% × ₱9,000 + 45% × ₱16,000) = ₱24,300,000 billed; × 95% approval × 85% avg reimbursement = ₱19,622,250 approved; × 98% disbursement = ₱19,229,805 disbursed"
+      },
+      "description": "Simulates mature implementation with strong facility engagement"
+    },
+    
+    "defaultScenario": "moderate"
+  },
+  
+  "regionalDistribution": {
+    "mode": "configurable",
+    "disclaimer": "Regional distributions are simulated and do not represent actual geographic patterns",
+    
+    "profiles": {
+      "neutral": {
+        "name": "Neutral Distribution",
+        "description": "Equal implementation rates across all regions",
+        "variationCoefficient": 0.0
+      },
+      
+      "differentiated": {
+        "name": "Differentiated Distribution",
+        "description": "Simulated urban-rural variation (NCR higher, rural regions lower)",
+        "variationCoefficient": 0.5,
+        "urbanMultiplier": 2.5,
+        "ruralMultiplier": 0.4,
+        "note": "Simulated pattern only - not based on actual regional data"
+      },
+      
+      "bottleneck_mix": {
+        "name": "Mixed Bottleneck Patterns (V3)",
+        "description": "Simulated regional variations showing different implementation bottlenecks",
+        "disclaimer": "SYNTHETIC PATTERNS - Not actual PhilHealth regional performance",
+        "patterns": {
+          "accreditation_bottleneck": {
+            "regions": ["Region IX (Zamboanga Peninsula)", "Region XII (SOCCSKSARGEN)"],
+            "accreditationMultiplier": 0.4,
+            "claimsMultiplier": 1.0,
+            "description": "Low accreditation rates limit facility participation"
+          },
+          "claims_filing_bottleneck": {
+            "regions": ["Region VI (Western Visayas)", "Region II (Cagayan Valley)"],
+            "accreditationMultiplier": 1.0,
+            "claimsMultiplier": 0.5,
+            "description": "Good accreditation but low claims filing"
+          },
+          "processing_delay": {
+            "regions": ["Region V (Bicol Region)", "Region X (Northern Mindanao)"],
+            "pendingAcceptanceMultiplier": 2.0,
+            "pendingAdjudicationMultiplier": 2.5,
+            "description": "Higher rates of claims stuck in processing"
+          },
+          "reimbursement_bottleneck": {
+            "regions": ["Region IV-B (MIMAROPA)", "Region VIII (Eastern Visayas)"],
+            "approvedButUnpaidMultiplier": 2.0,
+            "partialPaymentMultiplier": 1.5,
+            "description": "More approved claims awaiting payment"
+          },
+          "high_performance": {
+            "regions": ["National Capital Region", "Region VII (Central Visayas)"],
+            "accreditationMultiplier": 1.4,
+            "claimsMultiplier": 1.3,
+            "approvedButUnpaidMultiplier": 0.6,
+            "description": "Better performance across all stages"
+          }
+        },
+        "note": "V3: Differentiated bottlenecks to illustrate various implementation challenges. All patterns are synthetic."
+      }
+    },
+    
+    "defaultProfile": "neutral"
+  },
+  
+  "analyticalSafeguards": {
+    "handleZeroDenominators": true,
+    "displayNAForUndefined": true,
+    "distinguishActivityFromDelivery": true,
+    "notes": [
+      "All rates display 'N/A' when denominator is zero",
+      "Administrative activity (accreditation, filing) is distinct from service delivery",
+      "Facility counts never mixed with claim counts in rate calculations"
+    ]
+  },
+  
+  "validationRequirements": {
+    "uniqueIds": true,
+    "validReferences": true,
+    "dateConsistency": true,
+    "statusConsistency": true,
+    "approvalPaymentSeparation": true,
+    "requiredFields": ["facility_id", "claim_id", "service_date", "claim_amount", "status"]
+  },
+  
+  "displayLabels": {
+    "syntheticDataBanner": "⚠️ SYNTHETIC DATA — For Demonstration Only — Not Actual PhilHealth Performance",
+    "eligibilityWarning": "ILLUSTRATIVE — Eligibility criteria pending official verification",
+    "rateDisclaimer": "All rates are illustrative pending verification of official requirements",
+    "regionalDisclaimer": "Regional patterns are simulated and do not represent actual geographic findings",
+    "thresholdDisclaimer": "All recommendation thresholds are illustrative, not established PhilHealth benchmarks"
+  },
+  
+  "metadata": {
+    "dataType": "SYNTHETIC",
+    "purpose": "Demonstration and development only",
+    "notForProduction": true,
+    "notForPolicyDecisions": true,
+    "generatedBy": "Finvanta Data Generator V3",
+    "configVersion": "3.0-post-review-refinements",
+    "v3Changes": [
+      "Added pending acceptance and adjudication stages",
+      "Facilities with claims but no payments (not 100% payment receipt)",
+      "Regional bottleneck variations (bottleneck_mix profile)",
+      "Improved payment timing indicators",
+      "Explicit analysis cutoff date for time-since-approval calculations"
+    ]
+  }
+}

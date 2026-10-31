@@ -1,0 +1,52 @@
+{
+  "version": "2.0",
+  "generatedDate": "2026-10-31T13:26:26.147Z",
+  "generatedBy": "Finvanta Data Generator V2",
+  "scenario": "low",
+  "regionalProfile": "neutral",
+  "dataType": "SYNTHETIC",
+  "purpose": "Demonstration and testing only",
+  "disclaimer": "This data is entirely synthetic and illustrative. It does not represent actual PhilHealth facilities, claims, or performance. All assumptions are labeled as illustrative rather than actual PhilHealth reimbursement parameters.",
+  "recordCounts": {
+    "facilities": 1500,
+    "accreditations": 69,
+    "claims": 150,
+    "eligibleFacilities": 1500,
+    "filingFacilities": 17,
+    "approvedClaims": 49,
+    "deniedClaims": 18
+  },
+  "financials": {
+    "totalBilled": 1637000,
+    "totalApproved": 1031088,
+    "totalDisbursed": 518185,
+    "currency": "PHP",
+    "note": "Billed = package ceiling; Approved = adjudicated amount; Disbursed = actual payment"
+  },
+  "configUsed": {
+    "facilityLevelAssumption": "None - all facilities eligible pending official verification",
+    "accreditationRate": 0.05,
+    "filingRate": 0.2,
+    "approvalRate": 0.88,
+    "financialAssumptions": {
+      "disclaimer": "Financial estimates are synthetic and illustrative only",
+      "billedToApprovedRatio": 0.92,
+      "approvedToDisbursedRatio": 0.98,
+      "averageReimbursementToPackageRatio": 0.85,
+      "note": "Billed amount = package ceiling; Approved amount accounts for denials; Disbursed amount accounts for payment processing adjustments; Average reimbursement reflects typical adjudication outcomes"
+    },
+    "regionalProfile": "neutral"
+  },
+  "validationStatus": {
+    "uniqueFacilityIds": true,
+    "uniqueClaimIds": true,
+    "validFacilityReferences": true,
+    "approvalPaymentSeparation": true,
+    "dateConsistency": true,
+    "statusConsistency": true
+  },
+  "reproducibility": {
+    "seedUsed": 12345,
+    "note": "Using fixed seeds ensures reproducible datasets"
+  }
+}

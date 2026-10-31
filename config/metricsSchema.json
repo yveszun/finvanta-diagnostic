@@ -1,0 +1,232 @@
+{
+  "version": "2.0",
+  "description": "Standardized metric names across all modules",
+  "lastUpdated": "2026-10-25",
+  
+  "facilityCascadeMetrics": {
+    "stage1_eligibleFacilities": {
+      "type": "count",
+      "unit": "facilities",
+      "description": "Number of facilities meeting eligibility criteria for the benefit"
+    },
+    "stage2_accreditedFacilities": {
+      "type": "count",
+      "unit": "facilities",
+      "description": "Number of facilities that completed accreditation process"
+    },
+    "stage3_filingFacilities": {
+      "type": "count",
+      "unit": "facilities",
+      "description": "Number of accredited facilities that have filed at least one claim"
+    },
+    "stage4_receivingPaymentFacilities": {
+      "type": "count",
+      "unit": "facilities",
+      "description": "Number of facilities that have received at least one payment"
+    },
+    "facilitiesWithClaimsButNoPayment": {
+      "type": "count",
+      "unit": "facilities",
+      "formula": "filingFacilities - receivingPaymentFacilities",
+      "description": "Number of facilities that filed claims but have not received any payment"
+    },
+    "facilitiesWithClaimsButNoPaymentPercentage": {
+      "type": "percentage",
+      "unit": "percent",
+      "formula": "(facilitiesWithClaimsButNoPayment / filingFacilities) × 100",
+      "description": "Percentage of filing facilities that have not received any payment"
+    },
+    "accreditationRate": {
+      "type": "percentage",
+      "unit": "percent",
+      "formula": "(accreditedFacilities / eligibleFacilities) × 100",
+      "description": "Percentage of eligible facilities that completed accreditation"
+    },
+    "filingRate": {
+      "type": "percentage",
+      "unit": "percent",
+      "formula": "(filingFacilities / accreditedFacilities) × 100",
+      "description": "Percentage of accredited facilities that filed claims"
+    },
+    "paymentReceiptRate": {
+      "type": "percentage",
+      "unit": "percent",
+      "formula": "(receivingPaymentFacilities / filingFacilities) × 100",
+      "description": "Percentage of filing facilities that received payment"
+    }
+  },
+  
+  "claimsCascadeMetrics": {
+    "stage1_submittedClaims": {
+      "type": "count",
+      "unit": "claims",
+      "description": "Total number of claims submitted"
+    },
+    "stage2_acceptedClaims": {
+      "type": "count",
+      "unit": "claims",
+      "description": "Number of claims that passed initial validation"
+    },
+    "stage3_adjudicatedClaims": {
+      "type": "count",
+      "unit": "claims",
+      "description": "Number of claims that completed adjudication review"
+    },
+    "stage4_approvedClaims": {
+      "type": "count",
+      "unit": "claims",
+      "description": "Number of claims approved for payment"
+    },
+    "stage5_paidClaims": {
+      "type": "count",
+      "unit": "claims",
+      "description": "Number of claims for which payment was disbursed"
+    },
+    "approvedUnpaidClaims": {
+      "type": "count",
+      "unit": "claims",
+      "description": "Number of claims approved but payment pending"
+    },
+    "partiallyPaidClaims": {
+      "type": "count",
+      "unit": "claims",
+      "description": "Number of claims that received only partial payment"
+    },
+    "acceptanceRate": {
+      "type": "percentage",
+      "unit": "percent",
+      "formula": "(acceptedClaims / submittedClaims) × 100",
+      "description": "Percentage of submitted claims that passed initial validation"
+    },
+    "adjudicationRate": {
+      "type": "percentage",
+      "unit": "percent",
+      "formula": "(adjudicatedClaims / acceptedClaims) × 100",
+      "description": "Percentage of accepted claims that completed adjudication"
+    },
+    "approvalRate": {
+      "type": "percentage",
+      "unit": "percent",
+      "formula": "(approvedClaims / adjudicatedClaims) × 100",
+      "description": "Percentage of adjudicated claims that were approved"
+    },
+    "paymentRate": {
+      "type": "percentage",
+      "unit": "percent",
+      "formula": "(paidClaims / approvedClaims) × 100",
+      "description": "Percentage of approved claims that received payment"
+    },
+    "claimPaymentRate": {
+      "type": "percentage",
+      "unit": "percent",
+      "formula": "(paidClaims / approvedClaims) × 100",
+      "description": "Percentage of approved claims that received payment (alias)"
+    }
+  },
+  
+  "financialMetrics": {
+    "totalBilledAmount": {
+      "type": "currency",
+      "unit": "PHP",
+      "description": "Total amount billed across all submitted claims"
+    },
+    "totalApprovedAmount": {
+      "type": "currency",
+      "unit": "PHP",
+      "description": "Total amount approved for payment across approved claims"
+    },
+    "totalDisbursedAmount": {
+      "type": "currency",
+      "unit": "PHP",
+      "description": "Total amount actually paid to facilities"
+    },
+    "totalOutstandingAmount": {
+      "type": "currency",
+      "unit": "PHP",
+      "formula": "totalApprovedAmount - totalDisbursedAmount",
+      "description": "Approved amount not yet disbursed"
+    },
+    "approvedToDisbursedRatio": {
+      "type": "percentage",
+      "unit": "percent",
+      "formula": "(totalDisbursedAmount / totalApprovedAmount) × 100",
+      "description": "Percentage of approved amounts that have been disbursed"
+    },
+    "outstandingApprovedPercentage": {
+      "type": "percentage",
+      "unit": "percent",
+      "formula": "(totalOutstandingAmount / totalApprovedAmount) × 100",
+      "description": "Percentage of approved amounts still outstanding"
+    },
+    "averageBilledPerClaim": {
+      "type": "currency",
+      "unit": "PHP",
+      "formula": "totalBilledAmount / submittedClaims",
+      "description": "Average billed amount per submitted claim"
+    },
+    "averageApprovedPerClaim": {
+      "type": "currency",
+      "unit": "PHP",
+      "formula": "totalApprovedAmount / approvedClaims",
+      "description": "Average approved amount per approved claim"
+    },
+    "averageDisbursedPerClaim": {
+      "type": "currency",
+      "unit": "PHP",
+      "formula": "totalDisbursedAmount / paidClaims",
+      "description": "Average disbursed amount per paid claim"
+    }
+  },
+  
+  "timelineMetrics": {
+    "averageDaysToApproval": {
+      "type": "duration",
+      "unit": "days",
+      "formula": "avg(approvalDate - serviceDate) for approved claims",
+      "description": "Average days from service date to approval"
+    },
+    "averageDaysToPayment": {
+      "type": "duration",
+      "unit": "days",
+      "formula": "avg(paymentDate - serviceDate) for paid claims",
+      "description": "Average days from service date to payment disbursement"
+    },
+    "medianDaysToPayment": {
+      "type": "duration",
+      "unit": "days",
+      "description": "Median days from service date to payment disbursement"
+    }
+  },
+  
+  "regionalMetrics": {
+    "regionalAccreditationRate": {
+      "type": "percentage",
+      "unit": "percent",
+      "description": "Accreditation rate for a specific region"
+    },
+    "regionalFilingRate": {
+      "type": "percentage",
+      "unit": "percent",
+      "description": "Filing rate for a specific region"
+    },
+    "regionalApprovalRate": {
+      "type": "percentage",
+      "unit": "percent",
+      "description": "Approval rate for a specific region"
+    },
+    "regionalVariance": {
+      "type": "percentage",
+      "unit": "percentage points",
+      "formula": "max(regionalRate) - min(regionalRate)",
+      "description": "Difference between highest and lowest regional rates"
+    }
+  },
+  
+  "validationRules": {
+    "allMetricsMustBeNonNegative": true,
+    "percentagesMustBe0to100": true,
+    "facilitiesNeverMixedWithClaims": true,
+    "conversionRatesSameUnitOnly": true,
+    "zeroDenominatorReturnsNA": true
+  }
+}

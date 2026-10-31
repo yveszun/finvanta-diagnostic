@@ -1,0 +1,6 @@
+{
+  "analysisCutoffDate": "2025-07-15T23:59:59.000Z",
+  "description": "Analysis cutoff represents the END of the reporting day (23:59:59)",
+  "interpretation": "All events on or before July 15, 2025 23:59:59 UTC are included in the analysis",
+  "usage": "Import this configuration in all components to ensure consistent cutoff handling"
+}

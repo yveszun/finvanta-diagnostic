@@ -1,0 +1,317 @@
+{
+  "version": "2.0",
+  "lastUpdated": "2026-10-25",
+  "disclaimer": "ALL THRESHOLDS ARE ILLUSTRATIVE FOR DEMONSTRATION PURPOSES ONLY. These are not established PhilHealth benchmarks and should not be treated as policy targets without official verification.",
+  
+  "thresholdWarning": "⚠️ ILLUSTRATIVE THRESHOLDS — Not verified PhilHealth policy targets",
+  
+  "rules": [
+    {
+      "id": "LOW_ACCREDITATION_CRITICAL",
+      "condition": "accreditationRate < 10",
+      "severity": "critical",
+      "category": "Accreditation",
+      "metricsRequired": ["stage1_eligibleFacilities", "stage2_accreditedFacilities", "accreditationRate"],
+      
+      "observedFinding": "Accreditation rate is {{accreditationRate}}%",
+      "supportingIndicator": "{{stage2_accreditedFacilities}} of {{stage1_eligibleFacilities}} facilities accredited for this benefit",
+      
+      "potentialExplanation": "This MAY indicate: (1) Complex accreditation requirements, (2) Limited facility awareness of benefit, (3) Insufficient implementation support resources, (4) Documentation or capacity barriers, (5) Eligibility criteria unclear or restrictive",
+      
+      "evidenceLimitations": "We do not know: Which facilities attempted accreditation, Reasons for non-participation, Whether facilities are aware of the benefit, Capacity constraints at facility level, Actual eligibility if official criteria differ",
+      
+      "suggestedInvestigation": "Survey sample of non-accredited facilities; Review accreditation application data for rejection reasons; Interview regional coordinators on outreach effectiveness; Verify official eligibility criteria; Assess technical assistance availability",
+      
+      "possibleInstitutionalDecisions": "Consider: (1) Review and simplify accreditation requirements if appropriate, (2) Launch targeted facility engagement campaign, (3) Provide technical assistance for applications, (4) Clarify eligibility criteria officially, (5) Assess whether benefit design aligns with facility capacity",
+      
+      "priority": "HIGH",
+      "threshold": {
+        "value": 10,
+        "unit": "percent",
+        "label": "ILLUSTRATIVE ONLY",
+        "source": "Demonstration purposes - not a verified PhilHealth benchmark",
+        "note": "This threshold is not based on official policy documentation"
+      }
+    },
+    
+    {
+      "id": "MODERATE_ACCREDITATION",
+      "condition": "accreditationRate >= 10 AND accreditationRate < 25",
+      "severity": "medium",
+      "category": "Accreditation",
+      "metricsRequired": ["stage1_eligibleFacilities", "stage2_accreditedFacilities", "accreditationRate"],
+      
+      "observedFinding": "Accreditation rate is {{accreditationRate}}%",
+      "supportingIndicator": "{{stage2_accreditedFacilities}} of {{stage1_eligibleFacilities}} facilities accredited",
+      
+      "potentialExplanation": "This MAY indicate moderate early-stage uptake with room for acceleration",
+      
+      "evidenceLimitations": "Trend data not available; Barriers to higher uptake not identified; Actual eligibility criteria pending verification",
+      
+      "suggestedInvestigation": "Track monthly accreditation trends; Identify facilities in application process; Compare performance across regions; Document success factors from accredited facilities",
+      
+      "possibleInstitutionalDecisions": "Consider: (1) Targeted outreach to remaining eligible facilities, (2) Share success stories and best practices, (3) Monitor trend trajectory over next 3 months",
+      
+      "priority": "MEDIUM",
+      "threshold": {
+        "value": 25,
+        "unit": "percent",
+        "label": "ILLUSTRATIVE ONLY",
+        "source": "Demonstration purposes only",
+        "note": "Not an established PhilHealth benchmark"
+      }
+    },
+    
+    {
+      "id": "LOW_CLAIMS_FILING",
+      "condition": "accreditationRate >= 15 AND filingRate < 40",
+      "severity": "critical",
+      "category": "Service Activation",
+      "metricsRequired": ["stage2_accreditedFacilities", "stage3_filingFacilities", "filingRate"],
+      
+      "observedFinding": "Only {{filingRate}}% of accredited facilities are filing claims",
+      "supportingIndicator": "{{stage3_filingFacilities}} of {{stage2_accreditedFacilities}} accredited facilities have submitted claims",
+      
+      "potentialExplanation": "This MAY indicate: (1) Services not activated post-accreditation, (2) Provider awareness gaps about claims process, (3) Lower patient demand than anticipated, (4) Claims submission barriers, (5) Administrative capacity constraints",
+      
+      "evidenceLimitations": "We do not know: Which accredited facilities have activated services, Provider training completion status, Patient demand levels, Specific claims process barriers, Whether low filing reflects low service delivery or only low administrative reporting",
+      
+      "suggestedInvestigation": "Verify service activation status at accredited facilities; Survey providers on benefit awareness and claims process challenges; Review claims rejection patterns; Assess patient referral and awareness; Distinguish service delivery from claims filing",
+      
+      "possibleInstitutionalDecisions": "Consider: (1) Post-accreditation provider training program, (2) Simplified claims submission process, (3) Patient and provider awareness campaigns, (4) Monitor service activation timelines, (5) Assess whether benefit design meets patient needs",
+      
+      "priority": "HIGH",
+      "threshold": {
+        "value": 40,
+        "unit": "percent",
+        "label": "ILLUSTRATIVE ONLY",
+        "source": "Demonstration purposes only",
+        "note": "Not verified against PhilHealth policy targets"
+      }
+    },
+    
+    {
+      "id": "LOW_CLAIMS_APPROVAL_RATE",
+      "condition": "approvalRate < 80",
+      "severity": "critical",
+      "category": "Claims Adjudication",
+      "metricsRequired": ["stage3_adjudicatedClaims", "stage4_approvedClaims", "approvalRate"],
+      
+      "observedFinding": "Claims approval rate is {{approvalRate}}%",
+      "supportingIndicator": "{{stage4_approvedClaims}} of {{stage3_adjudicatedClaims}} adjudicated claims approved",
+      
+      "potentialExplanation": "This MAY indicate: (1) Documentation quality issues, (2) Eligibility verification challenges, (3) Service coding errors, (4) Claims process complexity, (5) Unclear benefit rules",
+      
+      "evidenceLimitations": "We do not know: Top denial reasons by category, Whether denials are systematic or facility-specific, Whether denied claims are corrected and resubmitted, Training gaps at facility level",
+      
+      "suggestedInvestigation": "Analyze denial reasons by frequency; Identify facilities with high denial rates; Review documentation requirements for clarity; Assess provider training adequacy; Distinguish technical denials from policy-based denials",
+      
+      "possibleInstitutionalDecisions": "Consider: (1) Targeted training on common denial reasons, (2) Simplify documentation requirements if appropriate, (3) Improve claims submission guidance, (4) Allow claim corrections and resubmissions, (5) Review whether benefit rules are clearly communicated",
+      
+      "priority": "HIGH",
+      "threshold": {
+        "value": 80,
+        "unit": "percent",
+        "label": "ILLUSTRATIVE ONLY",
+        "source": "Demonstration purposes only",
+        "note": "Not an established PhilHealth benchmark"
+      }
+    },
+    
+    {
+      "id": "PAYMENT_DELAY",
+      "condition": "averageDaysToPayment > 60",
+      "severity": "medium",
+      "category": "Payment Processing",
+      "metricsRequired": ["averageDaysToPayment", "stage5_paidClaims"],
+      
+      "observedFinding": "Average time from service to payment is {{averageDaysToPayment}} days",
+      "supportingIndicator": "Based on {{stage5_paidClaims}} paid claims",
+      
+      "potentialExplanation": "This MAY indicate: (1) Processing capacity constraints, (2) Documentation review backlogs, (3) Payment system delays, (4) Multiple approval layers",
+      
+      "evidenceLimitations": "We do not know: Breakdown of delays by processing stage (acceptance, adjudication, approval, disbursement), Whether delays are systemic or case-specific, Impact on provider cash flow and participation",
+      
+      "suggestedInvestigation": "Map processing timeline by stage; Identify bottleneck stages; Assess processing capacity; Interview facilities on impact of payment delays; Distinguish approval delays from disbursement delays",
+      
+      "possibleInstitutionalDecisions": "Consider: (1) Increase adjudication capacity, (2) Streamline approval workflow, (3) Expedite disbursement processing, (4) Communicate expected timelines to providers clearly",
+      
+      "priority": "MEDIUM",
+      "threshold": {
+        "value": 60,
+        "unit": "days",
+        "label": "ILLUSTRATIVE ONLY",
+        "source": "Demonstration purposes only",
+        "note": "Not a verified PhilHealth service standard"
+      }
+    },
+    
+    {
+      "id": "STRONG_PERFORMANCE",
+      "condition": "accreditationRate > 30 AND filingRate > 60 AND approvalRate > 90 AND approvedToDisbursedRatio > 80",
+      "severity": "success",
+      "category": "Monitoring",
+      "metricsRequired": ["accreditationRate", "filingRate", "approvalRate", "approvedToDisbursedRatio"],
+      
+      "observedFinding": "Implementation shows strong uptake across all stages including reimbursement",
+      "supportingIndicator": "Accreditation: {{accreditationRate}}%; Filing: {{filingRate}}%; Approval: {{approvalRate}}%; Disbursement: {{approvedToDisbursedRatio}}%",
+      
+      "potentialExplanation": "This MAY indicate effective implementation strategy, strong facility engagement, and efficient processing systems",
+      
+      "evidenceLimitations": "We do not know: Quality of services, Patient outcomes, Whether service delivery volumes match administrative reporting, Impact on patient access and satisfaction, Sustainability of current performance",
+      
+      "suggestedInvestigation": "Continue monthly monitoring of trends across all stages; Document success factors for potential replication; Begin outcome evaluation (patient access, quality, satisfaction); Assess actual service delivery beyond administrative metrics; Monitor for emerging bottlenecks",
+      
+      "possibleInstitutionalDecisions": "Consider: (1) Maintain current implementation approach, (2) Document and share success factors, (3) Shift focus to quality and outcome measurement, (4) Plan outcome evaluation study, (5) Monitor sustainability of performance",
+      
+      "priority": "LOW",
+      "threshold": {
+        "values": [30, 60, 90, 80],
+        "units": ["percent", "percent", "percent", "percent"],
+        "label": "ILLUSTRATIVE ONLY",
+        "source": "Demonstration purposes only",
+        "note": "These thresholds are not official PhilHealth performance targets"
+      }
+    },
+    
+    {
+      "id": "CRITICAL_REIMBURSEMENT_BOTTLENECK",
+      "condition": "approvedToDisbursedRatio < 60",
+      "severity": "critical",
+      "category": "Reimbursement",
+      "metricsRequired": ["approvedToDisbursedRatio", "totalApprovedAmount", "totalDisbursedAmount", "totalOutstandingAmount", "outstandingApprovedPercentage", "approvedUnpaidClaims"],
+      
+      "observedFinding": "Only {{approvedToDisbursedRatio}}% of approved amounts have been disbursed",
+      "supportingIndicator": "₱{{totalOutstandingAmount}} approved but not yet disbursed ({{outstandingApprovedPercentage}}% of approved); {{approvedUnpaidClaims}} claims approved but payment pending",
+      
+      "potentialExplanation": "This MAY indicate: (1) Disbursement system capacity constraints, (2) Payment processing backlogs, (3) Documentation requirements for final disbursement, (4) Banking or financial system delays, (5) Budget release timing issues",
+      
+      "evidenceLimitations": "We do not know: Breakdown of delays by processing substage (approval-to-obligation, obligation-to-disbursement), Whether delays are systemic or facility-specific, Root causes of disbursement bottleneck, Impact on provider cash flow and continued participation",
+      
+      "suggestedInvestigation": "Map disbursement process timeline by substage; Identify specific bottleneck points (obligation authority, banking transfers, documentation requirements); Assess disbursement processing capacity; Survey facilities on cash flow impact; Distinguish approval bottlenecks from payment system bottlenecks",
+      
+      "possibleInstitutionalDecisions": "Consider: (1) Increase disbursement processing capacity, (2) Streamline documentation for final payment, (3) Expedite banking and transfer processes, (4) Assess budget release procedures, (5) Implement interim payment mechanisms for approved claims, (6) Monitor provider cash flow impact on participation",
+      
+      "priority": "CRITICAL",
+      "threshold": {
+        "value": 60,
+        "unit": "percent",
+        "label": "ILLUSTRATIVE ONLY",
+        "source": "Demonstration purposes only",
+        "note": "Not a verified PhilHealth disbursement standard"
+      }
+    },
+    
+    {
+      "id": "MODERATE_REIMBURSEMENT_DELAY",
+      "condition": "approvedToDisbursedRatio >= 60 AND approvedToDisbursedRatio < 80",
+      "severity": "medium",
+      "category": "Reimbursement",
+      "metricsRequired": ["approvedToDisbursedRatio", "totalOutstandingAmount", "outstandingApprovedPercentage", "approvedUnpaidClaims"],
+      
+      "observedFinding": "{{approvedToDisbursedRatio}}% of approved amounts have been disbursed",
+      "supportingIndicator": "₱{{totalOutstandingAmount}} approved but awaiting disbursement ({{outstandingApprovedPercentage}}% of approved); {{approvedUnpaidClaims}} claims pending payment",
+      
+      "potentialExplanation": "This MAY indicate moderate disbursement processing delays requiring monitoring",
+      
+      "evidenceLimitations": "We do not know: Whether current disbursement rate is improving or deteriorating, Expected timeline for outstanding payments, Provider satisfaction with payment timelines",
+      
+      "suggestedInvestigation": "Track monthly disbursement rates; Monitor trend direction; Assess whether outstanding balances are increasing; Survey provider feedback on payment timelines; Compare to other benefit programs if available",
+      
+      "possibleInstitutionalDecisions": "Consider: (1) Monitor disbursement rate trends closely, (2) Assess need for process improvements if rate deteriorates, (3) Communicate expected payment timelines to providers clearly",
+      
+      "priority": "MEDIUM",
+      "threshold": {
+        "value": 80,
+        "unit": "percent",
+        "label": "ILLUSTRATIVE ONLY",
+        "source": "Demonstration purposes only",
+        "note": "Not an established PhilHealth benchmark"
+      }
+    },
+    
+    {
+      "id": "FACILITIES_NOT_RECEIVING_PAYMENT",
+      "condition": "facilitiesWithClaimsButNoPayment > 50",
+      "severity": "high",
+      "category": "Reimbursement",
+      "metricsRequired": ["facilitiesWithClaimsButNoPayment", "stage3_filingFacilities", "stage4_receivingPaymentFacilities", "facilitiesWithClaimsButNoPaymentPercentage"],
+      
+      "observedFinding": "{{facilitiesWithClaimsButNoPayment}} facilities ({{facilitiesWithClaimsButNoPaymentPercentage}}%) have filed claims but have not received any payment",
+      "supportingIndicator": "{{stage3_filingFacilities}} facilities filing claims, only {{stage4_receivingPaymentFacilities}} receiving payment",
+      
+      "potentialExplanation": "This MAY indicate: (1) Recent claim submissions still in processing, (2) Documentation or compliance issues preventing payment, (3) Banking setup incomplete at facility level, (4) Systematic payment barriers for certain facility types, (5) Claims rejected but facilities continuing to submit",
+      
+      "evidenceLimitations": "We do not know: Which specific facilities affected, How long since their first claim submission, Whether their claims are approved but unpaid vs. still in processing vs. denied, Specific barriers preventing payment receipt",
+      
+      "suggestedInvestigation": "Identify facilities with no payment despite claims; Assess time since first claim submission; Review claim status (approved/processing/denied); Check banking and compliance documentation; Distinguish new filers from long-standing payment issues; Provide targeted technical assistance",
+      
+      "possibleInstitutionalDecisions": "Consider: (1) Proactive outreach to facilities with approved but unpaid claims, (2) Technical assistance for banking and documentation setup, (3) Review whether systematic barriers affect specific facility types, (4) Monitor new filer payment timelines",
+      
+      "priority": "HIGH",
+      "threshold": {
+        "value": 50,
+        "unit": "facilities",
+        "label": "ILLUSTRATIVE ONLY",
+        "source": "Demonstration purposes only",
+        "note": "Threshold not based on established policy standard"
+      }
+    },
+    
+    {
+      "id": "HIGH_PARTIALLY_PAID_CLAIMS",
+      "condition": "partiallyPaidClaims > 30",
+      "severity": "medium",
+      "category": "Reimbursement",
+      "metricsRequired": ["partiallyPaidClaims", "stage4_approvedClaims"],
+      
+      "observedFinding": "{{partiallyPaidClaims}} claims have received only partial payment",
+      "supportingIndicator": "Out of {{stage4_approvedClaims}} approved claims",
+      
+      "potentialExplanation": "This MAY indicate: (1) Systematic underpayment issues, (2) Benefit package limits reached, (3) Documentation supporting full approved amount not complete, (4) Phased payment procedures, (5) Disputed amounts under review",
+      
+      "evidenceLimitations": "We do not know: Reasons for partial payment by case, Whether partial payments are expected (benefit limits) or processing issues, Amount of underpayment relative to approved, Provider impact and satisfaction",
+      
+      "suggestedInvestigation": "Analyze reasons for partial payment by frequency; Assess whether partial payments are appropriate (benefit limits) or errors; Calculate total underpayment amount; Survey provider feedback; Review whether partial payment procedures are clearly communicated",
+      
+      "possibleInstitutionalDecisions": "Consider: (1) Review benefit limits if causing systematic partial payments, (2) Clarify documentation requirements for full payment, (3) Improve communication about partial payment reasons, (4) Assess whether payment procedures need revision",
+      
+      "priority": "MEDIUM",
+      "threshold": {
+        "value": 30,
+        "unit": "claims",
+        "label": "ILLUSTRATIVE ONLY",
+        "source": "Demonstration purposes only",
+        "note": "Not an established threshold"
+      }
+    }
+  ],
+  
+  "displayGuidelines": {
+    "alwaysShowThresholdLabel": true,
+    "prominentDisclaimerOnEveryPage": true,
+    "distinguishFindingsFromHypotheses": true,
+    "useLanguage": {
+      "findings": "The data shows..., Observed..., Measured...",
+      "hypotheses": "This MAY indicate..., Potential explanation..., Possible factors..."
+    },
+    "prominentLimitationsDisplay": true,
+    "actionableInvestigationSteps": true,
+    "neverPresentAsEstablishedBenchmarks": true
+  },
+  
+  "analyticalNotes": [
+    "All thresholds are illustrative and not based on verified PhilHealth policy documentation",
+    "Recommendations distinguish observed administrative activity from actual service delivery",
+    "Evidence limitations are explicitly stated for each finding",
+    "Hypotheses are clearly labeled as potential explanations requiring investigation",
+    "Institutional decisions are presented as options for consideration, not prescriptive mandates"
+  ],
+  
+  "metadata": {
+    "configVersion": "2.0-conditional-approval",
+    "notForProduction": true,
+    "notForPolicyDecisions": true,
+    "purpose": "Demonstration of analytical framework only"
+  }
+}

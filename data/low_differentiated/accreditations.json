@@ -1,0 +1,936 @@
+[
+  {
+    "accreditation_id": "ACC_FAC_NAT_0035_2025-04-05",
+    "facility_id": "FAC_NAT_0035",
+    "accreditation_date": "2025-04-05",
+    "valid_until": "2026-04-05",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_NAT_0082_2025-05-16",
+    "facility_id": "FAC_NAT_0082",
+    "accreditation_date": "2025-05-16",
+    "valid_until": "2026-05-16",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_NAT_0010_2025-03-03",
+    "facility_id": "FAC_NAT_0010",
+    "accreditation_date": "2025-03-03",
+    "valid_until": "2026-03-03",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_NAT_0017_2025-02-26",
+    "facility_id": "FAC_NAT_0017",
+    "accreditation_date": "2025-02-26",
+    "valid_until": "2026-02-26",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_NAT_0066_2025-05-26",
+    "facility_id": "FAC_NAT_0066",
+    "accreditation_date": "2025-05-26",
+    "valid_until": "2026-05-26",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_NAT_0085_2025-06-01",
+    "facility_id": "FAC_NAT_0085",
+    "accreditation_date": "2025-06-01",
+    "valid_until": "2026-06-01",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_NAT_0030_2025-01-25",
+    "facility_id": "FAC_NAT_0030",
+    "accreditation_date": "2025-01-25",
+    "valid_until": "2026-01-25",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_NAT_0014_2025-03-08",
+    "facility_id": "FAC_NAT_0014",
+    "accreditation_date": "2025-03-08",
+    "valid_until": "2026-03-08",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_NAT_0042_2025-02-11",
+    "facility_id": "FAC_NAT_0042",
+    "accreditation_date": "2025-02-11",
+    "valid_until": "2026-02-11",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_NAT_0004_2025-05-11",
+    "facility_id": "FAC_NAT_0004",
+    "accreditation_date": "2025-05-11",
+    "valid_until": "2026-05-11",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_NAT_0027_2025-02-27",
+    "facility_id": "FAC_NAT_0027",
+    "accreditation_date": "2025-02-27",
+    "valid_until": "2026-02-27",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0166_2025-03-21",
+    "facility_id": "FAC_REG_0166",
+    "accreditation_date": "2025-03-21",
+    "valid_until": "2026-03-21",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0164_2025-05-07",
+    "facility_id": "FAC_REG_0164",
+    "accreditation_date": "2025-05-07",
+    "valid_until": "2026-05-07",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0092_2025-05-18",
+    "facility_id": "FAC_REG_0092",
+    "accreditation_date": "2025-05-18",
+    "valid_until": "2026-05-18",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0171_2025-02-26",
+    "facility_id": "FAC_REG_0171",
+    "accreditation_date": "2025-02-26",
+    "valid_until": "2026-02-26",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0097_2025-01-28",
+    "facility_id": "FAC_REG_0097",
+    "accreditation_date": "2025-01-28",
+    "valid_until": "2026-01-28",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0239_2025-02-04",
+    "facility_id": "FAC_REG_0239",
+    "accreditation_date": "2025-02-04",
+    "valid_until": "2026-02-04",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0193_2025-05-13",
+    "facility_id": "FAC_REG_0193",
+    "accreditation_date": "2025-05-13",
+    "valid_until": "2026-05-13",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0196_2025-06-15",
+    "facility_id": "FAC_REG_0196",
+    "accreditation_date": "2025-06-15",
+    "valid_until": "2026-06-15",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0206_2025-04-24",
+    "facility_id": "FAC_REG_0206",
+    "accreditation_date": "2025-04-24",
+    "valid_until": "2026-04-24",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0236_2025-01-27",
+    "facility_id": "FAC_REG_0236",
+    "accreditation_date": "2025-01-27",
+    "valid_until": "2026-01-27",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0350_2025-01-03",
+    "facility_id": "FAC_REG_0350",
+    "accreditation_date": "2025-01-03",
+    "valid_until": "2026-01-03",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0318_2025-05-03",
+    "facility_id": "FAC_REG_0318",
+    "accreditation_date": "2025-05-03",
+    "valid_until": "2026-05-03",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0285_2025-04-14",
+    "facility_id": "FAC_REG_0285",
+    "accreditation_date": "2025-04-14",
+    "valid_until": "2026-04-14",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0330_2025-02-19",
+    "facility_id": "FAC_REG_0330",
+    "accreditation_date": "2025-02-19",
+    "valid_until": "2026-02-19",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0429_2025-01-26",
+    "facility_id": "FAC_REG_0429",
+    "accreditation_date": "2025-01-26",
+    "valid_until": "2026-01-26",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0371_2025-06-26",
+    "facility_id": "FAC_REG_0371",
+    "accreditation_date": "2025-06-26",
+    "valid_until": "2026-06-26",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0424_2025-03-05",
+    "facility_id": "FAC_REG_0424",
+    "accreditation_date": "2025-03-05",
+    "valid_until": "2026-03-05",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0391_2025-03-26",
+    "facility_id": "FAC_REG_0391",
+    "accreditation_date": "2025-03-26",
+    "valid_until": "2026-03-26",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0390_2025-03-19",
+    "facility_id": "FAC_REG_0390",
+    "accreditation_date": "2025-03-19",
+    "valid_until": "2026-03-19",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0507_2025-02-27",
+    "facility_id": "FAC_REG_0507",
+    "accreditation_date": "2025-02-27",
+    "valid_until": "2026-02-27",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0527_2025-03-14",
+    "facility_id": "FAC_REG_0527",
+    "accreditation_date": "2025-03-14",
+    "valid_until": "2026-03-14",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0542_2025-01-03",
+    "facility_id": "FAC_REG_0542",
+    "accreditation_date": "2025-01-03",
+    "valid_until": "2026-01-03",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0534_2025-02-03",
+    "facility_id": "FAC_REG_0534",
+    "accreditation_date": "2025-02-03",
+    "valid_until": "2026-02-03",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0543_2025-03-28",
+    "facility_id": "FAC_REG_0543",
+    "accreditation_date": "2025-03-28",
+    "valid_until": "2026-03-28",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0593_2025-06-02",
+    "facility_id": "FAC_REG_0593",
+    "accreditation_date": "2025-06-02",
+    "valid_until": "2026-06-02",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0695_2025-02-22",
+    "facility_id": "FAC_REG_0695",
+    "accreditation_date": "2025-02-22",
+    "valid_until": "2026-02-22",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0631_2025-03-26",
+    "facility_id": "FAC_REG_0631",
+    "accreditation_date": "2025-03-26",
+    "valid_until": "2026-03-26",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0618_2025-06-12",
+    "facility_id": "FAC_REG_0618",
+    "accreditation_date": "2025-06-12",
+    "valid_until": "2026-06-12",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0647_2025-04-14",
+    "facility_id": "FAC_REG_0647",
+    "accreditation_date": "2025-04-14",
+    "valid_until": "2026-04-14",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0761_2025-05-09",
+    "facility_id": "FAC_REG_0761",
+    "accreditation_date": "2025-05-09",
+    "valid_until": "2026-05-09",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0764_2025-06-20",
+    "facility_id": "FAC_REG_0764",
+    "accreditation_date": "2025-06-20",
+    "valid_until": "2026-06-20",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0723_2025-05-17",
+    "facility_id": "FAC_REG_0723",
+    "accreditation_date": "2025-05-17",
+    "valid_until": "2026-05-17",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0857_2025-02-10",
+    "facility_id": "FAC_REG_0857",
+    "accreditation_date": "2025-02-10",
+    "valid_until": "2026-02-10",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0795_2025-06-01",
+    "facility_id": "FAC_REG_0795",
+    "accreditation_date": "2025-06-01",
+    "valid_until": "2026-06-01",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0854_2025-04-22",
+    "facility_id": "FAC_REG_0854",
+    "accreditation_date": "2025-04-22",
+    "valid_until": "2026-04-22",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0805_2025-03-24",
+    "facility_id": "FAC_REG_0805",
+    "accreditation_date": "2025-03-24",
+    "valid_until": "2026-03-24",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0835_2025-02-06",
+    "facility_id": "FAC_REG_0835",
+    "accreditation_date": "2025-02-06",
+    "valid_until": "2026-02-06",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0918_2025-01-08",
+    "facility_id": "FAC_REG_0918",
+    "accreditation_date": "2025-01-08",
+    "valid_until": "2026-01-08",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0889_2025-01-14",
+    "facility_id": "FAC_REG_0889",
+    "accreditation_date": "2025-01-14",
+    "valid_until": "2026-01-14",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0934_2025-03-14",
+    "facility_id": "FAC_REG_0934",
+    "accreditation_date": "2025-03-14",
+    "valid_until": "2026-03-14",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0963_2025-06-06",
+    "facility_id": "FAC_REG_0963",
+    "accreditation_date": "2025-06-06",
+    "valid_until": "2026-06-06",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_1042_2025-03-10",
+    "facility_id": "FAC_REG_1042",
+    "accreditation_date": "2025-03-10",
+    "valid_until": "2026-03-10",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0998_2025-05-04",
+    "facility_id": "FAC_REG_0998",
+    "accreditation_date": "2025-05-04",
+    "valid_until": "2026-05-04",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_1012_2025-06-25",
+    "facility_id": "FAC_REG_1012",
+    "accreditation_date": "2025-06-25",
+    "valid_until": "2026-06-25",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_1034_2025-02-10",
+    "facility_id": "FAC_REG_1034",
+    "accreditation_date": "2025-02-10",
+    "valid_until": "2026-02-10",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_0984_2025-01-03",
+    "facility_id": "FAC_REG_0984",
+    "accreditation_date": "2025-01-03",
+    "valid_until": "2026-01-03",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_1056_2025-05-04",
+    "facility_id": "FAC_REG_1056",
+    "accreditation_date": "2025-05-04",
+    "valid_until": "2026-05-04",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_1142_2025-02-11",
+    "facility_id": "FAC_REG_1142",
+    "accreditation_date": "2025-02-11",
+    "valid_until": "2026-02-11",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_1125_2025-03-01",
+    "facility_id": "FAC_REG_1125",
+    "accreditation_date": "2025-03-01",
+    "valid_until": "2026-03-01",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_1097_2025-03-26",
+    "facility_id": "FAC_REG_1097",
+    "accreditation_date": "2025-03-26",
+    "valid_until": "2026-03-26",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_1206_2025-03-20",
+    "facility_id": "FAC_REG_1206",
+    "accreditation_date": "2025-03-20",
+    "valid_until": "2026-03-20",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_1204_2025-05-07",
+    "facility_id": "FAC_REG_1204",
+    "accreditation_date": "2025-05-07",
+    "valid_until": "2026-05-07",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_1181_2025-06-16",
+    "facility_id": "FAC_REG_1181",
+    "accreditation_date": "2025-06-16",
+    "valid_until": "2026-06-16",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_1176_2025-05-20",
+    "facility_id": "FAC_REG_1176",
+    "accreditation_date": "2025-05-20",
+    "valid_until": "2026-05-20",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_1287_2025-02-08",
+    "facility_id": "FAC_REG_1287",
+    "accreditation_date": "2025-02-08",
+    "valid_until": "2026-02-08",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_1285_2025-05-25",
+    "facility_id": "FAC_REG_1285",
+    "accreditation_date": "2025-05-25",
+    "valid_until": "2026-05-25",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_1248_2025-01-08",
+    "facility_id": "FAC_REG_1248",
+    "accreditation_date": "2025-01-08",
+    "valid_until": "2026-01-08",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_REG_1259_2025-04-22",
+    "facility_id": "FAC_REG_1259",
+    "accreditation_date": "2025-04-22",
+    "valid_until": "2026-04-22",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_CAR_1401_2025-03-04",
+    "facility_id": "FAC_CAR_1401",
+    "accreditation_date": "2025-03-04",
+    "valid_until": "2026-03-04",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_CAR_1350_2025-04-16",
+    "facility_id": "FAC_CAR_1350",
+    "accreditation_date": "2025-04-16",
+    "valid_until": "2026-04-16",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_CAR_1346_2025-02-15",
+    "facility_id": "FAC_CAR_1346",
+    "accreditation_date": "2025-02-15",
+    "valid_until": "2026-02-15",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_CAR_1400_2025-01-14",
+    "facility_id": "FAC_CAR_1400",
+    "accreditation_date": "2025-01-14",
+    "valid_until": "2026-01-14",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_BAR_1492_2025-04-18",
+    "facility_id": "FAC_BAR_1492",
+    "accreditation_date": "2025-04-18",
+    "valid_until": "2026-04-18",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN",
+      "PSYCH_CONSULT_SPEC"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  },
+  {
+    "accreditation_id": "ACC_FAC_BAR_1497_2025-04-17",
+    "facility_id": "FAC_BAR_1497",
+    "accreditation_date": "2025-04-17",
+    "valid_until": "2026-04-17",
+    "status": "approved",
+    "accreditation_type": "Outpatient Mental Health Services",
+    "services_covered": [
+      "PSYCH_CONSULT_GEN"
+    ],
+    "illustrative_note": "Service-specific accreditation based on illustrative eligibility assumptions pending official policy verification"
+  }
+]
