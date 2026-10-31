@@ -103,6 +103,7 @@ describe('Bottleneck Detector', () => {
       
       const insight = getBottleneckInsight(bottleneck);
       
+      expect(insight.finding).toContain('drop-off');
       expect(insight.finding).toContain('Accreditation');
       expect(insight.investigation).toContain('accreditation');
       expect(insight.metric).toBe('accreditation conversion rate');
@@ -117,7 +118,8 @@ describe('Bottleneck Detector', () => {
       
       const insight = getBottleneckInsight(bottleneck);
       
-      expect(insight.finding).toContain('claims');
+      expect(insight.finding).toContain('drop-off');
+      expect(insight.finding).toContain('Claims');
       expect(insight.investigation).toContain('claims submission');
     });
 
@@ -130,7 +132,8 @@ describe('Bottleneck Detector', () => {
       
       const insight = getBottleneckInsight(bottleneck);
       
-      expect(insight.finding).toContain('Payment processing');
+      expect(insight.finding).toContain('drop-off');
+      expect(insight.finding).toContain('Payment');
       expect(insight.investigation).toContain('payment processing');
     });
 

@@ -42,7 +42,11 @@ export function ExecutiveHeadline({ data }) {
               System Health: <span className="font-bold capitalize">{summary.overallHealth}</span>
             </span>
             <span>
-              Utilization: <span className="font-bold">{Math.round(summary.utilizationRate * 100)}%</span>
+              Utilization: <span className="font-bold">
+                {summary.utilizationRate != null && isFinite(summary.utilizationRate)
+                  ? `${Math.round(summary.utilizationRate * 100)}%`
+                  : 'N/A'}
+              </span>
             </span>
           </div>
         </div>

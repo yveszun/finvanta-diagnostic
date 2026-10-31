@@ -38,7 +38,7 @@ export function PrimaryFinding({ data }) {
             {insight.finding}
           </p>
           <p className="text-slate-600">
-            {bottleneck.facilitiesLost.toLocaleString()} {bottleneck.description}
+            {(bottleneck.facilitiesLost || 0).toLocaleString()} {bottleneck.description}
           </p>
         </div>
 
@@ -46,7 +46,9 @@ export function PrimaryFinding({ data }) {
           <div>
             <div className="text-sm text-slate-500 mb-1">Conversion Rate</div>
             <div className="text-2xl font-bold text-slate-900">
-              {Math.round(bottleneck.conversionRate * 100)}%
+              {bottleneck.conversionRate != null && isFinite(bottleneck.conversionRate)
+                ? `${Math.round(bottleneck.conversionRate * 100)}%`
+                : 'N/A'}
             </div>
           </div>
           <div>

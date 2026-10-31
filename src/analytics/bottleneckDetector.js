@@ -11,31 +11,45 @@ export function detectPrimaryBottleneck(data) {
 
   const cascade = data.analytics.facilityParticipationCascade;
   
+  // Extract counts - handle both nested objects (Phase 4) and primitives (tests)
+  const extractCount = (value) => {
+    if (typeof value === 'number') return value;
+    return value?.count || 0;
+  };
+  
+  const eligible = extractCount(cascade.stage1_eligible);
+  const accredited = extractCount(cascade.stage2_accredited);
+  const claiming = extractCount(cascade.stage3_claiming);
+  const receivingPayment = extractCount(cascade.stage4_receiving_payment);
+  
   // Calculate conversion rates between stages
   const conversions = [
     {
       stage: 'Accreditation',
       from: 'stage1_eligible',
       to: 'stage2_accredited',
-      rate: cascade.stage2_accredited / cascade.stage1_eligible,
-      dropoff: cascade.stage1_eligible - cascade.stage2_accredited,
-      description: 'facilities eligible but not accredited'
+      rate: eligible > 0 ? accredited / eligible : 0,
+      dropoff: eligible - accredited,
+      description: 'facilities eligible but not accredited',
+      stageName: cascade.stage2_accredited?.label || 'Accreditation'
     },
     {
       stage: 'Claims Submission',
       from: 'stage2_accredited',
       to: 'stage3_claiming',
-      rate: cascade.stage3_claiming / cascade.stage2_accredited,
-      dropoff: cascade.stage2_accredited - cascade.stage3_claiming,
-      description: 'accredited facilities not submitting claims'
+      rate: accredited > 0 ? claiming / accredited : 0,
+      dropoff: accredited - claiming,
+      description: 'accredited facilities not submitting claims',
+      stageName: cascade.stage3_claiming?.label || 'Claims Submission'
     },
     {
       stage: 'Payment Receipt',
       from: 'stage3_claiming',
       to: 'stage4_receiving_payment',
-      rate: cascade.stage4_receiving_payment / cascade.stage3_claiming,
-      dropoff: cascade.stage3_claiming - cascade.stage4_receiving_payment,
-      description: 'claiming facilities not receiving payment'
+      rate: claiming > 0 ? receivingPayment / claiming : 0,
+      dropoff: claiming - receivingPayment,
+      description: 'claiming facilities not receiving payment',
+      stageName: cascade.stage4_receiving_payment?.label || 'Payment Receipt'
     }
   ];
 
@@ -62,7 +76,14 @@ function getSeverity(rate) {
 }
 
 function getImpact(facilitiesLost, totalEligible) {
-  const percentLost = (facilitiesLost / totalEligible) * 100;
+  // Extract count if totalEligible is a nested object
+  const eligible = totalEligible?.count || totalEligible || 0;
+  
+  if (eligible === 0) {
+    return 'low'; // No eligible facilities means no impact
+  }
+  
+  const percentLost = (facilitiesLost / eligible) * 100;
   if (percentLost > 30) return 'critical';
   if (percentLost > 15) return 'high';
   if (percentLost > 5) return 'moderate';
@@ -74,17 +95,17 @@ export function getBottleneckInsight(bottleneck) {
 
   const insights = {
     'Accreditation': {
-      finding: 'Accreditation is the primary barrier to facility participation',
+      finding: 'Largest proportional drop-off: Accreditation stage',
       investigation: 'Review accreditation requirements and support programs',
       metric: 'accreditation conversion rate'
     },
     'Claims Submission': {
-      finding: 'Many accredited facilities are not actively submitting claims',
+      finding: 'Largest proportional drop-off: Claims submission stage',
       investigation: 'Examine claims submission processes and technical barriers',
       metric: 'claims submission rate'
     },
     'Payment Receipt': {
-      finding: 'Payment processing is constraining facility engagement',
+      finding: 'Largest proportional drop-off: Payment receipt stage',
       investigation: 'Analyze payment processing timelines and validation issues',
       metric: 'payment receipt rate'
     }

@@ -12,29 +12,35 @@ export function SimplifiedCascade({ data }) {
 
   const cascade = data.analytics.facilityParticipationCascade;
 
+  // Extract counts from nested objects (Phase 4 data structure)
+  const eligible = cascade.stage1_eligible?.count || 0;
+  const accredited = cascade.stage2_accredited?.count || 0;
+  const claiming = cascade.stage3_claiming?.count || 0;
+  const receivingPayment = cascade.stage4_receiving_payment?.count || 0;
+
   const stages = [
     {
       label: 'Eligible',
-      count: cascade.stage1_eligible || 0,
+      count: eligible,
       percent: 100,
       color: 'bg-indigo-100 text-indigo-700'
     },
     {
       label: 'Accredited',
-      count: cascade.stage2_accredited || 0,
-      percent: Math.round(((cascade.stage2_accredited || 0) / (cascade.stage1_eligible || 1)) * 100),
+      count: accredited,
+      percent: eligible > 0 ? Math.round((accredited / eligible) * 100) : 0,
       color: 'bg-blue-100 text-blue-700'
     },
     {
       label: 'Claiming',
-      count: cascade.stage3_claiming || 0,
-      percent: Math.round(((cascade.stage3_claiming || 0) / (cascade.stage1_eligible || 1)) * 100),
+      count: claiming,
+      percent: eligible > 0 ? Math.round((claiming / eligible) * 100) : 0,
       color: 'bg-emerald-100 text-emerald-700'
     },
     {
       label: 'Receiving Payment',
-      count: cascade.stage4_receiving_payment || 0,
-      percent: Math.round(((cascade.stage4_receiving_payment || 0) / (cascade.stage1_eligible || 1)) * 100),
+      count: receivingPayment,
+      percent: eligible > 0 ? Math.round((receivingPayment / eligible) * 100) : 0,
       color: 'bg-green-100 text-green-700'
     }
   ];
