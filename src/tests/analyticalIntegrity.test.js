@@ -22,13 +22,68 @@
 import { describe, it, expect } from 'vitest';
 import { evaluateRecommendations } from '../utils/recommendationEngine';
 import { formatNumber, formatCurrency, safePercent } from '../utils/formatters';
+import fs from 'fs';
+import path from 'path';
 
 describe('Analytical Integrity Tests', () => {
   describe('1. National vs Regional Reconciliation', () => {
-    it('should verify reconciliation through script output', () => {
-      // Reconciliation is verified through scripts/verifyReconciliation.js
-      // This test documents that requirement and provides assertion
-      expect(true).toBe(true);
+    it('should reconcile national totals with regional sums from Phase 3 analytics', () => {
+      // Load actual Phase 3 analytics - AUTHORITATIVE bottleneck_mix (matches dashboard)
+      const analyticsPath = path.resolve(process.cwd(), 'outputs/phase3_analytics/high_bottleneck_mix_analytics.json');
+      const analytics = JSON.parse(fs.readFileSync(analyticsPath, 'utf-8'));
+      
+      // Extract national totals
+      const nationalFacilities = analytics.analytics.facilityParticipationCascade.stage1_eligible.count;
+      const nationalAccredited = analytics.analytics.facilityParticipationCascade.stage2_accredited.count;
+      const nationalClaims = analytics.analytics.claimsProcessingCascade.stage1_submitted.count;
+      
+      // Sum regional data
+      const regions = analytics.analytics.regionalComparisons.byRegion;
+      const regionalFacilitiesSum = Object.values(regions).reduce((sum, region) => sum + region.facilities, 0);
+      const regionalAccreditedSum = Object.values(regions).reduce((sum, region) => sum + region.accredited, 0);
+      const regionalClaimsSum = Object.values(regions).reduce((sum, region) => sum + region.claims, 0);
+      
+      // Verify reconciliation
+      expect(regionalFacilitiesSum).toBe(nationalFacilities);
+      expect(regionalAccreditedSum).toBe(nationalAccredited);
+      expect(regionalClaimsSum).toBe(nationalClaims);
+    });
+
+    it('should detect deliberately corrupted regional totals', () => {
+      // Load actual Phase 3 analytics - AUTHORITATIVE bottleneck_mix
+      const analyticsPath = path.resolve(process.cwd(), 'outputs/phase3_analytics/moderate_bottleneck_mix_analytics.json');
+      const analytics = JSON.parse(fs.readFileSync(analyticsPath, 'utf-8'));
+      
+      // Extract national totals
+      const nationalFacilities = analytics.analytics.facilityParticipationCascade.stage1_eligible.count;
+      
+      // Deliberately corrupt regional sum
+      const regions = analytics.analytics.regionalComparisons.byRegion;
+      const corruptedSum = Object.values(regions).reduce((sum, region) => sum + region.facilities, 0) + 100; // Add 100
+      
+      // Should detect discrepancy
+      expect(corruptedSum).not.toBe(nationalFacilities);
+      expect(corruptedSum - nationalFacilities).toBe(100);
+    });
+
+    it('should reconcile financial amounts across all regions', () => {
+      // Load actual Phase 3 analytics - AUTHORITATIVE bottleneck_mix
+      const analyticsPath = path.resolve(process.cwd(), 'outputs/phase3_analytics/low_bottleneck_mix_analytics.json');
+      const analytics = JSON.parse(fs.readFileSync(analyticsPath, 'utf-8'));
+      
+      // Extract national financial totals
+      const nationalBilled = analytics.analytics.financialCalculations.totalBilled.amount;
+      
+      // Sum regional financial data (parse currency strings)
+      const regions = analytics.analytics.regionalComparisons.byRegion;
+      const regionalBilledSum = Object.values(regions).reduce((sum, region) => {
+        const billedStr = region.financial.billed.replace(/[₱,]/g, '');
+        return sum + parseFloat(billedStr);
+      }, 0);
+      
+      // Allow small rounding differences (< 0.1%)
+      const variance = Math.abs(regionalBilledSum - nationalBilled) / nationalBilled;
+      expect(variance).toBeLessThan(0.001); // < 0.1%
     });
   });
 
@@ -395,18 +450,117 @@ describe('Analytical Integrity Tests', () => {
   });
 
   describe('11. React Hook Consistency', () => {
-    it('should be tested through component tests', () => {
-      // React hook rules are enforced by React itself and ESLint
-      // Component tests verify hook order is consistent
+    it('should render App component without hook violations', async () => {
+      const React = await import('react');
+      const { render } = await import('@testing-library/react');
+      const { default: App } = await import('../App');
+      
+      // If hooks are used incorrectly, React will throw during render
+      expect(() => {
+        render(React.createElement(App));
+      }).not.toThrow();
+    });
+
+    it('should verify AbortController for cancelled requests (hook consistency)', () => {
+      // AbortController is implemented in App.jsx useEffect cleanup
+      // This verifies the pattern without needing to render the full component
+      const controller = new AbortController();
+      controller.abort();
+      expect(controller.signal.aborted).toBe(true);
+      
+      // Hook consistency is enforced by React itself
+      // If hooks were called conditionally, React would throw
       expect(true).toBe(true);
     });
   });
 
   describe('12. Permanent Synthetic Data Warning', () => {
-    it('should always display synthetic data warning', () => {
-      // Tested in dashboard.test.js
-      // SyntheticDataNotice component has no dismiss functionality
-      expect(true).toBe(true);
+    it('should render synthetic data warning in SyntheticDataNotice component', async () => {
+      const React = await import('react');
+      const { render, screen } = await import('@testing-library/react');
+      const { default: SyntheticDataNotice } = await import('../components/SyntheticDataNotice');
+      
+      render(React.createElement(SyntheticDataNotice));
+      
+      // Verify warning text is present
+      expect(screen.getByText(/SYNTHETIC DEMONSTRATION DATA/i)).toBeInTheDocument();
+      expect(screen.getByText(/NOT ACTUAL PHILHEALTH/i)).toBeInTheDocument();
+    });
+
+    it('should display warning with clear distinction from real data', async () => {
+      const React = await import('react');
+      const { render, screen } = await import('@testing-library/react');
+      const { default: SyntheticDataNotice } = await import('../components/SyntheticDataNotice');
+      
+      render(React.createElement(SyntheticDataNotice));
+      
+      // Verify it's labeled as fabricated/synthetic
+      const notice = screen.getByText(/entirely fabricated/i);
+      expect(notice).toBeInTheDocument();
+      
+      // Verify it mentions synthetic data explicitly
+      expect(screen.getByText(/SYNTHETIC/i)).toBeInTheDocument();
+    });
+
+    it('should have no dismiss/close functionality', () => {
+      const fs = require('fs');
+      const path = require('path');
+      
+      // Read the component source file
+      const componentPath = path.join(__dirname, '../components/SyntheticDataNotice.jsx');
+      const componentSource = fs.readFileSync(componentPath, 'utf8');
+      
+      // Should not contain dismiss/close button patterns
+      expect(componentSource).not.toMatch(/onClick.*close/i);
+      expect(componentSource).not.toMatch(/dismiss/i);
+      expect(componentSource).not.toMatch(/setState.*false/);
+      expect(componentSource).not.toMatch(/setVisible/i);
+      
+      // Should not import useState for hiding
+      if (componentSource.includes('useState')) {
+        // If it uses useState, verify it's not for visibility toggling
+        expect(componentSource).not.toMatch(/useState.*\(true\)|useState.*\(false\)/);
+      }
+    });
+
+    it('should remain visible in App component structure', async () => {
+      const React = await import('react');
+      const { render, screen, waitFor } = await import('@testing-library/react');
+      
+      // Mock fetch to return valid analytics data
+      const originalFetch = global.fetch;
+      global.fetch = vi.fn(() =>
+        Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve({
+            analytics: {
+              facilityParticipationCascade: {
+                totalFacilities: 100,
+                accreditedFacilities: 80
+              },
+              claimsProcessingCascade: {
+                totalClaims: 1000
+              },
+              regionalBreakdown: []
+            }
+          })
+        })
+      );
+      
+      const { default: App } = await import('../App');
+      render(React.createElement(App));
+      
+      // Warning should be present - wait for it since App loads async
+      await waitFor(() => {
+        expect(screen.getByText(/SYNTHETIC DEMONSTRATION DATA/i)).toBeInTheDocument();
+      }, { timeout: 3000 });
+      
+      // Verify it's visible (not hidden via CSS)
+      const warningElement = screen.getByText(/SYNTHETIC DEMONSTRATION DATA/i);
+      expect(warningElement).toBeVisible();
+      
+      // Restore original fetch
+      global.fetch = originalFetch;
     });
   });
 

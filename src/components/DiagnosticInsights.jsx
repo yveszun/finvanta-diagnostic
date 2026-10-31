@@ -5,6 +5,7 @@ export default function DiagnosticInsights({ data }) {
   const [recommendations, setRecommendations] = useState([]);
   const [recommendationRules, setRecommendationRules] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     loadRecommendationRules();
@@ -12,18 +13,46 @@ export default function DiagnosticInsights({ data }) {
 
   useEffect(() => {
     if (recommendationRules && data) {
-      const recs = evaluateRecommendations(data, recommendationRules);
-      setRecommendations(recs);
+      try {
+        const recs = evaluateRecommendations(data, recommendationRules);
+        setRecommendations(recs);
+        setError(null); // Clear any previous errors
+      } catch (err) {
+        console.error('Error evaluating recommendations:', err);
+        setError('Failed to evaluate recommendations. Please check diagnostic configuration.');
+        setRecommendations([]);
+      }
     }
   }, [data, recommendationRules]);
 
   const loadRecommendationRules = async () => {
     try {
       const response = await fetch('/config/recommendationRules.json');
+      
+      // CHECK: Verify HTTP response status
+      if (!response.ok) {
+        throw new Error(`Failed to load recommendation rules: HTTP ${response.status} ${response.statusText}`);
+      }
+      
+      // CHECK: Verify content type
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('Recommendation rules file is not valid JSON');
+      }
+      
       const rules = await response.json();
+      
+      // CHECK: Verify rules structure
+      if (!rules || !rules.rules || !Array.isArray(rules.rules)) {
+        throw new Error('Invalid recommendation rules structure: missing or malformed rules array');
+      }
+      
       setRecommendationRules(rules);
+      setError(null);
     } catch (err) {
       console.error('Error loading recommendation rules:', err);
+      setError(`Failed to load diagnostic rules: ${err.message}`);
+      setRecommendationRules(null);
     } finally {
       setLoading(false);
     }
@@ -38,6 +67,36 @@ export default function DiagnosticInsights({ data }) {
     );
   }
 
+  // CRITICAL: Display error state - diagnostic engine failure must not be presented as success
+  if (error || !recommendationRules) {
+    return (
+      <div className="mb-8 bg-white rounded-lg shadow p-6">
+        <h2 className="text-xl font-semibold text-gray-900 mb-2">Diagnostic Insights</h2>
+        <div className="mt-4 p-4 bg-red-50 border-l-4 border-red-400 rounded">
+          <div className="flex">
+            <div className="flex-shrink-0">
+              <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <div className="ml-3">
+              <h3 className="text-sm font-medium text-red-800">
+                Diagnostic Engine Error
+              </h3>
+              <div className="mt-2 text-sm text-red-700">
+                <p>{error || 'Failed to load recommendation rules. Diagnostic insights unavailable.'}</p>
+                <p className="mt-2 text-xs">
+                  This does not indicate successful implementation performance. The diagnostic system failed to load.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // DISTINCTION: Empty valid recommendations (evaluated successfully) vs failed evaluation
   if (!recommendations || recommendations.length === 0) {
     return (
       <div className="mb-8 bg-white rounded-lg shadow p-6">
@@ -46,6 +105,9 @@ export default function DiagnosticInsights({ data }) {
         <div className="mt-4 p-4 bg-green-50 border-l-4 border-green-400 rounded">
           <p className="text-sm text-green-800">
             Implementation metrics appear within expected ranges. Continue monitoring trends.
+          </p>
+          <p className="mt-2 text-xs text-green-700">
+            Note: This indicates successful diagnostic evaluation with no critical findings, not a system error.
           </p>
         </div>
       </div>

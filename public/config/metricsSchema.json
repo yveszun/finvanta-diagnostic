@@ -24,6 +24,18 @@
       "unit": "facilities",
       "description": "Number of facilities that have received at least one payment"
     },
+    "facilitiesWithClaimsButNoPayment": {
+      "type": "count",
+      "unit": "facilities",
+      "formula": "filingFacilities - receivingPaymentFacilities",
+      "description": "Number of facilities that filed claims but have not received any payment"
+    },
+    "facilitiesWithClaimsButNoPaymentPercentage": {
+      "type": "percentage",
+      "unit": "percent",
+      "formula": "(facilitiesWithClaimsButNoPayment / filingFacilities) × 100",
+      "description": "Percentage of filing facilities that have not received any payment"
+    },
     "accreditationRate": {
       "type": "percentage",
       "unit": "percent",
@@ -70,6 +82,16 @@
       "unit": "claims",
       "description": "Number of claims for which payment was disbursed"
     },
+    "approvedUnpaidClaims": {
+      "type": "count",
+      "unit": "claims",
+      "description": "Number of claims approved but payment pending"
+    },
+    "partiallyPaidClaims": {
+      "type": "count",
+      "unit": "claims",
+      "description": "Number of claims that received only partial payment"
+    },
     "acceptanceRate": {
       "type": "percentage",
       "unit": "percent",
@@ -93,6 +115,12 @@
       "unit": "percent",
       "formula": "(paidClaims / approvedClaims) × 100",
       "description": "Percentage of approved claims that received payment"
+    },
+    "claimPaymentRate": {
+      "type": "percentage",
+      "unit": "percent",
+      "formula": "(paidClaims / approvedClaims) × 100",
+      "description": "Percentage of approved claims that received payment (alias)"
     }
   },
   
@@ -111,6 +139,24 @@
       "type": "currency",
       "unit": "PHP",
       "description": "Total amount actually paid to facilities"
+    },
+    "totalOutstandingAmount": {
+      "type": "currency",
+      "unit": "PHP",
+      "formula": "totalApprovedAmount - totalDisbursedAmount",
+      "description": "Approved amount not yet disbursed"
+    },
+    "approvedToDisbursedRatio": {
+      "type": "percentage",
+      "unit": "percent",
+      "formula": "(totalDisbursedAmount / totalApprovedAmount) × 100",
+      "description": "Percentage of approved amounts that have been disbursed"
+    },
+    "outstandingApprovedPercentage": {
+      "type": "percentage",
+      "unit": "percent",
+      "formula": "(totalOutstandingAmount / totalApprovedAmount) × 100",
+      "description": "Percentage of approved amounts still outstanding"
     },
     "averageBilledPerClaim": {
       "type": "currency",
